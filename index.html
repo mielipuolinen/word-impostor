@@ -476,39 +476,82 @@
       *{ transition: none !important; }
     }
 
+    /* Footer */
     .footer{
       position: relative;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 10px;
       text-align: center;
       font-size: 12px;
       font-weight: 850;
       color: var(--muted2);
-      padding: 6px 44px;
+      padding: 10px 10px;
       margin-top: 6px;
       user-select: none;
     }
-.footbtn{
-      position:absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 34px;
-      height: 26px;
-      min-height: 26px;
+
+    .footertext{
+      grid-column: 1;
+      justify-self: center;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      justify-content:center;
+      gap:2px;
+      line-height: 1.2;
+      padding: 0 10px;
+      /* Reserve space so the right-side buttons don't overlap the centered text */
+      padding-right: 92px;
+      pointer-events: none;
+      max-width: 100%;
+    }
+    .footerline{
+      pointer-events: none;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .footerline.top{
+      color: rgba(238,243,255,.66);
+      font-weight: 950;
+      letter-spacing: .04em;
+    }
+
+    .footactions{
+      grid-column: 2;
+      justify-self: end;
+      display:flex;
+      gap:8px;
+      align-items:center;
+    }
+
+    .footbtn{
+      appearance:none;
+      border:none;
+      width: 36px;
+      height: 30px;
+      min-height: 30px;
       padding: 0;
       border-radius: 10px;
       font-size: 16px;
       font-weight: 900;
       line-height: 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
       background: rgba(255,255,255,.04);
       border: 1px solid rgba(255,255,255,.14);
       box-shadow: none;
-      opacity: .65;
-      flex: 0 0 auto;
+      opacity: .70;
+      cursor:pointer;
+      user-select:none;
+      transition: transform .08s ease, filter .08s ease, opacity .15s ease, background .15s ease, box-shadow .15s ease;
     }
-    .footbtn.right{ right: 2px; }
-    .footbtn.right2{ right: 42px; }
-    .footbtn.left{ left: 2px; }
 
-    .footbtn:active{ transform: translateY(calc(-50% + 1px)) scale(.99); }
+    .footbtn:active{ transform: translateY(1px) scale(.99); filter: brightness(1.03); }
     .footbtn.active{
       opacity: 1;
       border-color: rgba(122,167,255,.75);
@@ -516,6 +559,11 @@
       background: rgba(255,255,255,.06);
     }
 
+    /* If you ever add left-side buttons later, this keeps text centered */
+    @media (max-width: 380px){
+      .footertext{ padding-right: 82px; }
+      .footbtn{ width: 34px; }
+    }
     .toast{
       position: fixed;
       left: 50%;
@@ -572,7 +620,7 @@
 
           <div class="row" style="margin-top:10px;">
             <div class="col">
-              <label id="difficultyLabel">Difficulty</label>
+              <label id="difficultyLabel">Vaikeustaso</label>
               <div class="seg" id="difficultySeg" role="group" aria-label="Difficulty">
                 <button class="segbtn" type="button" data-diff="all" id="diffAll">All</button>
                 <button class="segbtn" type="button" data-diff="easy" id="diffEasy">Easy</button>
@@ -584,7 +632,7 @@
 
           <div class="row" style="margin-top:10px;">
             <div class="col">
-              <label id="categoriesLabel">Categories</label>
+              <label id="categoriesLabel">Sanaluokat</label>
               <div class="chips" id="categoryChips" role="group" aria-label="Categories"></div>
             </div>
           </div>
@@ -592,7 +640,7 @@
           <label class="toggle" aria-label="Impostor hint">
             <input id="impostorHintToggle" type="checkbox" />
             <span class="toggle-ui">
-              <span class="toggle-name" id="impostorHintName">Impostor hint</span>
+              <span class="toggle-name" id="impostorHintName">Huijari: Luokkavihje</span>
               <span class="toggle-pill" id="impostorHintState">Off</span>
             </span>
           </label>
@@ -600,7 +648,7 @@
           <label class="toggle" aria-label="Hidden impostor">
             <input id="hiddenImpostorToggle" type="checkbox" />
             <span class="toggle-ui">
-              <span class="toggle-name" id="hiddenImpostorName">Impostor gets a wrong word</span>
+              <span class="toggle-name" id="hiddenImpostorName">Huijari: Saa väärän sanan</span>
               <span class="toggle-pill" id="hiddenImpostorState">Off</span>
             </span>
           </label>
@@ -659,9 +707,14 @@
       </section>
 
       <footer class="footer">
-        <button class="footbtn right2" type="button" id="repoBtn" aria-label="GitHub" title="GitHub">🐙</button>
-        <span id="footerText">Made by AI with ❤️ — 0% human code.</span>
-        <button class="footbtn right" type="button" id="selfTestBtn" aria-label="Self-test" title="Self-test">🧪</button>
+        <div class="footertext" aria-hidden="true">
+          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.4</div>
+          <div class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
+        </div>
+        <div class="footactions" aria-label="Links">
+          <button class="footbtn" type="button" id="repoBtn" aria-label="GitHub" title="GitHub">🐙</button>
+          <button class="footbtn" type="button" id="selfTestBtn" aria-label="Self-test" title="Self-test">🧪</button>
+        </div>
       </footer>
       <div class="toast hidden" id="toast" aria-live="polite"></div>
     </div>
@@ -1084,16 +1137,16 @@
 
         players: "Number of players",
         custom: "Custom",
-        difficulty: "Difficulty",
-        categories: "Categories",
+        difficulty: "Difficulty level",
+        categories: "Word categories",
         all: "All",
         diff_easy: "Easy",
         diff_medium: "Medium",
         diff_hard: "Hard",
-        impostorHint: "Impostor hint",
+        impostorHint: "Impostor: Word category hint",
         toggle_on: "On",
         toggle_off: "Off",
-        hiddenImpostor: "Impostor gets a wrong word",
+        hiddenImpostor: "Impostor: Gets a wrong word",
         start: "Start",
         reveal: "Reveal the card",
         close: "Close & Pass to the next player",
@@ -1116,7 +1169,9 @@
         cat_activity: "Activity",
         cat_thing: "Thing",
         cat_suomi: "Finland",
-        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi",
+        footerTop: "sanahuijari.fi · v1.4",
+        footerBottom: "Made by AI with ❤️ — 0% human code.",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.4",
         meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
         meta_short: "Sanahuijari",
 
@@ -1134,16 +1189,16 @@
 
         players: "Pelaajien määrä",
         custom: "Muu",
-        difficulty: "Vaikeus",
-        categories: "Luokat",
+        difficulty: "Vaikeustaso",
+        categories: "Sanaluokat",
         all: "Kaikki",
         diff_easy: "Helppo",
         diff_medium: "Keskitaso",
         diff_hard: "Vaikea",
-        impostorHint: "Huijarin vihje",
+        impostorHint: "Huijari: Luokkavihje",
         toggle_on: "Päällä",
         toggle_off: "Pois",
-        hiddenImpostor: "Huijari saa väärän sanan",
+        hiddenImpostor: "Huijari: Saa väärän sanan",
         start: "Aloita",
         reveal: "Näytä kortti",
         close: "Sulje & Anna seuraavalle pelaajalle",
@@ -1166,7 +1221,9 @@
         cat_activity: "Toiminta",
         cat_thing: "Asia",
         cat_suomi: "Suomi",
-        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi",
+        footerTop: "sanahuijari.fi · v1.4",
+        footerBottom: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
+        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.4",
         meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
         meta_short: "Sanahuijari",
 
@@ -1254,7 +1311,8 @@
       diffMedium: $("diffMedium"),
       diffHard: $("diffHard"),
 
-      footerText: $("footerText"),
+      footerTop: $("footerTop"),
+      footerBottom: $("footerBottom"),
       selfTestBtn: $("selfTestBtn"),
       repoBtn: $("repoBtn"),
       toast: $("toast"),
@@ -1413,7 +1471,8 @@
       if(el.doneText) el.doneText.textContent = t("doneTitle");
       if(el.doneSub) el.doneSub.textContent = t("doneBody");
       if(el.newGameBtn) el.newGameBtn.textContent = t("newGame");
-      if(el.footerText) el.footerText.textContent = t("footer");
+      if(el.footerTop) el.footerTop.textContent = t("footerTop");
+      if(el.footerBottom) el.footerBottom.textContent = t("footerBottom");
       if(el.selfTestBtn){
         el.selfTestBtn.setAttribute("aria-label", t("selfTest"));
         el.selfTestBtn.title = t("selfTest");
