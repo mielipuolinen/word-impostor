@@ -248,6 +248,21 @@
       color:#08102a;
     }
 
+    /* Special logo chip (Kinojuha) */
+    .chip.logo{
+      padding: 8px 12px;
+      min-height: 44px;
+    }
+    .chip.logo img{
+      display:block;
+      height: 22px;
+      width:auto;
+      max-width: 140px;
+      object-fit: contain;
+      filter: drop-shadow(0 6px 12px rgba(0,0,0,.28));
+    }
+    .chip.logo.active img{ filter: none; }
+
     /* Settings toggles (full-row pill) */
     .toggle{
       display:block;
@@ -493,7 +508,8 @@
     }
 
     .footertext{
-      grid-column: 1;
+      grid-column: 1 / -1;
+      grid-row: 1;
       justify-self: center;
       display:flex;
       flex-direction:column;
@@ -502,7 +518,8 @@
       gap:2px;
       line-height: 1.2;
       padding: 0 10px;
-      /* Reserve space so the right-side buttons don't overlap the centered text */
+      /* Reserve equal space on both sides so the text stays truly centered, even with right-side buttons */
+      padding-left: 92px;
       padding-right: 92px;
       pointer-events: none;
       max-width: 100%;
@@ -522,6 +539,7 @@
 
     .footactions{
       grid-column: 2;
+      grid-row: 1;
       justify-self: end;
       display:flex;
       gap:8px;
@@ -561,7 +579,7 @@
 
     /* If you ever add left-side buttons later, this keeps text centered */
     @media (max-width: 380px){
-      .footertext{ padding-right: 82px; }
+      .footertext{ padding-left: 82px; padding-right: 82px; }
       .footbtn{ width: 34px; }
     }
     .toast{
@@ -708,7 +726,7 @@
 
       <footer class="footer">
         <div class="footertext" aria-hidden="true">
-          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.4</div>
+          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.5</div>
           <div class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
         </div>
         <div class="footactions" aria-label="Links">
@@ -1039,7 +1057,132 @@
       {"en":"Provinssi","fi":"Provinssi","cats":["activity","suomi"],"diff":"medium"},
       {"en":"Ski holiday","fi":"Hiihtoloma","cats":["activity","suomi"],"diff":"medium"},
       {"en":"Reindeer corral","fi":"Poroaitaus","cats":["place","animal","suomi"],"diff":"hard"},
-      {"en":"Cloudberry","fi":"Lakka","cats":["food","nature","suomi"],"diff":"medium"}
+      {"en":"Cloudberry","fi":"Lakka","cats":["food","nature","suomi"],"diff":"medium"},
+
+      {"en":"Inception","fi":"Inception","cats":["movies"],"diff":"medium"},
+      {"en":"The Matrix","fi":"Matrix","cats":["movies","space"],"diff":"medium"},
+      {"en":"Titanic","fi":"Titanic","cats":["movies"],"diff":"easy"},
+      {"en":"Star Wars","fi":"Tähtien sota","cats":["movies","space"],"diff":"easy"},
+      {"en":"The Lord of the Rings","fi":"Taru sormusten herrasta","cats":["movies"],"diff":"hard"},
+      {"en":"Harry Potter","fi":"Harry Potter","cats":["movies"],"diff":"easy"},
+      {"en":"Jurassic Park","fi":"Jurassic Park","cats":["movies","animal"],"diff":"medium"},
+      {"en":"Avatar","fi":"Avatar","cats":["movies","space"],"diff":"easy"},
+      {"en":"The Godfather","fi":"Kummisetä","cats":["movies"],"diff":"hard"},
+      {"en":"Forrest Gump","fi":"Forrest Gump","cats":["movies"],"diff":"medium"},
+      {"en":"The Lion King","fi":"Leijonakuningas","cats":["movies","animal"],"diff":"medium"},
+      {"en":"Frozen","fi":"Frozen","cats":["movies"],"diff":"easy"},
+      {"en":"Toy Story","fi":"Toy Story","cats":["movies"],"diff":"easy"},
+      {"en":"Spider-Man","fi":"Hämähäkkimies","cats":["movies"],"diff":"easy"},
+      {"en":"Batman","fi":"Batman","cats":["movies"],"diff":"easy"},
+      {"en":"The Avengers","fi":"Avengers","cats":["movies"],"diff":"medium"},
+      {"en":"Interstellar","fi":"Interstellar","cats":["movies","space"],"diff":"hard"},
+      {"en":"Back to the Future","fi":"Paluu tulevaisuuteen","cats":["movies"],"diff":"hard"},
+      {"en":"Home Alone","fi":"Yksin kotona","cats":["movies"],"diff":"easy"},
+      {"en":"Jaws","fi":"Tappajahai","cats":["movies","animal"],"diff":"medium"},
+      {"en":"The Shining","fi":"Hohto","cats":["movies"],"diff":"hard"},
+      {"en":"Gladiator","fi":"Gladiator","cats":["movies"],"diff":"medium"},
+      {"en":"Rocky","fi":"Rocky","cats":["movies","activity"],"diff":"easy"},
+      {"en":"The Terminator","fi":"Terminator","cats":["movies"],"diff":"medium"},
+      {"en":"Finding Nemo","fi":"Nemoa etsimässä","cats":["movies","animal"],"diff":"medium"},
+      {"en":"Coco","fi":"Coco","cats":["movies","music"],"diff":"easy"},
+      {"en":"La La Land","fi":"La La Land","cats":["movies","music"],"diff":"medium"},
+      {"en":"The Sound of Music","fi":"Sound of Music","cats":["movies","music"],"diff":"hard"},
+      {"en":"Pirates of the Caribbean","fi":"Pirates of the Caribbean","cats":["movies","vehicle"],"diff":"hard"},
+      {"en":"Mission: Impossible","fi":"Mission: Impossible","cats":["movies"],"diff":"hard"},
+
+      {"en":"Guitar","fi":"Kitara","cats":["music","thing"],"diff":"easy"},
+      {"en":"Piano","fi":"Piano","cats":["music","thing"],"diff":"easy"},
+      {"en":"Drums","fi":"Rummut","cats":["music","thing"],"diff":"easy"},
+      {"en":"Violin","fi":"Viulu","cats":["music","thing"],"diff":"medium"},
+      {"en":"Saxophone","fi":"Saksofoni","cats":["music","thing"],"diff":"hard"},
+      {"en":"Microphone","fi":"Mikrofoni","cats":["music","thing"],"diff":"medium"},
+      {"en":"DJ","fi":"DJ","cats":["music","person"],"diff":"easy"},
+      {"en":"Band","fi":"Bändi","cats":["music","person"],"diff":"easy"},
+      {"en":"Choir","fi":"Kuoro","cats":["music","activity"],"diff":"medium"},
+      {"en":"Orchestra","fi":"Orkesteri","cats":["music","person"],"diff":"medium"},
+      {"en":"Concert","fi":"Keikka","cats":["music","activity"],"diff":"easy"},
+      {"en":"Festival","fi":"Festari","cats":["music","activity"],"diff":"easy"},
+      {"en":"Playlist","fi":"Soittolista","cats":["music","thing"],"diff":"medium"},
+      {"en":"Headphones","fi":"Kuulokkeet","cats":["music","thing"],"diff":"hard"},
+      {"en":"Vinyl record","fi":"Vinyylilevy","cats":["music","thing"],"diff":"hard"},
+      {"en":"Songwriter","fi":"Säveltäjä","cats":["music","person"],"diff":"hard"},
+      {"en":"Rap","fi":"Rap","cats":["music"],"diff":"easy"},
+      {"en":"Rock","fi":"Rock","cats":["music"],"diff":"easy"},
+      {"en":"Jazz","fi":"Jazz","cats":["music"],"diff":"easy"},
+      {"en":"Classical music","fi":"Klassinen musiikki","cats":["music"],"diff":"hard"},
+      {"en":"Pop music","fi":"Popmusiikki","cats":["music"],"diff":"medium"},
+      {"en":"Heavy metal","fi":"Heavy metal","cats":["music"],"diff":"medium"},
+      {"en":"Karaoke","fi":"Karaoke","cats":["music","activity"],"diff":"easy"},
+      {"en":"Encore","fi":"Ylimääräinen","cats":["music"],"diff":"hard"},
+      {"en":"Stage","fi":"Lava","cats":["music","place"],"diff":"easy"},
+      {"en":"Amplifier","fi":"Vahvistin","cats":["music","thing"],"diff":"medium"},
+      {"en":"Metronome","fi":"Metronomi","cats":["music","thing"],"diff":"hard"},
+      {"en":"Sheet music","fi":"Nuotit","cats":["music","thing"],"diff":"medium"},
+      {"en":"Opera","fi":"Ooppera","cats":["music","place"],"diff":"medium"},
+      {"en":"Ballet","fi":"Baletti","cats":["music","activity"],"diff":"medium"},
+
+      {"en":"Nightwish","fi":"Nightwish","cats":["music","person","suomi"],"diff":"medium"},
+      {"en":"The Rasmus","fi":"The Rasmus","cats":["music","person","suomi"],"diff":"medium"},
+      {"en":"HIM","fi":"HIM","cats":["music","person","suomi"],"diff":"easy"},
+      {"en":"Apocalyptica","fi":"Apocalyptica","cats":["music","person","suomi"],"diff":"hard"},
+      {"en":"ALMA","fi":"ALMA","cats":["music","person","suomi"],"diff":"easy"},
+      {"en":"Erika Vikman","fi":"Erika Vikman","cats":["music","person","suomi"],"diff":"hard"},
+      {"en":"JVG","fi":"JVG","cats":["music","person","suomi"],"diff":"easy"},
+      {"en":"Haloo Helsinki!","fi":"Haloo Helsinki!","cats":["music","person","suomi"],"diff":"hard"},
+      {"en":"Ultra Bra","fi":"Ultra Bra","cats":["music","person","suomi"],"diff":"medium"},
+      {"en":"Kaija Koo","fi":"Kaija Koo","cats":["music","person","suomi"],"diff":"medium"},
+      {"en":"Vain elämää","fi":"Vain elämää","cats":["music","activity","suomi"],"diff":"hard"},
+      {"en":"Tangomarkkinat","fi":"Tangomarkkinat","cats":["music","activity","suomi"],"diff":"hard"},
+      {"en":"Savonlinna Opera Festival","fi":"Savonlinnan oopperajuhlat","cats":["music","activity","place","suomi"],"diff":"hard"},
+
+      {"en":"Uuno Turhapuro","fi":"Uuno Turhapuro","cats":["movies","person","suomi"],"diff":"hard"},
+      {"en":"The Unknown Soldier","fi":"Tuntematon sotilas","cats":["movies","suomi"],"diff":"hard"},
+      {"en":"Napapiirin sankarit","fi":"Napapiirin sankarit","cats":["movies","suomi"],"diff":"hard"},
+      {"en":"Rare Exports","fi":"Rare Exports","cats":["movies","suomi"],"diff":"medium"},
+      {"en":"Aki Kaurismäki","fi":"Aki Kaurismäki","cats":["movies","person","suomi"],"diff":"hard"},
+      {"en":"Klaus Härö","fi":"Klaus Härö","cats":["movies","person","suomi"],"diff":"hard"},
+      {"en":"Finnish Film Foundation","fi":"Suomen elokuvasäätiö","cats":["movies","thing","suomi"],"diff":"hard"},
+      {"en":"Helsinki International Film Festival","fi":"Rakkautta & Anarkiaa","cats":["movies","activity","place","suomi"],"diff":"hard"},
+      {"en":"Cinema Orion","fi":"Elokuvateatteri Orion","cats":["movies","place","suomi"],"diff":"hard"},
+
+      {"en":"Kinojuha","fi":"Kinojuha","cats":["kinojuha","place","suomi"],"diff":"easy"},
+      {"en":"Taavi Vartia","fi":"Taavi Vartia","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Nurmijärvi","fi":"Nurmijärvi","cats":["kinojuha","place","suomi"],"diff":"easy"},
+      {"en":"Taaborin Kesäteatteri","fi":"Taaborin Kesäteatteri","cats":["kinojuha","movies","activity","place","suomi"],"diff":"hard"},
+      {"en":"Taaborinvuori","fi":"Taaborinvuori","cats":["kinojuha","place","nature","suomi"],"diff":"hard"},
+      {"en":"Art House screening","fi":"Art House -näytös","cats":["kinojuha","movies","activity","suomi"],"diff":"medium"},
+      {"en":"Premiere night","fi":"Ensi-ilta","cats":["kinojuha","movies","activity"],"diff":"medium"},
+      {"en":"Movie ticket","fi":"Elokuvalippu","cats":["kinojuha","movies","thing"],"diff":"easy"},
+      {"en":"VIP hall","fi":"VIP-sali","cats":["kinojuha","movies","place"],"diff":"medium"},
+      {"en":"50s interior","fi":"50-luvun tunnelma","cats":["kinojuha","thing","suomi"],"diff":"hard"},
+      {"en":"Popcorn combo","fi":"Popparikombo","cats":["kinojuha","food"],"diff":"easy"},
+
+      {"en":"Rölli ja kultainen avain","fi":"Rölli ja kultainen avain","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"Rölli ja kaikkien aikojen salaisuus","fi":"Rölli ja kaikkien aikojen salaisuus","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"The Island of Secrets","fi":"Lomasankarit","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"Finders of the Lost Yacht","fi":"Pertsa ja Kilu","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"World's Safest Place","fi":"Kevyttä yläpilveä","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+
+      {"en":"Pahat pojat","fi":"Pahat pojat","cats":["kinojuha","movies","suomi"],"diff":"medium"},
+      {"en":"Leijonasydän","fi":"Leijonasydän","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"Häjyt","fi":"Häjyt","cats":["kinojuha","movies","suomi"],"diff":"medium"},
+      {"en":"Kopps","fi":"Kopps","cats":["kinojuha","movies","suomi"],"diff":"easy"},
+      {"en":"Luokkakokous","fi":"Luokkakokous","cats":["kinojuha","movies","suomi"],"diff":"medium"},
+      {"en":"Napapiirin sankarit","fi":"Napapiirin sankarit","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"Rare Exports","fi":"Rare Exports","cats":["kinojuha","movies","suomi"],"diff":"medium"},
+      {"en":"Tuntematon sotilas","fi":"Tuntematon sotilas","cats":["kinojuha","movies","suomi"],"diff":"hard"},
+      {"en":"Uuno Turhapuro","fi":"Uuno Turhapuro","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+
+      {"en":"Jasper Pääkkönen","fi":"Jasper Pääkkönen","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Laura Birn","fi":"Laura Birn","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Krista Kosonen","fi":"Krista Kosonen","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Jussi Vatanen","fi":"Jussi Vatanen","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Kari Väänänen","fi":"Kari Väänänen","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Peter Franzén","fi":"Peter Franzén","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Vesa-Matti Loiri","fi":"Vesa-Matti Loiri","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Eero Aho","fi":"Eero Aho","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Pirjo Lonka","fi":"Pirjo Lonka","cats":["kinojuha","movies","person","suomi"],"diff":"hard"},
+      {"en":"Irina Björklund","fi":"Irina Björklund","cats":["kinojuha","movies","person","suomi"],"diff":"hard"}
     ]
   }
   </script>
@@ -1084,7 +1227,7 @@
 
     const $ = (id) => document.getElementById(id);
 
-    const CATEGORY_KEYS = ["space","food","animal","person","vehicle","place","nature","activity","thing","suomi"]; // keep in sync with i18n
+    const CATEGORY_KEYS = ["space","food","animal","person","vehicle","place","nature","activity","thing","movies","music","kinojuha","suomi"]; // keep in sync with i18n // keep in sync with i18n // keep in sync with i18n
     const DIFF_KEYS = ["all","easy","medium","hard"];
 
     function inferDifficultyFromText(en, fi){
@@ -1169,9 +1312,12 @@
         cat_activity: "Activity",
         cat_thing: "Thing",
         cat_suomi: "Finland",
-        footerTop: "sanahuijari.fi · v1.4",
+        cat_movies: "Movies",
+        cat_music: "Music",
+        cat_kinojuha: "Kinojuha",
+        footerTop: "sanahuijari.fi · v1.5",
         footerBottom: "Made by AI with ❤️ — 0% human code.",
-        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.4",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.5",
         meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
         meta_short: "Sanahuijari",
 
@@ -1221,9 +1367,12 @@
         cat_activity: "Toiminta",
         cat_thing: "Asia",
         cat_suomi: "Suomi",
-        footerTop: "sanahuijari.fi · v1.4",
+        cat_movies: "Elokuvat",
+        cat_music: "Musiikki",
+        cat_kinojuha: "Kinojuha",
+        footerTop: "sanahuijari.fi · v1.5",
         footerBottom: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
-        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.4",
+        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.5",
         meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
         meta_short: "Sanahuijari",
 
@@ -1721,12 +1870,44 @@
       for(const btn of children){
         const key = btn.dataset.cat;
         if(key === "__all__"){
+          btn.classList.remove("logo");
           btn.textContent = t("all");
           btn.classList.toggle("active", state.selectedCats.length === 0);
-        }else{
-          btn.textContent = t(`cat_${key}`);
-          btn.classList.toggle("active", selected.has(key));
+          continue;
         }
+
+        // Special: Kinojuha uses a logo instead of text
+        if(key === "kinojuha"){
+          btn.classList.add("logo");
+          btn.classList.toggle("active", selected.has(key));
+          const label = t("cat_kinojuha");
+          btn.setAttribute("aria-label", label);
+          btn.setAttribute("title", label);
+
+          if(!btn.dataset.logoReady){
+            btn.textContent = "";
+            const img = document.createElement("img");
+            img.src = "https://www.kinojuha.fi/hosting/kinojuha.fi/graphics/logo.png";
+            img.alt = label;
+            img.decoding = "async";
+            img.loading = "lazy";
+            img.addEventListener("error", () => {
+              // Fallback to text if the logo can't be loaded
+              btn.classList.remove("logo");
+              btn.textContent = label;
+            }, { once: true });
+            btn.appendChild(img);
+            btn.dataset.logoReady = "1";
+          }else{
+            const img = btn.querySelector("img");
+            if(img) img.alt = label;
+          }
+          continue;
+        }
+
+        btn.classList.remove("logo");
+        btn.textContent = t(`cat_${key}`);
+        btn.classList.toggle("active", selected.has(key));
       }
     }
 
@@ -1907,8 +2088,10 @@
           const prevLang = state.lang;
           state.lang = "en";
           console.assert(categoryText(["space","vehicle","suomi"]) === "Space / Vehicle / Finland", "EN categoryText failed");
+          console.assert(categoryText(["kinojuha","movies"]) === "Kinojuha / Movies", "EN categoryText Kinojuha failed");
           state.lang = "fi";
           console.assert(categoryText(["space","vehicle","suomi"]) === "Avaruus / Ajoneuvo / Suomi", "FI categoryText failed");
+          console.assert(categoryText(["kinojuha","movies"]) === "Kinojuha / Elokuvat", "FI categoryText Kinojuha failed");
           state.lang = prevLang;
         }
 
