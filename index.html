@@ -7,22 +7,22 @@
 
   <!-- App metadata (single-file, best-effort PWA + iOS add-to-home) -->
   <meta name="description" id="descMeta" content="Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä." />
-  <meta name="application-name" id="appNameMeta" content="Sanahuijari.fi" />
+  <meta name="application-name" id="appNameMeta" content="🎭 Sanahuijari.fi" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" id="appleTitleMeta" content="Sanahuijari.fi" />
+  <meta name="apple-mobile-web-app-title" id="appleTitleMeta" content="🎭 Sanahuijari.fi" />
   <meta name="format-detection" content="telephone=no" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" id="ogTitleMeta" content="Sanahuijari.fi" />
+  <meta property="og:title" id="ogTitleMeta" content="🎭 Sanahuijari.fi" />
   <meta property="og:description" id="ogDescMeta" content="Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä." />
 
   <link rel="icon" id="appIcon" type="image/svg+xml" href="" />
   <link rel="apple-touch-icon" id="appleIcon" href="" />
   <link rel="mask-icon" id="maskIcon" color="#7aa7ff" href="" />
   <link rel="manifest" id="manifestLink" href="" />
-  <title>Sanahuijari.fi</title>
+  <title>🎭 Sanahuijari.fi</title>
   <style>
     :root{
       --bg:#0b1020;
@@ -612,7 +612,7 @@
     <div class="app">
       <div class="head">
         <div class="brand">
-          <h1 id="titleText">Sanahuijari.fi</h1>
+          <h1 id="titleText">🎭 Sanahuijari.fi</h1>
           <div class="tagline" id="taglineText">Pelaa livenä yhdellä laitteella</div>
         </div>
         <div class="lang" role="group" aria-label="Language">
@@ -728,7 +728,7 @@
 
       <footer class="footer">
         <div class="footertext" aria-hidden="true">
-          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.51</div>
+          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.52</div>
           <div class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
         </div>
         <div class="footactions" aria-label="Links">
@@ -1277,7 +1277,7 @@
 
     const I18N = {
       en: {
-        title: "Sanahuijari.fi",
+        title: "🎭 Sanahuijari.fi",
         tagline: "Pass & play on one device",
 
         players: "Number of players",
@@ -1317,9 +1317,9 @@
         cat_movies: "Movies",
         cat_music: "Music",
         cat_kinojuha: "Kinojuha",
-        footerTop: "sanahuijari.fi · v1.51",
+        footerTop: "sanahuijari.fi · v1.52",
         footerBottom: "Made by AI with ❤️ — 0% human code.",
-        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.511",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.52",
         meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
         meta_short: "Sanahuijari",
 
@@ -1332,7 +1332,7 @@
 
       },
       fi: {
-        title: "Sanahuijari.fi",
+        title: "🎭 Sanahuijari.fi",
         tagline: "Pelaa livenä yhdellä laitteella",
 
         players: "Pelaajien määrä",
@@ -1372,9 +1372,9 @@
         cat_movies: "Elokuvat",
         cat_music: "Musiikki",
         cat_kinojuha: "Kinojuha",
-        footerTop: "sanahuijari.fi · v1.51",
+        footerTop: "sanahuijari.fi · v1.52",
         footerBottom: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
-        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.511",
+        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.52",
         meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
         meta_short: "Sanahuijari",
 
@@ -1484,7 +1484,7 @@
     }
 
     function iconSvg(){
-      // Finnish-first icon: "S" + ".fi". Works as favicon + manifest icon.
+      // Mask-first icon (🎭 vibe) for Sanahuijari.fi. Designed to be legible at small sizes.
       // Note: iOS home-screen icon via data-URI is best-effort.
       return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -1493,12 +1493,44 @@
       <stop offset="0" stop-color="#7aa7ff"/>
       <stop offset="1" stop-color="#0b1020"/>
     </linearGradient>
+    <linearGradient id="m" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="rgba(255,255,255,0.98)"/>
+      <stop offset="1" stop-color="rgba(255,255,255,0.78)"/>
+    </linearGradient>
   </defs>
+
   <rect width="512" height="512" rx="120" fill="url(#g)"/>
-  <circle cx="256" cy="256" r="152" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.22)" stroke-width="10"/>
-  <text x="50%" y="56%" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="210" font-weight="1000" fill="#08102a">S</text>
-  <text x="50%" y="73%" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="92" font-weight="950" fill="#08102a">.fi</text>
-  <path d="M408 150l20 40 44 6-32 31 8 44-40-21-40 21 8-44-32-31 44-6z" fill="rgba(255,255,255,0.35)"/>
+
+  <!-- subtle halo -->
+  <circle cx="256" cy="256" r="170" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.16)" stroke-width="10"/>
+
+  <!-- theatrical mask -->
+  <g transform="translate(0 0)">
+    <path d="M256 128c-76 0-138 62-138 138 0 79 36 135 88 168 20 12 38 18 50 18s30-6 50-18c52-33 88-89 88-168 0-76-62-138-138-138z"
+          fill="url(#m)" stroke="rgba(0,0,0,0.22)" stroke-width="10"/>
+
+    <!-- cheeks shadow -->
+    <path d="M164 250c10 78 56 132 92 154-40-10-96-58-108-154z" fill="rgba(11,16,32,0.10)"/>
+    <path d="M348 250c-10 78-56 132-92 154 40-10 96-58 108-154z" fill="rgba(11,16,32,0.10)"/>
+
+    <!-- eye holes -->
+    <path d="M172 262c0-30 23-54 52-54s52 24 52 54-23 54-52 54-52-24-52-54z" fill="rgba(11,16,32,0.92)"/>
+    <path d="M288 262c0-30 23-54 52-54s52 24 52 54-23 54-52 54-52-24-52-54z" fill="rgba(11,16,32,0.92)"/>
+
+    <!-- mouth -->
+    <path d="M196 340c20 18 40 27 60 27s40-9 60-27" fill="none" stroke="rgba(11,16,32,0.70)" stroke-width="14" stroke-linecap="round"/>
+
+    <!-- tiny .fi badge (for identity at very small sizes) -->
+    <g>
+      <rect x="184" y="392" width="144" height="62" rx="31" fill="rgba(11,16,32,0.22)" stroke="rgba(255,255,255,0.20)" stroke-width="6"/>
+      <text x="256" y="435" text-anchor="middle"
+            font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial"
+            font-size="44" font-weight="950" fill="rgba(255,255,255,0.92)">.fi</text>
+    </g>
+  </g>
+
+  <!-- little sparkle -->
+  <path d="M408 150l18 36 40 5-29 28 7 40-36-19-36 19 7-40-29-28 40-5z" fill="rgba(255,255,255,0.32)"/>
 </svg>`;
     }
 
