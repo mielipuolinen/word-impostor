@@ -1,28 +1,28 @@
 <!doctype html>
-<html lang="en">
+<html lang="fi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#0b1020" />
 
   <!-- App metadata (single-file, best-effort PWA + iOS add-to-home) -->
-  <meta name="description" id="descMeta" content="Pass-and-play word impostor game for one phone/tablet." />
-  <meta name="application-name" id="appNameMeta" content="Word Impostor Game" />
+  <meta name="description" id="descMeta" content="Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä." />
+  <meta name="application-name" id="appNameMeta" content="Sanahuijari.fi" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" id="appleTitleMeta" content="Word Impostor Game" />
+  <meta name="apple-mobile-web-app-title" id="appleTitleMeta" content="Sanahuijari.fi" />
   <meta name="format-detection" content="telephone=no" />
 
   <meta property="og:type" content="website" />
-  <meta property="og:title" id="ogTitleMeta" content="Word Impostor Game" />
-  <meta property="og:description" id="ogDescMeta" content="Pass-and-play word impostor game for one phone/tablet." />
+  <meta property="og:title" id="ogTitleMeta" content="Sanahuijari.fi" />
+  <meta property="og:description" id="ogDescMeta" content="Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä." />
 
   <link rel="icon" id="appIcon" type="image/svg+xml" href="" />
   <link rel="apple-touch-icon" id="appleIcon" href="" />
   <link rel="mask-icon" id="maskIcon" color="#7aa7ff" href="" />
   <link rel="manifest" id="manifestLink" href="" />
-  <title>Word Impostor Game</title>
+  <title>Sanahuijari.fi</title>
   <style>
     :root{
       --bg:#0b1020;
@@ -88,7 +88,10 @@
       text-transform: uppercase;
       color: rgba(238,243,255,.58);
       line-height: 1.15;
-      max-width: 28ch;
+      max-width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .lang{ display:flex; gap:8px; align-items:center; }
@@ -475,17 +478,16 @@
 
     .footer{
       position: relative;
-      text-align:center;
+      text-align: center;
       font-size: 12px;
       font-weight: 850;
       color: var(--muted2);
-      padding: 6px 40px;
+      padding: 6px 44px;
       margin-top: 6px;
       user-select: none;
     }
-    .footbtn{
+.footbtn{
       position:absolute;
-      right: 2px;
       top: 50%;
       transform: translateY(-50%);
       width: 34px;
@@ -502,6 +504,10 @@
       opacity: .65;
       flex: 0 0 auto;
     }
+    .footbtn.right{ right: 2px; }
+    .footbtn.right2{ right: 42px; }
+    .footbtn.left{ left: 2px; }
+
     .footbtn:active{ transform: translateY(calc(-50% + 1px)) scale(.99); }
     .footbtn.active{
       opacity: 1;
@@ -538,8 +544,8 @@
     <div class="app">
       <div class="head">
         <div class="brand">
-          <h1 id="titleText">Word Impostor Game</h1>
-          <div class="tagline" id="taglineText">Pass &amp; play on one device</div>
+          <h1 id="titleText">Sanahuijari.fi</h1>
+          <div class="tagline" id="taglineText">Pelaa livenä yhdellä laitteella</div>
         </div>
         <div class="lang" role="group" aria-label="Language">
           <button class="langbtn" type="button" id="langEn" aria-label="English" title="English">🇬🇧</button>
@@ -653,8 +659,9 @@
       </section>
 
       <footer class="footer">
+        <button class="footbtn right2" type="button" id="repoBtn" aria-label="GitHub" title="GitHub">🐙</button>
         <span id="footerText">Made by AI with ❤️ — 0% human code.</span>
-        <button class="footbtn" type="button" id="selfTestBtn" aria-label="Self-test" title="Self-test">🧪</button>
+        <button class="footbtn right" type="button" id="selfTestBtn" aria-label="Self-test" title="Self-test">🧪</button>
       </footer>
       <div class="toast hidden" id="toast" aria-live="polite"></div>
     </div>
@@ -1072,7 +1079,7 @@
 
     const I18N = {
       en: {
-        title: "Word Impostor Game",
+        title: "Sanahuijari.fi",
         tagline: "Pass & play on one device",
 
         players: "Number of players",
@@ -1109,18 +1116,20 @@
         cat_activity: "Activity",
         cat_thing: "Thing",
         cat_suomi: "Finland",
-        footer: "Made by AI with ❤️ — 0% human code.",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi",
         meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
-        meta_short: "Impostor",
+        meta_short: "Sanahuijari",
 
         selfTest: "Self-test",
         testsPassed: "Self-test: all good ✅",
         testsFailed: (n) => `Self-test: ${n} issue(s) — check console ⚠️`,
         testsOn: "Self-test ON",
         testsOff: "Self-test OFF",
+        repo: "GitHub repository",
+
       },
       fi: {
-        title: "Sanahuijari-peli",
+        title: "Sanahuijari.fi",
         tagline: "Pelaa livenä yhdellä laitteella",
 
         players: "Pelaajien määrä",
@@ -1157,20 +1166,22 @@
         cat_activity: "Toiminta",
         cat_thing: "Asia",
         cat_suomi: "Suomi",
-        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
+        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi",
         meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
-        meta_short: "Huijari",
+        meta_short: "Sanahuijari",
 
         selfTest: "Itsetesti",
         testsPassed: "Itsetesti: kaikki ok ✅",
         testsFailed: (n) => `Itsetesti: ${n} ongelmaa — katso konsoli ⚠️`,
         testsOn: "Itsetesti PÄÄLLÄ",
         testsOff: "Itsetesti POIS",
+        repo: "GitHub-repositorio",
+
       }
     };
 
     const state = {
-      lang: "en",
+      lang: "fi",
       totalPlayers: 0,
       currentPlayer: 1,
       impostorPlayer: 0,
@@ -1245,6 +1256,7 @@
 
       footerText: $("footerText"),
       selfTestBtn: $("selfTestBtn"),
+      repoBtn: $("repoBtn"),
       toast: $("toast"),
     };
 
@@ -1263,7 +1275,8 @@
     }
 
     function iconSvg(){
-      // Simple, readable icon. Works as favicon + manifest icon. iOS home-screen icon via data-URI is best-effort.
+      // Finnish-first icon: "S" + ".fi". Works as favicon + manifest icon.
+      // Note: iOS home-screen icon via data-URI is best-effort.
       return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
   <defs>
@@ -1274,7 +1287,8 @@
   </defs>
   <rect width="512" height="512" rx="120" fill="url(#g)"/>
   <circle cx="256" cy="256" r="152" fill="rgba(255,255,255,0.10)" stroke="rgba(255,255,255,0.22)" stroke-width="10"/>
-  <text x="50%" y="58%" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Arial" font-size="170" font-weight="900" fill="#08102a">WI</text>
+  <text x="50%" y="56%" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="210" font-weight="1000" fill="#08102a">S</text>
+  <text x="50%" y="73%" text-anchor="middle" font-family="system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial" font-size="92" font-weight="950" fill="#08102a">.fi</text>
   <path d="M408 150l20 40 44 6-32 31 8 44-40-21-40 21 8-44-32-31 44-6z" fill="rgba(255,255,255,0.35)"/>
 </svg>`;
     }
@@ -1349,8 +1363,8 @@
     function detectInitialLanguage(){
       const saved = storage.get(LS.lang, null);
       if(saved === "fi" || saved === "en") return saved;
-      const nav = (navigator.language || "en").toLowerCase();
-      return nav.startsWith("fi") ? "fi" : "en";
+      // Default to Finnish (device/browser language is ignored unless user explicitly switches).
+      return "fi";
     }
 
     function updateToggleStateLabels(){
@@ -1403,6 +1417,10 @@
       if(el.selfTestBtn){
         el.selfTestBtn.setAttribute("aria-label", t("selfTest"));
         el.selfTestBtn.title = t("selfTest");
+      }
+      if(el.repoBtn){
+        el.repoBtn.setAttribute("aria-label", t("repo"));
+        el.repoBtn.title = t("repo");
       }
 
       updateToggleStateLabels();
@@ -1972,6 +1990,17 @@
       }
     }
 
+    const REPO_URL = "https://github.com/mielipuolinen/word-impostor/";
+
+    function openRepo(){
+      try{
+        const w = window.open(REPO_URL, "_blank", "noopener,noreferrer");
+        if(!w) location.href = REPO_URL;
+      }catch(_e){
+        location.href = REPO_URL;
+      }
+    }
+
     function init(){
       ensureArrays();
 
@@ -2052,6 +2081,13 @@
       document.addEventListener("visibilitychange", () => {
         if(state.dealing && document.visibilityState === "visible") requestWakeLock();
       });
+
+      // Repo button (subtle)
+      if(el.repoBtn){
+        el.repoBtn.setAttribute("aria-label", t("repo"));
+        el.repoBtn.title = t("repo");
+        el.repoBtn.addEventListener("click", openRepo);
+      }
 
       // Self-test toggle button (subtle)
       if(el.selfTestBtn){
