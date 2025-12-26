@@ -1,0 +1,1569 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0b1020" />
+  <title>Word Impostor</title>
+  <style>
+    :root{
+      --bg:#0b1020;
+      --text:#eef3ff;
+      --muted:rgba(238,243,255,.68);
+      --muted2:rgba(238,243,255,.52);
+      --accent:#7aa7ff;
+      --accent2:#5485ff;
+      --danger:#ff6b8a;
+      --surface: rgba(255,255,255,.060);
+      --surface2: rgba(255,255,255,.035);
+      --border: rgba(255,255,255,.12);
+      --border2: rgba(255,255,255,.16);
+      --shadow: 0 18px 50px rgba(0,0,0,.45);
+      --radius: 22px;
+      --pad: clamp(14px, 3.8vw, 20px);
+      --maxw: 680px;
+    }
+
+    *{ box-sizing:border-box }
+    html,body{ height:100% }
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      background: radial-gradient(1200px 800px at 20% 0%, #1a2a63 0%, var(--bg) 55%) fixed;
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+      overflow-x:hidden;
+    }
+
+    /* Layout optimized for phones: top-aligned + safe-area padding */
+    .wrap{
+      min-height: 100dvh;
+      display:flex;
+      align-items:flex-start;
+      justify-content:center;
+      padding: calc(var(--pad) + env(safe-area-inset-top)) var(--pad) calc(var(--pad) + env(safe-area-inset-bottom));
+    }
+    .app{
+      width:min(100%, var(--maxw));
+      display:flex;
+      flex-direction:column;
+      gap:12px;
+    }
+
+    /* Header */
+    .head{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:12px;
+    }
+    h1{
+      margin:0;
+      font-size: clamp(22px, 5.2vw, 32px);
+      letter-spacing:.2px;
+      line-height:1.05;
+    }
+
+    .lang{ display:flex; gap:8px; align-items:center; }
+    .langbtn{
+      flex:0 0 auto;
+      width: 44px;
+      height: 32px;
+      padding: 0;
+      border-radius: 10px;
+      font-size: 28px;
+      font-weight: 900;
+      line-height: 1;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.16);
+      color: var(--text);
+      overflow:hidden;
+      box-shadow:none;
+    }
+    .langbtn.active{
+      border-color: rgba(122,167,255,.75);
+      box-shadow: 0 0 0 3px rgba(122,167,255,.22);
+    }
+
+    /* Surfaces */
+    .panel, .card{
+      background: linear-gradient(180deg, var(--surface) 0%, var(--surface2) 100%);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+    }
+    .panel-inner{ padding: var(--pad); }
+
+    /* Form */
+    .row{ display:flex; gap:12px; align-items:center; flex-wrap:wrap }
+    .col{ display:flex; flex-direction:column; gap:10px; flex:1 1 220px }
+
+    label{
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: .2px;
+      color: rgba(238,243,255,.92);
+    }
+
+    input[type="number"]{
+      width:100%;
+      padding: 16px 16px;
+      border-radius: 16px;
+      border: 1px solid var(--border2);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      font-size: 18px;
+      font-weight: 800;
+      outline:none;
+    }
+    input[type="number"]:focus{
+      border-color: rgba(122,167,255,.65);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.18);
+    }
+
+    /* Buttons */
+    .btns{ display:flex; gap:12px; flex-wrap:wrap; margin-top: 12px; }
+    button{
+      appearance:none;
+      border:none;
+      border-radius: 18px;
+      padding: 16px 16px;
+      min-height: 56px;
+      font-size: clamp(16px, 4.4vw, 18px);
+      font-weight: 900;
+      cursor:pointer;
+      user-select:none;
+      color: var(--text);
+      background: rgba(255,255,255,.08);
+      border: 1px solid var(--border);
+      box-shadow: 0 12px 28px rgba(0,0,0,.24);
+      transition: transform .08s ease, filter .08s ease, background .15s ease, box-shadow .15s ease;
+      touch-action: manipulation;
+      flex: 1 1 180px;
+      white-space: normal;
+      line-height: 1.1;
+    }
+    button:active{ transform: translateY(1px) scale(.99); filter: brightness(1.03); }
+
+    button:focus-visible,
+    input:focus-visible{
+      outline: none;
+      box-shadow: 0 0 0 4px rgba(122,167,255,.22), 0 12px 28px rgba(0,0,0,.24);
+    }
+
+    .primary{
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color: #08102a;
+      box-shadow: 0 18px 45px rgba(0,0,0,.34);
+    }
+
+    /* Quick player buttons */
+    .quick{ display:flex; gap:10px; flex-wrap:wrap; }
+    .quickbtn{
+      flex: 1 1 64px;
+      padding: 14px 0;
+      min-height: 52px;
+      font-size: 18px;
+      font-weight: 950;
+      border-radius: 18px;
+      box-shadow: none;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .quickbtn.active{
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
+    }
+
+    /* Segmented control (difficulty) */
+    .seg{ display:flex; gap:10px; flex-wrap:wrap; }
+    .segbtn{
+      flex: 1 1 120px;
+      min-height: 52px;
+      padding: 14px 10px;
+      border-radius: 18px;
+      box-shadow:none;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      font-weight: 950;
+    }
+    .segbtn.active{
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
+    }
+
+    /* Category chips */
+    .chips{ display:flex; gap:10px; flex-wrap:wrap; }
+    .chip{
+      flex: 0 0 auto;
+      min-height: 44px;
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 950;
+      box-shadow:none;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+    }
+    .chip.active{
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
+    }
+
+    /* Settings */
+    .setting{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:14px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.16);
+      border: 1px solid rgba(255,255,255,.10);
+      margin-top: 12px;
+    }
+    .setting .name{
+      font-weight: 900;
+      font-size: 16px;
+      line-height: 1.15;
+      color: rgba(238,243,255,.95);
+    }
+
+    /* Switch */
+    .switch{ position:relative; display:inline-block; width:56px; height:34px; flex: 0 0 auto; }
+    .switch input{ opacity:0; width:0; height:0; }
+    .slider{
+      position:absolute;
+      cursor:pointer;
+      inset:0;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.18);
+      transition: .18s;
+      border-radius: 999px;
+    }
+    .slider:before{
+      position:absolute;
+      content:"";
+      height:28px;
+      width:28px;
+      left:3px;
+      top:50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.92);
+      transition: .18s;
+      border-radius: 999px;
+      box-shadow: 0 10px 22px rgba(0,0,0,.28);
+    }
+    .switch input:checked + .slider{
+      background: rgba(122,167,255,.78);
+      border-color: rgba(122,167,255,.55);
+    }
+    .switch input:checked + .slider:before{ transform: translate(22px, -50%); }
+
+    /* Dealing header */
+    .topline{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+      margin-bottom: 12px;
+    }
+    .player{
+      font-size: clamp(20px, 5.0vw, 26px);
+      font-weight: 950;
+      letter-spacing:.2px;
+    }
+    .progress{ color: var(--muted); font-size: 14px; font-weight: 850; }
+
+    /* Cards */
+    .card-face{
+      padding: 22px var(--pad);
+      display:flex;
+      flex-direction:column;
+      gap:16px;
+      min-height: clamp(320px, 52vh, 520px);
+      justify-content:center;
+      text-align:center;
+    }
+
+    /* Make WORD/SANA label readable */
+    .card-title{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
+      margin: 0 auto;
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 950;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: rgba(238,243,255,.95);
+      background: rgba(0,0,0,.20);
+      border: 1px solid rgba(255,255,255,.16);
+    }
+
+    .card-main{
+      font-size: clamp(36px, 8.8vw, 56px);
+      font-weight: 1000;
+      letter-spacing: .3px;
+      line-height: 1.04;
+      word-break: break-word;
+    }
+    .card-main.imposter{ color: var(--danger); }
+
+    .hintbox{
+      margin-top: 0;
+      padding: 14px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(0,0,0,.18);
+      text-align:left;
+    }
+    .hintbox .label{
+      font-size: 12px;
+      color: var(--muted2);
+      letter-spacing:.16em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 900;
+    }
+    .hintbox .value{
+      font-size: clamp(18px, 4.9vw, 24px);
+      font-weight: 950;
+      line-height: 1.15;
+    }
+
+    /* Done screen */
+    .done-face{
+      min-height: clamp(280px, 44vh, 480px);
+      gap: 14px;
+    }
+    .done-title{
+      font-size: clamp(28px, 6.8vw, 40px);
+      font-weight: 1000;
+      letter-spacing: .2px;
+      line-height: 1.05;
+    }
+    .done-sub{
+      font-size: clamp(16px, 4.6vw, 18px);
+      font-weight: 850;
+      color: var(--muted);
+      line-height: 1.25;
+    }
+
+    /* Big tap CTA for Reveal / Close */
+    .tap{
+      width: 100%;
+      padding: 26px 18px;
+      border-radius: 22px;
+      border: 1px solid rgba(122,167,255,.62);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      color:#08102a;
+      font-weight: 1000;
+      font-size: clamp(20px, 5.3vw, 28px);
+      letter-spacing: .1px;
+      box-shadow: 0 18px 45px rgba(0,0,0,.35);
+      position: relative;
+      overflow:hidden;
+      min-height: 70px;
+    }
+    .tap::before{
+      content:"";
+      position:absolute;
+      inset:-40% -30%;
+      background: radial-gradient(closest-side at 30% 30%, rgba(255,255,255,.60), rgba(255,255,255,0));
+      opacity:.22;
+      transform: rotate(10deg);
+      pointer-events:none;
+    }
+    .tap::after{
+      content:"›";
+      position:absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 30px;
+      opacity: .55;
+      pointer-events:none;
+    }
+    .passbtn::after{ content:"→"; opacity: .65; }
+
+    .hidden{ display:none !important; }
+
+    @media (prefers-reduced-motion: reduce){
+      *{ transition: none !important; }
+    }
+
+    .footer{
+      text-align:center;
+      font-size: 12px;
+      font-weight: 850;
+      color: var(--muted2);
+      padding: 6px 2px;
+      margin-top: 6px;
+      user-select: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="app">
+      <div class="head">
+        <h1 id="titleText">Word Impostor</h1>
+        <div class="lang" role="group" aria-label="Language">
+          <button class="langbtn" type="button" id="langEn" aria-label="English" title="English">🇬🇧</button>
+          <button class="langbtn" type="button" id="langFi" aria-label="Suomi" title="Suomi">🇫🇮</button>
+        </div>
+      </div>
+
+      <!-- SETUP -->
+      <section class="panel" id="setupPanel">
+        <div class="panel-inner">
+          <div class="row">
+            <div class="col">
+              <label id="playersLabel">Number of players</label>
+              <div class="quick" id="playerQuick" role="group" aria-label="Player count">
+                <button class="quickbtn" type="button" data-count="3">3</button>
+                <button class="quickbtn" type="button" data-count="4">4</button>
+                <button class="quickbtn" type="button" data-count="5">5</button>
+                <button class="quickbtn" type="button" data-count="6">6</button>
+                <button class="quickbtn" type="button" data-count="custom" id="customBtn">Custom</button>
+              </div>
+              <input id="playersInput" class="hidden" type="number" inputmode="numeric" min="3" value="5" />
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <div class="col">
+              <label id="difficultyLabel">Difficulty</label>
+              <div class="seg" id="difficultySeg" role="group" aria-label="Difficulty">
+                <button class="segbtn" type="button" data-diff="all" id="diffAll">All</button>
+                <button class="segbtn" type="button" data-diff="easy" id="diffEasy">Easy</button>
+                <button class="segbtn" type="button" data-diff="medium" id="diffMedium">Medium</button>
+                <button class="segbtn" type="button" data-diff="hard" id="diffHard">Hard</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="row" style="margin-top:10px;">
+            <div class="col">
+              <label id="categoriesLabel">Categories</label>
+              <div class="chips" id="categoryChips" role="group" aria-label="Categories"></div>
+            </div>
+          </div>
+
+          <div class="setting" role="group" aria-label="Impostor hint">
+            <div class="name" id="impostorHintName">Impostor hint</div>
+            <label class="switch" aria-label="Toggle impostor hint">
+              <input id="impostorHintToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="setting" role="group" aria-label="Hidden impostor">
+            <div class="name" id="hiddenImpostorName">Impostor gets a wrong word</div>
+            <label class="switch" aria-label="Toggle hidden impostor">
+              <input id="hiddenImpostorToggle" type="checkbox" />
+              <span class="slider"></span>
+            </label>
+          </div>
+
+          <div class="btns">
+            <button class="primary" id="startBtn">Start</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEALING -->
+      <section class="panel hidden" id="dealPanel">
+        <div class="panel-inner">
+          <div class="topline">
+            <div class="player" id="playerHeading">Player 1</div>
+            <div class="progress" id="progressText" aria-live="polite">1 / 5</div>
+          </div>
+
+          <div class="card">
+            <!-- FACE DOWN -->
+            <div class="card-face" id="faceDown">
+              <button class="tap" id="revealBtn">Reveal the card</button>
+            </div>
+
+            <!-- FACE UP -->
+            <div class="card-face hidden" id="faceUp">
+              <div class="card-title" id="cardLabel">WORD</div>
+              <div class="card-main" id="cardMain">PINEAPPLE</div>
+
+              <div class="hintbox hidden" id="impostorHintBox" aria-live="polite">
+                <div class="label" id="impostorHintLabel">CATEGORIES</div>
+                <div class="value" id="impostorHintText">Food</div>
+              </div>
+
+              <div class="btns" style="margin-top:8px;">
+                <button class="tap passbtn" id="closeCardBtn">Close &amp; Pass to the next player</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DONE -->
+      <section class="panel hidden" id="donePanel">
+        <div class="panel-inner">
+          <div class="card">
+            <div class="card-face done-face">
+              <div class="done-title" id="doneText">Start playing</div>
+              <div class="done-sub" id="doneSub">All players have seen their cards.</div>
+              <div class="btns">
+                <button class="primary" id="newGameBtn">New game</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer class="footer" id="footerText">Made by AI with ❤️ — 0% human code.</footer>
+
+    </div>
+  </div>
+
+  <!--
+    WORD DATA
+    - Keep this single file, but make the word list easy to expand.
+    - Add as many entries as you want in the JSON below.
+    - "diff" is optional; if omitted, the game infers difficulty from word length.
+
+    Format:
+    {
+      "words": [
+        {"en":"Pineapple","fi":"Ananas","cats":["food","nature"],"diff":"easy"}
+      ]
+    }
+  -->
+  <script id="wordData" type="application/json">
+  {
+    "words": [
+      {"en":"Airport","fi":"Lentokenttä","cats":["place"]},
+      {"en":"Astronaut","fi":"Astronautti","cats":["person","space"]},
+      {"en":"Backpack","fi":"Reppu","cats":["thing"]},
+      {"en":"Bakery","fi":"Leipomo","cats":["place"]},
+      {"en":"Bamboo","fi":"Bambu","cats":["nature"]},
+      {"en":"Banana","fi":"Banaani","cats":["food","nature"]},
+      {"en":"Baseball","fi":"Baseball","cats":["activity"]},
+      {"en":"Basil","fi":"Basilika","cats":["food","nature"]},
+      {"en":"Bicycle","fi":"Polkupyörä","cats":["vehicle"]},
+      {"en":"Blizzard","fi":"Lumimyrsky","cats":["nature"]},
+      {"en":"Bookstore","fi":"Kirjakauppa","cats":["place"]},
+      {"en":"Bowling","fi":"Keilaus","cats":["activity"]},
+      {"en":"Cactus","fi":"Kaktus","cats":["nature"]},
+      {"en":"Camera","fi":"Kamera","cats":["thing"]},
+      {"en":"Campfire","fi":"Nuotio","cats":["activity","thing"]},
+      {"en":"Castle","fi":"Linna","cats":["place"]},
+      {"en":"Cereal","fi":"Aamumurot","cats":["food"]},
+      {"en":"Chameleon","fi":"Kameleontti","cats":["animal"]},
+      {"en":"Chess","fi":"Shakki","cats":["activity"]},
+      {"en":"Chocolate","fi":"Suklaa","cats":["food"]},
+      {"en":"Circus","fi":"Sirkus","cats":["place","activity"]},
+      {"en":"Cloud","fi":"Pilvi","cats":["nature"]},
+      {"en":"Coconut","fi":"Kookos","cats":["food","nature"]},
+      {"en":"Comet","fi":"Komeetta","cats":["space"]},
+      {"en":"Concert","fi":"Konsertti","cats":["activity"]},
+      {"en":"Cookie","fi":"Keksi","cats":["food"]},
+      {"en":"Crocodile","fi":"Krokotiili","cats":["animal"]},
+      {"en":"Cupcake","fi":"Muffini","cats":["food"]},
+      {"en":"Desert","fi":"Aavikko","cats":["place","nature"]},
+      {"en":"Dolphin","fi":"Delfiini","cats":["animal"]},
+      {"en":"Dragon","fi":"Lohikäärme","cats":["animal"],"diff":"hard"},
+      {"en":"Eclipse","fi":"Pimennys","cats":["space"],"diff":"medium"},
+      {"en":"Espresso","fi":"Espresso","cats":["food"],"diff":"medium"},
+      {"en":"Forest","fi":"Metsä","cats":["place","nature"]},
+      {"en":"Galaxy","fi":"Galaksi","cats":["space"],"diff":"hard"},
+      {"en":"Giraffe","fi":"Kirahvi","cats":["animal"],"diff":"medium"},
+      {"en":"Guitar","fi":"Kitara","cats":["thing"]},
+      {"en":"Hamburger","fi":"Hampurilainen","cats":["food"],"diff":"medium"},
+      {"en":"Hospital","fi":"Sairaala","cats":["place"],"diff":"medium"},
+      {"en":"Hot air balloon","fi":"Kuumailmapallo","cats":["vehicle"],"diff":"medium"},
+      {"en":"Ice cream","fi":"Jäätelö","cats":["food"],"diff":"easy"},
+      {"en":"Island","fi":"Saari","cats":["place","nature"]},
+      {"en":"Jellyfish","fi":"Meduusa","cats":["animal"],"diff":"medium"},
+      {"en":"Jungle","fi":"Viidakko","cats":["place","nature"],"diff":"medium"},
+      {"en":"Kangaroo","fi":"Kenguru","cats":["animal"],"diff":"medium"},
+      {"en":"Kayak","fi":"Kajakki","cats":["vehicle"]},
+      {"en":"Library","fi":"Kirjasto","cats":["place"]},
+      {"en":"Limo","fi":"Limusiini","cats":["vehicle"],"diff":"hard"},
+      {"en":"Lobster","fi":"Hummeri","cats":["animal","food"],"diff":"medium"},
+      {"en":"Mango","fi":"Mango","cats":["food","nature"]},
+      {"en":"Marathon","fi":"Maraton","cats":["activity"],"diff":"medium"},
+      {"en":"Market","fi":"Tori","cats":["place"]},
+      {"en":"Milkshake","fi":"Pirtelö","cats":["food"],"diff":"medium"},
+      {"en":"Museum","fi":"Museo","cats":["place"]},
+      {"en":"Mushroom","fi":"Sieni","cats":["food","nature"]},
+      {"en":"Ninja","fi":"Ninja","cats":["person"],"diff":"hard"},
+      {"en":"Octopus","fi":"Mustekala","cats":["animal"],"diff":"medium"},
+      {"en":"Opera","fi":"Ooppera","cats":["activity"],"diff":"hard"},
+      {"en":"Owl","fi":"Pöllö","cats":["animal"]},
+      {"en":"Pancake","fi":"Pannukakku","cats":["food"],"diff":"easy"},
+      {"en":"Park","fi":"Puisto","cats":["place"]},
+      {"en":"Pineapple","fi":"Ananas","cats":["food","nature"],"diff":"easy"},
+      {"en":"Pirate","fi":"Merirosvo","cats":["person"],"diff":"medium"},
+      {"en":"Planet","fi":"Planeetta","cats":["space"],"diff":"medium"},
+      {"en":"Popcorn","fi":"Popcorn","cats":["food"],"diff":"easy"},
+      {"en":"Pumpkin","fi":"Kurpitsa","cats":["food","nature"],"diff":"easy"},
+      {"en":"Rainbow","fi":"Sateenkaari","cats":["nature"],"diff":"easy"},
+      {"en":"Raspberry","fi":"Vadelma","cats":["food","nature"]},
+      {"en":"Robot","fi":"Robotti","cats":["person","thing"],"diff":"medium"},
+      {"en":"Rocket","fi":"Raketti","cats":["space","vehicle"],"diff":"medium"},
+      {"en":"Roller coaster","fi":"Vuoristorata","cats":["activity"],"diff":"medium"},
+      {"en":"Saturn","fi":"Saturnus","cats":["space"],"diff":"hard"},
+      {"en":"School","fi":"Koulu","cats":["place"]},
+      {"en":"Scooter","fi":"Potkulauta","cats":["vehicle"],"diff":"easy"},
+      {"en":"Shark","fi":"Hai","cats":["animal"],"diff":"medium"},
+      {"en":"Skateboard","fi":"Skeittilauta","cats":["vehicle"],"diff":"medium"},
+      {"en":"Snowman","fi":"Lumiukko","cats":["thing","nature"],"diff":"easy"},
+      {"en":"Soccer","fi":"Jalkapallo","cats":["activity"],"diff":"easy"},
+      {"en":"Spaceship","fi":"Avaruusalus","cats":["space","vehicle"],"diff":"hard"},
+      {"en":"Spaghetti","fi":"Spagetti","cats":["food"],"diff":"easy"},
+      {"en":"Storm","fi":"Myrsky","cats":["nature"],"diff":"easy"},
+      {"en":"Strawberry","fi":"Mansikka","cats":["food","nature"],"diff":"easy"},
+      {"en":"Sunflower","fi":"Auringonkukka","cats":["nature"],"diff":"medium"},
+      {"en":"Sushi","fi":"Sushi","cats":["food"],"diff":"medium"},
+      {"en":"Telescope","fi":"Kaukoputki","cats":["thing","space"],"diff":"hard"},
+      {"en":"Thunder","fi":"Ukkonen","cats":["nature"],"diff":"easy"},
+      {"en":"Tiger","fi":"Tiikeri","cats":["animal"],"diff":"easy"},
+      {"en":"Tornado","fi":"Tornado","cats":["nature"],"diff":"medium"},
+      {"en":"Train","fi":"Juna","cats":["vehicle"],"diff":"easy"},
+      {"en":"Turtle","fi":"Kilpikonna","cats":["animal"],"diff":"easy"},
+      {"en":"Unicorn","fi":"Yksisarvinen","cats":["animal"],"diff":"hard"},
+      {"en":"Volcano","fi":"Tulivuori","cats":["nature"],"diff":"medium"},
+      {"en":"Waffle","fi":"Vohveli","cats":["food"],"diff":"easy"},
+      {"en":"Waterfall","fi":"Vesiputous","cats":["nature"],"diff":"medium"},
+      {"en":"Whale","fi":"Valas","cats":["animal"],"diff":"medium"},
+      {"en":"Yacht","fi":"Jahti","cats":["vehicle"],"diff":"hard"},
+      {"en":"Yogurt","fi":"Jogurtti","cats":["food"],"diff":"easy"},
+      {"en":"Zebra","fi":"Seepra","cats":["animal"],"diff":"easy"},
+
+      {"en":"Apple","fi":"Omena","cats":["food","nature"],"diff":"easy"},
+      {"en":"Orange","fi":"Appelsiini","cats":["food","nature"],"diff":"easy"},
+      {"en":"Lemon","fi":"Sitruuna","cats":["food","nature"],"diff":"easy"},
+      {"en":"Pear","fi":"Päärynä","cats":["food","nature"],"diff":"easy"},
+      {"en":"Peach","fi":"Persikka","cats":["food","nature"],"diff":"easy"},
+      {"en":"Grapes","fi":"Viinirypäleet","cats":["food","nature"],"diff":"easy"},
+      {"en":"Blueberry","fi":"Mustikka","cats":["food","nature"],"diff":"easy"},
+      {"en":"Cherry","fi":"Kirsikka","cats":["food","nature"],"diff":"easy"},
+      {"en":"Watermelon","fi":"Vesimeloni","cats":["food","nature"],"diff":"medium"},
+      {"en":"Avocado","fi":"Avokado","cats":["food","nature"],"diff":"medium"},
+
+      {"en":"Bread","fi":"Leipä","cats":["food"],"diff":"easy"},
+      {"en":"Cheese","fi":"Juusto","cats":["food"],"diff":"easy"},
+      {"en":"Butter","fi":"Voi","cats":["food"],"diff":"easy"},
+      {"en":"Honey","fi":"Hunaja","cats":["food","nature"],"diff":"easy"},
+      {"en":"Jam","fi":"Hillo","cats":["food"],"diff":"easy"},
+      {"en":"Pizza","fi":"Pizza","cats":["food"],"diff":"easy"},
+      {"en":"Salad","fi":"Salaatti","cats":["food"],"diff":"easy"},
+      {"en":"Soup","fi":"Keitto","cats":["food"],"diff":"easy"},
+      {"en":"Sandwich","fi":"Voileipä","cats":["food"],"diff":"medium"},
+      {"en":"Porridge","fi":"Puuro","cats":["food"],"diff":"medium"},
+      {"en":"Omelette","fi":"Munakas","cats":["food"],"diff":"medium"},
+      {"en":"Pasta","fi":"Pasta","cats":["food"],"diff":"easy"},
+      {"en":"Risotto","fi":"Risotto","cats":["food"],"diff":"hard"},
+      {"en":"Taco","fi":"Taco","cats":["food"],"diff":"easy"},
+      {"en":"Burrito","fi":"Burrito","cats":["food"],"diff":"medium"},
+
+      {"en":"Coffee","fi":"Kahvi","cats":["food"],"diff":"easy"},
+      {"en":"Tea","fi":"Tee","cats":["food"],"diff":"easy"},
+      {"en":"Hot chocolate","fi":"Kaakao","cats":["food"],"diff":"medium"},
+      {"en":"Lemonade","fi":"Limonadi","cats":["food"],"diff":"medium"},
+
+      {"en":"Carrot","fi":"Porkkana","cats":["food","nature"],"diff":"easy"},
+      {"en":"Potato","fi":"Peruna","cats":["food","nature"],"diff":"easy"},
+      {"en":"Tomato","fi":"Tomaatti","cats":["food","nature"],"diff":"easy"},
+      {"en":"Cucumber","fi":"Kurkku","cats":["food","nature"],"diff":"easy"},
+      {"en":"Onion","fi":"Sipuli","cats":["food","nature"],"diff":"easy"},
+      {"en":"Garlic","fi":"Valkosipuli","cats":["food","nature"],"diff":"medium"},
+      {"en":"Broccoli","fi":"Parsakaali","cats":["food","nature"],"diff":"medium"},
+      {"en":"Cauliflower","fi":"Kukkakaali","cats":["food","nature"],"diff":"hard"},
+      {"en":"Bell pepper","fi":"Paprika","cats":["food","nature"],"diff":"medium"},
+
+      {"en":"Dog","fi":"Koira","cats":["animal"],"diff":"easy"},
+      {"en":"Cat","fi":"Kissa","cats":["animal"],"diff":"easy"},
+      {"en":"Horse","fi":"Hevonen","cats":["animal"],"diff":"easy"},
+      {"en":"Cow","fi":"Lehmä","cats":["animal"],"diff":"easy"},
+      {"en":"Pig","fi":"Sika","cats":["animal"],"diff":"easy"},
+      {"en":"Sheep","fi":"Lammas","cats":["animal"],"diff":"easy"},
+      {"en":"Goat","fi":"Vuohi","cats":["animal"],"diff":"easy"},
+      {"en":"Bear","fi":"Karhu","cats":["animal"],"diff":"easy"},
+      {"en":"Wolf","fi":"Susi","cats":["animal"],"diff":"easy"},
+      {"en":"Fox","fi":"Kettu","cats":["animal"],"diff":"easy"},
+      {"en":"Rabbit","fi":"Kani","cats":["animal"],"diff":"easy"},
+      {"en":"Deer","fi":"Peura","cats":["animal"],"diff":"easy"},
+      {"en":"Moose","fi":"Hirvi","cats":["animal"],"diff":"easy"},
+      {"en":"Eagle","fi":"Kotka","cats":["animal"],"diff":"medium"},
+      {"en":"Penguin","fi":"Pingviini","cats":["animal"],"diff":"medium"},
+      {"en":"Parrot","fi":"Papukaija","cats":["animal"],"diff":"medium"},
+      {"en":"Swan","fi":"Joutsen","cats":["animal"],"diff":"medium"},
+      {"en":"Snake","fi":"Käärme","cats":["animal"],"diff":"easy"},
+      {"en":"Spider","fi":"Hämähäkki","cats":["animal"],"diff":"medium"},
+      {"en":"Butterfly","fi":"Perhonen","cats":["animal","nature"],"diff":"medium"},
+      {"en":"Bee","fi":"Mehiläinen","cats":["animal","nature"],"diff":"easy"},
+      {"en":"Ant","fi":"Muurahainen","cats":["animal","nature"],"diff":"medium"},
+      {"en":"Lion","fi":"Leijona","cats":["animal"],"diff":"easy"},
+      {"en":"Elephant","fi":"Elefantti","cats":["animal"],"diff":"medium"},
+
+      {"en":"Doctor","fi":"Lääkäri","cats":["person"],"diff":"easy"},
+      {"en":"Teacher","fi":"Opettaja","cats":["person"],"diff":"easy"},
+      {"en":"Chef","fi":"Kokki","cats":["person"],"diff":"easy"},
+      {"en":"Detective","fi":"Etsivä","cats":["person"],"diff":"medium"},
+      {"en":"Firefighter","fi":"Palomies","cats":["person"],"diff":"medium"},
+      {"en":"Pilot","fi":"Lentäjä","cats":["person"],"diff":"easy"},
+      {"en":"Musician","fi":"Muusikko","cats":["person"],"diff":"medium"},
+      {"en":"Artist","fi":"Taiteilija","cats":["person"],"diff":"medium"},
+      {"en":"Photographer","fi":"Valokuvaaja","cats":["person"],"diff":"hard"},
+      {"en":"Scientist","fi":"Tiedemies","cats":["person"],"diff":"medium"},
+
+      {"en":"Car","fi":"Auto","cats":["vehicle"],"diff":"easy"},
+      {"en":"Bus","fi":"Bussi","cats":["vehicle"],"diff":"easy"},
+      {"en":"Tram","fi":"Raitiovaunu","cats":["vehicle"],"diff":"medium"},
+      {"en":"Airplane","fi":"Lentokone","cats":["vehicle"],"diff":"medium"},
+      {"en":"Helicopter","fi":"Helikopteri","cats":["vehicle"],"diff":"hard"},
+      {"en":"Boat","fi":"Vene","cats":["vehicle"],"diff":"easy"},
+      {"en":"Ship","fi":"Laiva","cats":["vehicle"],"diff":"easy"},
+      {"en":"Submarine","fi":"Sukellusvene","cats":["vehicle"],"diff":"hard"},
+      {"en":"Motorcycle","fi":"Moottoripyörä","cats":["vehicle"],"diff":"hard"},
+      {"en":"Van","fi":"Pakettiauto","cats":["vehicle"],"diff":"medium"},
+
+      {"en":"Beach","fi":"Ranta","cats":["place","nature"],"diff":"easy"},
+      {"en":"Mountain","fi":"Vuori","cats":["place","nature"],"diff":"easy"},
+      {"en":"River","fi":"Joki","cats":["place","nature"],"diff":"easy"},
+      {"en":"Lake","fi":"Järvi","cats":["place","nature"],"diff":"easy"},
+      {"en":"Bridge","fi":"Silta","cats":["place","thing"],"diff":"easy"},
+      {"en":"Restaurant","fi":"Ravintola","cats":["place"],"diff":"medium"},
+      {"en":"Café","fi":"Kahvila","cats":["place"],"diff":"medium"},
+      {"en":"Stadium","fi":"Stadion","cats":["place"],"diff":"medium"},
+      {"en":"Theater","fi":"Teatteri","cats":["place"],"diff":"medium"},
+      {"en":"Farm","fi":"Maatila","cats":["place"],"diff":"easy"},
+      {"en":"Harbor","fi":"Satama","cats":["place"],"diff":"medium"},
+      {"en":"Metro station","fi":"Metron asema","cats":["place"],"diff":"medium"},
+
+      {"en":"Snow","fi":"Lumi","cats":["nature"],"diff":"easy"},
+      {"en":"Rain","fi":"Sade","cats":["nature"],"diff":"easy"},
+      {"en":"Wind","fi":"Tuuli","cats":["nature"],"diff":"easy"},
+      {"en":"Fog","fi":"Sumu","cats":["nature"],"diff":"easy"},
+      {"en":"Lightning","fi":"Salama","cats":["nature"],"diff":"medium"},
+      {"en":"Earthquake","fi":"Maanjäristys","cats":["nature"],"diff":"hard"},
+      {"en":"Glacier","fi":"Jäätikkö","cats":["nature"],"diff":"medium"},
+      {"en":"Flower","fi":"Kukka","cats":["nature"],"diff":"easy"},
+      {"en":"Tree","fi":"Puu","cats":["nature"],"diff":"easy"},
+      {"en":"Pine tree","fi":"Mänty","cats":["nature"],"diff":"medium"},
+      {"en":"Birch","fi":"Koivu","cats":["nature"],"diff":"easy"},
+      {"en":"Oak","fi":"Tammi","cats":["nature"],"diff":"easy"},
+      {"en":"Meadow","fi":"Niitty","cats":["nature"],"diff":"medium"},
+
+      {"en":"Swimming","fi":"Uinti","cats":["activity"],"diff":"medium"},
+      {"en":"Dancing","fi":"Tanssi","cats":["activity"],"diff":"easy"},
+      {"en":"Cooking","fi":"Ruoanlaitto","cats":["activity"],"diff":"hard"},
+      {"en":"Painting","fi":"Maalaus","cats":["activity"],"diff":"medium"},
+      {"en":"Running","fi":"Juoksu","cats":["activity"],"diff":"easy"},
+      {"en":"Hiking","fi":"Vaellus","cats":["activity"],"diff":"medium"},
+      {"en":"Camping","fi":"Retkeily","cats":["activity"],"diff":"medium"},
+      {"en":"Yoga","fi":"Jooga","cats":["activity"],"diff":"easy"},
+      {"en":"Meditation","fi":"Meditaatio","cats":["activity"],"diff":"hard"},
+      {"en":"Fishing","fi":"Kalastus","cats":["activity","nature"],"diff":"medium"},
+      {"en":"Skiing","fi":"Hiihto","cats":["activity"],"diff":"easy"},
+      {"en":"Sauna","fi":"Sauna","cats":["activity"],"diff":"easy"},
+
+      {"en":"Phone","fi":"Puhelin","cats":["thing"],"diff":"easy"},
+      {"en":"Laptop","fi":"Kannettava","cats":["thing"],"diff":"medium"},
+      {"en":"Tablet","fi":"Tabletti","cats":["thing"],"diff":"easy"},
+      {"en":"Key","fi":"Avain","cats":["thing"],"diff":"easy"},
+      {"en":"Lock","fi":"Lukko","cats":["thing"],"diff":"easy"},
+      {"en":"Umbrella","fi":"Sateenvarjo","cats":["thing"],"diff":"medium"},
+      {"en":"Wallet","fi":"Lompakko","cats":["thing"],"diff":"medium"},
+      {"en":"Passport","fi":"Passi","cats":["thing"],"diff":"easy"},
+      {"en":"Ticket","fi":"Lippu","cats":["thing"],"diff":"easy"},
+      {"en":"Map","fi":"Kartta","cats":["thing"],"diff":"easy"},
+      {"en":"Compass","fi":"Kompassi","cats":["thing"],"diff":"medium"},
+      {"en":"Clock","fi":"Kello","cats":["thing"],"diff":"easy"},
+      {"en":"Mirror","fi":"Peili","cats":["thing"],"diff":"easy"},
+      {"en":"Ladder","fi":"Tikkaat","cats":["thing"],"diff":"medium"},
+      {"en":"Hammer","fi":"Vasara","cats":["thing"],"diff":"easy"},
+      {"en":"Screwdriver","fi":"Ruuvimeisseli","cats":["thing"],"diff":"hard"},
+      {"en":"Wrench","fi":"Jakoavain","cats":["thing"],"diff":"medium"},
+      {"en":"Flashlight","fi":"Taskulamppu","cats":["thing"],"diff":"hard"},
+
+      {"en":"Moon","fi":"Kuu","cats":["space"],"diff":"easy"},
+      {"en":"Sun","fi":"Aurinko","cats":["space"],"diff":"easy"},
+      {"en":"Star","fi":"Tähti","cats":["space"],"diff":"easy"},
+      {"en":"Meteor","fi":"Meteori","cats":["space"],"diff":"medium"},
+      {"en":"Satellite","fi":"Satelliitti","cats":["space"],"diff":"hard"},
+      {"en":"Space station","fi":"Avaruusasema","cats":["space","place"],"diff":"hard"},
+      {"en":"Black hole","fi":"Musta aukko","cats":["space"],"diff":"hard"},
+      {"en":"Antenna","fi":"Antenni","cats":["thing"],"diff":"medium"},
+
+      {"en":"Helsinki","fi":"Helsinki","cats":["place","suomi"],"diff":"easy"},
+      {"en":"Tampere","fi":"Tampere","cats":["place","suomi"],"diff":"easy"},
+      {"en":"Turku","fi":"Turku","cats":["place","suomi"],"diff":"easy"},
+      {"en":"Oulu","fi":"Oulu","cats":["place","suomi"],"diff":"easy"},
+      {"en":"Rovaniemi","fi":"Rovaniemi","cats":["place","suomi"],"diff":"medium"},
+      {"en":"Lapland","fi":"Lappi","cats":["place","nature","suomi"],"diff":"medium"},
+      {"en":"Suomenlinna","fi":"Suomenlinna","cats":["place","suomi"],"diff":"hard"},
+      {"en":"Saimaa","fi":"Saimaa","cats":["place","nature","suomi"],"diff":"easy"},
+      {"en":"Archipelago","fi":"Saaristo","cats":["nature","place","suomi"],"diff":"medium"},
+
+      {"en":"Reindeer","fi":"Poro","cats":["animal","suomi"],"diff":"easy"},
+      {"en":"Brown bear","fi":"Karhu","cats":["animal","suomi"],"diff":"medium"},
+      {"en":"Whooper swan","fi":"Laulujoutsen","cats":["animal","suomi"],"diff":"hard"},
+
+      {"en":"Northern lights","fi":"Revontulet","cats":["nature","space","suomi"],"diff":"hard"},
+      {"en":"Midnight sun","fi":"Yötön yö","cats":["nature","space","suomi"],"diff":"medium"},
+      {"en":"Frozen lake","fi":"Jäätynyt järvi","cats":["nature","suomi"],"diff":"hard"},
+
+      {"en":"Karjalanpiirakka","fi":"Karjalanpiirakka","cats":["food","suomi"],"diff":"hard"},
+      {"en":"Korvapuusti","fi":"Korvapuusti","cats":["food","suomi"],"diff":"medium"},
+      {"en":"Salmiakki","fi":"Salmiakki","cats":["food","suomi"],"diff":"medium"},
+      {"en":"Mämmi","fi":"Mämmi","cats":["food","suomi"],"diff":"easy"},
+      {"en":"Ruisleipä","fi":"Ruisleipä","cats":["food","suomi"],"diff":"medium"},
+      {"en":"Lohikeitto","fi":"Lohikeitto","cats":["food","suomi"],"diff":"medium"},
+      {"en":"Poronkäristys","fi":"Poronkäristys","cats":["food","suomi"],"diff":"hard"},
+      {"en":"Glögi","fi":"Glögi","cats":["food","suomi"],"diff":"easy"},
+      {"en":"Sima","fi":"Sima","cats":["food","suomi"],"diff":"easy"},
+      {"en":"Leipäjuusto","fi":"Leipäjuusto","cats":["food","suomi"],"diff":"hard"},
+      {"en":"Mustikkapiirakka","fi":"Mustikkapiirakka","cats":["food","suomi"],"diff":"hard"},
+
+      {"en":"Sisu","fi":"Sisu","cats":["thing","suomi"],"diff":"easy"},
+      {"en":"Moomin","fi":"Muumipeikko","cats":["person","suomi"],"diff":"medium"},
+      {"en":"Santa Claus","fi":"Joulupukki","cats":["person","suomi"],"diff":"medium"},
+      {"en":"Kalevala","fi":"Kalevala","cats":["thing","suomi"],"diff":"medium"},
+      {"en":"Sleigh","fi":"Reki","cats":["vehicle","suomi"],"diff":"easy"},
+
+      {"en":"Midsummer","fi":"Juhannus","cats":["activity","suomi"],"diff":"medium"},
+      {"en":"May Day","fi":"Vappu","cats":["activity","suomi"],"diff":"easy"},
+      {"en":"Independence Day","fi":"Itsenäisyyspäivä","cats":["activity","suomi"],"diff":"hard"},
+      {"en":"Ice swimming","fi":"Avantouinti","cats":["activity","suomi"],"diff":"hard"},
+      {"en":"Berry picking","fi":"Marjastus","cats":["activity","nature","suomi"],"diff":"medium"},
+      {"en":"Orienteering","fi":"Suunnistus","cats":["activity","nature","suomi"],"diff":"hard"},
+
+      {"en":"Kimi Räikkönen","fi":"Kimi Räikkönen","cats":["person","suomi"],"diff":"hard"},
+      {"en":"Sanna Marin","fi":"Sanna Marin","cats":["person","suomi"],"diff":"medium"},
+      {"en":"Ismo Leikola","fi":"Ismo Leikola","cats":["person","suomi"],"diff":"hard"},
+      {"en":"Darude","fi":"Darude","cats":["person","suomi"],"diff":"medium"},
+      {"en":"Lordi","fi":"Lordi","cats":["person","suomi"],"diff":"easy"}
+    ]
+  }
+  </script>
+
+  <script>
+    "use strict";
+
+    // ---- Storage keys (localStorage) ----
+    const LS = {
+      lang: "wi_lang",
+      players: "wi_players",
+      playersMode: "wi_players_mode", // "preset" | "custom"
+      hint: "wi_hint",
+      hidden: "wi_hidden",
+      difficulty: "wi_difficulty", // all|easy|medium|hard
+      categories: "wi_categories", // comma-separated keys; empty = all
+    };
+
+    const storage = {
+      get(key, fallback=null){
+        try{
+          const v = localStorage.getItem(key);
+          return v === null ? fallback : v;
+        }catch(_e){
+          return fallback;
+        }
+      },
+      set(key, value){
+        try{ localStorage.setItem(key, String(value)); }catch(_e){}
+      },
+      getBool(key, fallback=false){
+        const v = this.get(key, null);
+        if(v === null) return fallback;
+        return v === "1" || v === "true";
+      },
+      setBool(key, value){
+        this.set(key, value ? "1" : "0");
+      }
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    const CATEGORY_KEYS = ["space","food","animal","person","vehicle","place","nature","activity","thing","suomi"]; // keep in sync with i18n // keep in sync with i18n
+    const DIFF_KEYS = ["all","easy","medium","hard"];
+
+    function inferDifficultyFromText(en, fi){
+      const a = String(en || "").trim();
+      const b = String(fi || "").trim();
+      const maxLen = Math.max(a.length, b.length);
+      const hasSpace = a.includes(" ") || b.includes(" ");
+      if(maxLen >= 13) return "hard";
+      if(hasSpace || maxLen >= 8) return "medium";
+      return "easy";
+    }
+
+    function normalizeWord(raw){
+      if(!raw) return null;
+      const en = String(raw.en || "").trim();
+      const fi = String(raw.fi || "").trim();
+      if(!en || !fi) return null;
+
+      const cats = Array.isArray(raw.cats) ? raw.cats.map(String).map(s => s.trim()).filter(Boolean) : [];
+      const safeCats = cats.length ? cats : ["thing"];
+      const diff = DIFF_KEYS.includes(raw.diff) ? raw.diff : inferDifficultyFromText(en, fi);
+
+      return { en, fi, cats: safeCats, diff };
+    }
+
+    function loadWordBank(){
+      const node = $("wordData");
+      if(!node) return [];
+      try{
+        const parsed = JSON.parse(node.textContent || "{}");
+        const words = Array.isArray(parsed.words) ? parsed.words : [];
+        const out = [];
+        for(const w of words){
+          const n = normalizeWord(w);
+          if(n) out.push(n);
+        }
+        return out;
+      }catch(e){
+        console.error("Failed to parse wordData JSON", e);
+        return [];
+      }
+    }
+
+    const WORD_BANK = loadWordBank();
+
+    const I18N = {
+      en: {
+        title: "Word Impostor",
+        players: "Number of players",
+        custom: "Custom",
+        difficulty: "Difficulty",
+        categories: "Categories",
+        all: "All",
+        diff_easy: "Easy",
+        diff_medium: "Medium",
+        diff_hard: "Hard",
+        impostorHint: "Impostor hint",
+        hiddenImpostor: "Impostor gets a wrong word",
+        start: "Start",
+        reveal: "Reveal the card",
+        close: "Close & Pass to the next player",
+        doneTitle: "Start playing",
+        doneBody: "All players have seen their cards.",
+        newGame: "New game",
+        youAreImpostor: "You are an impostor",
+        card_word: "WORD",
+        category: "CATEGORY",
+        categoriesLabel: "CATEGORIES",
+        alertMinPlayers: "At least 3 players.",
+        alertNoWords: "No words match your filters.",
+        player: (n) => `Player ${n}`,
+        cat_space: "Space",
+        cat_food: "Food",
+        cat_animal: "Animal",
+        cat_person: "Person",
+        cat_vehicle: "Vehicle",
+        cat_place: "Place",
+        cat_nature: "Nature",
+        cat_activity: "Activity",
+        cat_thing: "Thing",
+        cat_suomi: "Finland",
+        footer: "Made by ChatGPT 5.2 AI with ❤️ — 0% human code.",
+      },
+      fi: {
+        title: "Sanahuijari",
+        players: "Pelaajien määrä",
+        custom: "Muu",
+        difficulty: "Vaikeus",
+        categories: "Luokat",
+        all: "Kaikki",
+        diff_easy: "Helppo",
+        diff_medium: "Keskitaso",
+        diff_hard: "Vaikea",
+        impostorHint: "Huijarin vihje",
+        hiddenImpostor: "Huijari saa väärän sanan",
+        start: "Aloita",
+        reveal: "Näytä kortti",
+        close: "Sulje & Anna seuraavalle pelaajalle",
+        doneTitle: "Aloittakaa peli",
+        doneBody: "Kaikki ovat nähneet korttinsa.",
+        newGame: "Uusi peli",
+        youAreImpostor: "Olet huijari",
+        card_word: "SANA",
+        category: "LUOKKA",
+        categoriesLabel: "LUOKAT",
+        alertMinPlayers: "Vähintään 3 pelaajaa.",
+        alertNoWords: "Yhtään sanaa ei löydy valinnoilla.",
+        player: (n) => `Pelaaja ${n}`,
+        cat_space: "Avaruus",
+        cat_food: "Ruoka",
+        cat_animal: "Eläin",
+        cat_person: "Henkilö",
+        cat_vehicle: "Ajoneuvo",
+        cat_place: "Paikka",
+        cat_nature: "Luonto",
+        cat_activity: "Toiminta",
+        cat_thing: "Asia",
+        cat_suomi: "Suomi",
+        footer: "ChatGPT 5.2 tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
+      }
+    };
+
+    const state = {
+      lang: "en",
+      totalPlayers: 0,
+      currentPlayer: 1,
+      impostorPlayer: 0,
+      secret: null, // {en, fi, cats, diff}
+      decoy: null,  // {en, fi, cats, diff}
+      pool: [],      // filtered pool used for this game
+      dealing: false,
+      impostorHintEnabled: false,
+      hiddenImpostorEnabled: false,
+      difficulty: "all",
+      selectedCats: [], // empty = all
+    };
+
+    // Cache elements once.
+    const el = {
+      html: document.documentElement,
+      titleText: $("titleText"),
+      playersLabel: $("playersLabel"),
+      customBtn: $("customBtn"),
+      difficultyLabel: $("difficultyLabel"),
+      categoriesLabel: $("categoriesLabel"),
+      difficultySeg: $("difficultySeg"),
+      categoryChips: $("categoryChips"),
+
+      impostorHintName: $("impostorHintName"),
+      hiddenImpostorName: $("hiddenImpostorName"),
+      doneText: $("doneText"),
+      doneSub: $("doneSub"),
+
+      langEn: $("langEn"),
+      langFi: $("langFi"),
+
+      setupPanel: $("setupPanel"),
+      dealPanel: $("dealPanel"),
+      donePanel: $("donePanel"),
+
+      playerQuick: $("playerQuick"),
+      playersInput: $("playersInput"),
+      impostorHintToggle: $("impostorHintToggle"),
+      hiddenImpostorToggle: $("hiddenImpostorToggle"),
+
+      startBtn: $("startBtn"),
+
+      playerHeading: $("playerHeading"),
+      progressText: $("progressText"),
+
+      faceDown: $("faceDown"),
+      faceUp: $("faceUp"),
+      revealBtn: $("revealBtn"),
+      closeCardBtn: $("closeCardBtn"),
+
+      cardLabel: $("cardLabel"),
+      cardMain: $("cardMain"),
+
+      impostorHintBox: $("impostorHintBox"),
+      impostorHintLabel: $("impostorHintLabel"),
+      impostorHintText: $("impostorHintText"),
+
+      newGameBtn: $("newGameBtn"),
+
+      diffAll: $("diffAll"),
+      diffEasy: $("diffEasy"),
+      diffMedium: $("diffMedium"),
+      diffHard: $("diffHard"),
+      footerText: $("footerText"),
+    };
+
+    function t(key, ...args){
+      const dict = I18N[state.lang] || I18N.en;
+      const v = dict[key];
+      if(typeof v === "function") return v(...args);
+      if(v == null) return key;
+      return v;
+    }
+
+    function detectInitialLanguage(){
+      const saved = storage.get(LS.lang, null);
+      if(saved === "fi" || saved === "en") return saved;
+      const nav = (navigator.language || "en").toLowerCase();
+      return nav.startsWith("fi") ? "fi" : "en";
+    }
+
+    function setLanguage(lang){
+      state.lang = (lang === "fi") ? "fi" : "en";
+      storage.set(LS.lang, state.lang);
+
+      el.html.lang = state.lang;
+      el.langEn?.classList.toggle("active", state.lang === "en");
+      el.langFi?.classList.toggle("active", state.lang === "fi");
+
+      // Text updates
+      if(el.titleText) el.titleText.textContent = t("title");
+      document.title = t("title");
+      if(el.playersLabel) el.playersLabel.textContent = t("players");
+      if(el.customBtn) el.customBtn.textContent = t("custom");
+
+      if(el.difficultyLabel) el.difficultyLabel.textContent = t("difficulty");
+      if(el.categoriesLabel) el.categoriesLabel.textContent = t("categories");
+
+      // Difficulty button labels
+      if(el.diffAll) el.diffAll.textContent = t("all");
+      if(el.diffEasy) el.diffEasy.textContent = t("diff_easy");
+      if(el.diffMedium) el.diffMedium.textContent = t("diff_medium");
+      if(el.diffHard) el.diffHard.textContent = t("diff_hard");
+
+      if(el.impostorHintName) el.impostorHintName.textContent = t("impostorHint");
+      if(el.hiddenImpostorName) el.hiddenImpostorName.textContent = t("hiddenImpostor");
+      if(el.startBtn) el.startBtn.textContent = t("start");
+      if(el.revealBtn) el.revealBtn.textContent = t("reveal");
+      if(el.closeCardBtn) el.closeCardBtn.textContent = t("close");
+      if(el.cardLabel) el.cardLabel.textContent = t("card_word");
+      if(el.doneText) el.doneText.textContent = t("doneTitle");
+      if(el.doneSub) el.doneSub.textContent = t("doneBody");
+      if(el.newGameBtn) el.newGameBtn.textContent = t("newGame");
+      if(el.footerText) el.footerText.textContent = t("footer");
+
+      renderCategoryChips();
+
+      // Refresh a revealed card if needed
+      if(el.dealPanel && !el.dealPanel.classList.contains("hidden")){
+        updateDealUI();
+        if(el.faceUp && !el.faceUp.classList.contains("hidden")) revealCard(true);
+      }
+    }
+
+    function randInt(min, maxInclusive){
+      return Math.floor(Math.random() * (maxInclusive - min + 1)) + min;
+    }
+
+    function showPanel(which){
+      el.setupPanel?.classList.toggle("hidden", which !== "setup");
+      el.dealPanel?.classList.toggle("hidden", which !== "deal");
+      el.donePanel?.classList.toggle("hidden", which !== "done");
+    }
+
+    function updateDealUI(){
+      el.playerHeading && (el.playerHeading.textContent = t("player", state.currentPlayer));
+      el.progressText && (el.progressText.textContent = `${state.currentPlayer} / ${state.totalPlayers}`);
+      el.faceDown?.classList.remove("hidden");
+      el.faceUp?.classList.add("hidden");
+      if(el.cardLabel) el.cardLabel.textContent = t("card_word");
+    }
+
+    function normalizeCats(entry){
+      const cats = entry?.cats;
+      return Array.isArray(cats) && cats.length ? cats : ["thing"];
+    }
+
+    function categoryText(keys){
+      return keys.map(k => (I18N[state.lang][`cat_${k}`] ?? I18N.en[`cat_${k}`] ?? k)).join(" / ");
+    }
+
+    function intersectsCats(a=[], b=[]){
+      for(const x of a){
+        if(b.includes(x)) return true;
+      }
+      return false;
+    }
+
+    function buildPool(){
+      let pool = WORD_BANK.slice();
+      if(state.difficulty !== "all"){
+        pool = pool.filter(w => w.diff === state.difficulty);
+      }
+      if(state.selectedCats.length){
+        const set = new Set(state.selectedCats);
+        pool = pool.filter(w => normalizeCats(w).some(c => set.has(c)));
+      }
+      return pool;
+    }
+
+    function chooseSecret(){
+      const pool = state.pool && state.pool.length ? state.pool : WORD_BANK;
+      state.secret = pool[randInt(0, pool.length - 1)] || null;
+    }
+
+    function chooseDecoyForSecret(secret){
+      if(!secret) return null;
+      const cats = normalizeCats(secret);
+      const basePool = state.pool && state.pool.length ? state.pool : WORD_BANK;
+      const withoutSecret = basePool.filter(w => w !== secret);
+
+      // Prefer: same difficulty + shares at least one category
+      const sameDiff = withoutSecret.filter(w => w.diff === secret.diff);
+      const strong = sameDiff.filter(w => intersectsCats(normalizeCats(w), cats));
+
+      // Fallback: any difficulty but category overlap
+      const weak = withoutSecret.filter(w => intersectsCats(normalizeCats(w), cats));
+
+      const pool = strong.length ? strong : (weak.length ? weak : withoutSecret);
+      return pool[randInt(0, pool.length - 1)] || null;
+    }
+
+    // ---- Setup UI state ----
+    function clampPlayers(v){
+      const n = Math.floor(Number(v));
+      return Number.isFinite(n) ? Math.max(3, n) : 3;
+    }
+
+    function setActiveQuick(value){
+      const btns = el.playerQuick?.querySelectorAll(".quickbtn") || [];
+      btns.forEach(b => b.classList.toggle("active", b.dataset.count === String(value)));
+    }
+
+    function usePresetCount(n){
+      if(!el.playersInput) return;
+      el.playersInput.value = String(n);
+      el.playersInput.classList.add("hidden");
+      setActiveQuick(String(n));
+      storage.set(LS.playersMode, "preset");
+      storage.set(LS.players, n);
+    }
+
+    function useCustomCount(){
+      if(!el.playersInput) return;
+      setActiveQuick("custom");
+      el.playersInput.classList.remove("hidden");
+      if(Number(el.playersInput.value) < 3) el.playersInput.value = "3";
+      el.playersInput.focus();
+      el.playersInput.select();
+      storage.set(LS.playersMode, "custom");
+      storage.set(LS.players, el.playersInput.value);
+    }
+
+    function setDifficulty(diff){
+      state.difficulty = DIFF_KEYS.includes(diff) ? diff : "all";
+      storage.set(LS.difficulty, state.difficulty);
+      const btns = el.difficultySeg?.querySelectorAll(".segbtn") || [];
+      btns.forEach(b => b.classList.toggle("active", b.dataset.diff === state.difficulty));
+    }
+
+    function setSelectedCats(keys){
+      const normalized = (Array.isArray(keys) ? keys : [])
+        .map(String)
+        .map(s => s.trim())
+        .filter(k => CATEGORY_KEYS.includes(k));
+
+      // empty = all
+      state.selectedCats = Array.from(new Set(normalized));
+      storage.set(LS.categories, state.selectedCats.join(","));
+      renderCategoryChips();
+    }
+
+    function renderCategoryChips(){
+      if(!el.categoryChips) return;
+      const selected = new Set(state.selectedCats);
+
+      // Build once if empty
+      if(!el.categoryChips.dataset.ready){
+        el.categoryChips.innerHTML = "";
+
+        const allBtn = document.createElement("button");
+        allBtn.type = "button";
+        allBtn.className = "chip";
+        allBtn.dataset.cat = "__all__";
+        allBtn.addEventListener("click", () => setSelectedCats([]));
+        el.categoryChips.appendChild(allBtn);
+
+        for(const key of CATEGORY_KEYS){
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "chip";
+          btn.dataset.cat = key;
+          btn.addEventListener("click", () => {
+            const next = new Set(state.selectedCats);
+            if(next.has(key)) next.delete(key);
+            else next.add(key);
+            setSelectedCats(Array.from(next));
+          });
+          el.categoryChips.appendChild(btn);
+        }
+
+        el.categoryChips.dataset.ready = "1";
+      }
+
+      // Update labels + active state for current language
+      const children = Array.from(el.categoryChips.children);
+      for(const btn of children){
+        const key = btn.dataset.cat;
+        if(key === "__all__"){
+          btn.textContent = t("all");
+          btn.classList.toggle("active", state.selectedCats.length === 0);
+        }else{
+          btn.textContent = t(`cat_${key}`);
+          btn.classList.toggle("active", selected.has(key));
+        }
+      }
+    }
+
+    // ---- Dealing flow ----
+    function setHintBoxVisible(visible){
+      if(!el.impostorHintBox) return;
+      el.impostorHintBox.classList.toggle("hidden", !visible);
+    }
+
+    function revealCard(isRefresh=false){
+      const isImpostor = (state.currentPlayer === state.impostorPlayer);
+      const secret = state.secret;
+
+      if(!el.cardMain || !el.cardLabel) return;
+
+      const showHint = isImpostor && state.impostorHintEnabled && !!secret;
+
+      if(isImpostor && !state.hiddenImpostorEnabled){
+        // Classic impostor
+        el.cardLabel.classList.add("hidden");
+        el.cardMain.textContent = t("youAreImpostor");
+        el.cardMain.classList.add("imposter");
+
+        if(showHint){
+          const cats = normalizeCats(secret);
+          el.impostorHintText && (el.impostorHintText.textContent = categoryText(cats));
+          el.impostorHintLabel && (el.impostorHintLabel.textContent = (cats.length > 1) ? t("categoriesLabel") : t("category"));
+          setHintBoxVisible(true);
+        }else{
+          setHintBoxVisible(false);
+        }
+      }else{
+        // Word card (hidden impostor -> decoy)
+        el.cardLabel.classList.remove("hidden");
+        el.cardLabel.textContent = t("card_word");
+        const entry = (isImpostor && state.hiddenImpostorEnabled) ? state.decoy : secret;
+        el.cardMain.textContent = entry ? (entry[state.lang] || entry.en) : "";
+        el.cardMain.classList.remove("imposter");
+
+        if(showHint){
+          const cats = normalizeCats(secret);
+          el.impostorHintText && (el.impostorHintText.textContent = categoryText(cats));
+          el.impostorHintLabel && (el.impostorHintLabel.textContent = (cats.length > 1) ? t("categoriesLabel") : t("category"));
+          setHintBoxVisible(true);
+        }else{
+          setHintBoxVisible(false);
+        }
+      }
+
+      if(!isRefresh){
+        el.faceDown?.classList.add("hidden");
+        el.faceUp?.classList.remove("hidden");
+      }
+    }
+
+    function hideCard(){
+      el.faceUp?.classList.add("hidden");
+      el.faceDown?.classList.remove("hidden");
+    }
+
+    function nextPlayer(){
+      if(state.currentPlayer >= state.totalPlayers){
+        finishDealing();
+        return;
+      }
+      state.currentPlayer += 1;
+      updateDealUI();
+    }
+
+    function startGame(){
+      if(!el.playersInput) return;
+
+      const total = clampPlayers(el.playersInput.value);
+      el.playersInput.value = String(total);
+      storage.set(LS.players, total);
+
+      state.impostorHintEnabled = !!el.impostorHintToggle?.checked;
+      state.hiddenImpostorEnabled = !!el.hiddenImpostorToggle?.checked;
+      storage.setBool(LS.hint, state.impostorHintEnabled);
+      storage.setBool(LS.hidden, state.hiddenImpostorEnabled);
+
+      // Build pool using current filters and keep it fixed for this round.
+      state.pool = buildPool();
+      if(!state.pool.length){
+        alert(t("alertNoWords"));
+        return;
+      }
+
+      state.totalPlayers = total;
+      state.currentPlayer = 1;
+      state.impostorPlayer = randInt(1, total);
+      chooseSecret();
+      state.decoy = state.hiddenImpostorEnabled ? chooseDecoyForSecret(state.secret) : null;
+      state.dealing = true;
+
+      showPanel("deal");
+      updateDealUI();
+      requestWakeLock();
+    }
+
+    function finishDealing(){
+      state.dealing = false;
+      hideCard();
+      showPanel("done");
+    }
+
+    function newGame(){
+      state.totalPlayers = 0;
+      state.currentPlayer = 1;
+      state.impostorPlayer = 0;
+      state.secret = null;
+      state.decoy = null;
+      state.pool = [];
+      state.dealing = false;
+
+      showPanel("setup");
+      releaseWakeLock();
+    }
+
+    // ---- Wake lock (best effort) ----
+    let wakeLock = null;
+    async function requestWakeLock(){
+      try{
+        if("wakeLock" in navigator){
+          wakeLock = await navigator.wakeLock.request("screen");
+        }
+      }catch(_e){}
+    }
+    async function releaseWakeLock(){
+      try{
+        if(wakeLock){
+          await wakeLock.release();
+          wakeLock = null;
+        }
+      }catch(_e){}
+    }
+
+    // ---- Self tests (only when enabled) ----
+    function shouldRunTests(){
+      return /(?:\?|&)test=1(?:&|$)/.test(location.search);
+    }
+
+    function runSelfTests(){
+      console.assert(WORD_BANK.length > 0, "WORD_BANK should not be empty");
+
+      const pineapple = WORD_BANK.find(w => w.en === "Pineapple");
+      console.assert(!!pineapple, "Test word missing: Pineapple");
+      console.assert(pineapple?.fi === "Ananas", "Finnish translation should be Ananas");
+
+      // Category translations
+      const prevLang = state.lang;
+      state.lang = "en";
+      console.assert(categoryText(["space","vehicle","suomi"]) === "Space / Vehicle / Finland", "EN categoryText failed");
+      state.lang = "fi";
+      console.assert(categoryText(["space","vehicle","suomi"]) === "Avaruus / Ajoneuvo / Suomi", "FI categoryText failed");
+      state.lang = prevLang;
+
+      // Filtering
+      state.difficulty = "hard";
+      state.selectedCats = ["space"];
+      const pool = buildPool();
+      console.assert(pool.every(w => w.diff === "hard"), "Pool should be hard only");
+      console.assert(pool.every(w => w.cats.includes("space")), "Pool should be space category");
+
+      // Hidden impostor decoy shares a category
+      const rocket = WORD_BANK.find(w => w.en === "Rocket");
+      console.assert(!!rocket, "Test word missing: Rocket");
+      state.pool = WORD_BANK.filter(w => w.cats.includes("space"));
+      const decoy = chooseDecoyForSecret(rocket);
+      console.assert(decoy && decoy !== rocket, "Decoy should exist and differ from secret");
+      console.assert(intersectsCats(normalizeCats(decoy), normalizeCats(rocket)), "Decoy should share a category");
+    }
+
+    // ---- Init wiring ----
+    function init(){
+      // Language
+      setLanguage(detectInitialLanguage());
+
+      // Restore toggles
+      if(el.impostorHintToggle) el.impostorHintToggle.checked = storage.getBool(LS.hint, false);
+      if(el.hiddenImpostorToggle) el.hiddenImpostorToggle.checked = storage.getBool(LS.hidden, false);
+
+      // Restore difficulty
+      const savedDiff = storage.get(LS.difficulty, "all");
+      setDifficulty(DIFF_KEYS.includes(savedDiff) ? savedDiff : "all");
+
+      // Restore categories
+      const savedCats = (storage.get(LS.categories, "") || "").split(",").map(s => s.trim()).filter(Boolean);
+      setSelectedCats(savedCats);
+
+      // Persist on change
+      el.impostorHintToggle?.addEventListener("change", () => storage.setBool(LS.hint, !!el.impostorHintToggle.checked));
+      el.hiddenImpostorToggle?.addEventListener("change", () => storage.setBool(LS.hidden, !!el.hiddenImpostorToggle.checked));
+
+      // Difficulty clicks
+      el.difficultySeg?.addEventListener("click", (e) => {
+        const btn = e.target.closest("button.segbtn");
+        if(!btn) return;
+        setDifficulty(btn.dataset.diff);
+      });
+
+      // Player count restore
+      const savedPlayers = clampPlayers(storage.get(LS.players, 5));
+      const mode = storage.get(LS.playersMode, "preset");
+      if([3,4,5,6].includes(savedPlayers) && mode !== "custom") usePresetCount(savedPlayers);
+      else{
+        if(el.playersInput) el.playersInput.value = String(savedPlayers);
+        useCustomCount();
+      }
+
+      // Quick buttons
+      el.playerQuick?.addEventListener("click", (e) => {
+        const btn = e.target.closest("button.quickbtn");
+        if(!btn) return;
+        const v = btn.dataset.count;
+        if(v === "custom") useCustomCount();
+        else usePresetCount(clampPlayers(v));
+      });
+
+      // Custom input changes -> keep storage updated
+      el.playersInput?.addEventListener("input", () => {
+        if(el.playersInput.classList.contains("hidden")) return;
+        storage.set(LS.players, clampPlayers(el.playersInput.value));
+      });
+
+      // Enter key starts
+      el.playersInput?.addEventListener("keydown", (e) => {
+        if(e.key === "Enter") startGame();
+      });
+
+      // Language buttons
+      el.langEn?.addEventListener("click", () => setLanguage("en"));
+      el.langFi?.addEventListener("click", () => setLanguage("fi"));
+
+      // Main actions
+      el.startBtn?.addEventListener("click", startGame);
+      el.revealBtn?.addEventListener("click", () => revealCard(false));
+      el.closeCardBtn?.addEventListener("click", () => { hideCard(); nextPlayer(); });
+      el.newGameBtn?.addEventListener("click", newGame);
+
+      document.addEventListener("visibilitychange", () => {
+        if(state.dealing && document.visibilityState === "visible") requestWakeLock();
+      });
+
+      showPanel("setup");
+      if(shouldRunTests()) runSelfTests();
+
+      // If JSON is empty, warn in console (no UI text)
+      if(!WORD_BANK.length){
+        console.warn("No words loaded. Add words under <script id=wordData type=application/json>.");
+      }
+    }
+
+    init();
+  </script>
+</body>
+</html>
