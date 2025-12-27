@@ -673,6 +673,14 @@
             </span>
           </label>
 
+          <label class="toggle" aria-label="Two impostors">
+            <input id="twoImpostorsToggle" type="checkbox" />
+            <span class="toggle-ui">
+              <span class="toggle-name" id="twoImpostorsName">10%: Kaksi huijaria</span>
+              <span class="toggle-pill" id="twoImpostorsState">Off</span>
+            </span>
+          </label>
+
           <div class="btns">
             <button class="primary" id="startBtn">Start</button>
           </div>
@@ -728,7 +736,7 @@
 
       <footer class="footer">
         <div class="footertext" aria-hidden="true">
-          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.52</div>
+          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.6</div>
           <div class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
         </div>
         <div class="footactions" aria-label="Links">
@@ -1202,7 +1210,8 @@
       hidden: "wi_hidden",
       difficulty: "wi_difficulty", // all|easy|medium|hard
       categories: "wi_categories", // comma-separated keys; empty = all
-      lastSecret: "wi_last_secret" // last picked secret (to reduce immediate repeats)
+      lastSecret: "wi_last_secret", // last picked secret (to reduce immediate repeats)
+      twoImpostors: "wi_two_impostors" // 10% chance for two impostors
     };
 
     const storage = {
@@ -1292,6 +1301,7 @@
         toggle_on: "On",
         toggle_off: "Off",
         hiddenImpostor: "Impostor: Gets a wrong word",
+        twoImpostors: "10% chance: Two impostors",
         start: "Start",
         reveal: "Reveal the card",
         close: "Close & Pass to the next player",
@@ -1317,9 +1327,9 @@
         cat_movies: "Movies",
         cat_music: "Music",
         cat_kinojuha: "Kinojuha",
-        footerTop: "sanahuijari.fi · v1.52",
+        footerTop: "sanahuijari.fi · v1.6",
         footerBottom: "Made by AI with ❤️ — 0% human code.",
-        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.52",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.6",
         meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
         meta_short: "Sanahuijari",
 
@@ -1347,6 +1357,7 @@
         toggle_on: "Päällä",
         toggle_off: "Pois",
         hiddenImpostor: "Huijari: Saa väärän sanan",
+        twoImpostors: "10%: Kaksi huijaria",
         start: "Aloita",
         reveal: "Näytä kortti",
         close: "Sulje & Anna seuraavalle pelaajalle",
@@ -1372,9 +1383,9 @@
         cat_movies: "Elokuvat",
         cat_music: "Musiikki",
         cat_kinojuha: "Kinojuha",
-        footerTop: "sanahuijari.fi · v1.52",
+        footerTop: "sanahuijari.fi · v1.6",
         footerBottom: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
-        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.52",
+        footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.6",
         meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
         meta_short: "Sanahuijari",
 
@@ -1392,13 +1403,14 @@
       lang: "fi",
       totalPlayers: 0,
       currentPlayer: 1,
-      impostorPlayer: 0,
+      impostorPlayers: [],
       secret: null,
       decoy: null,
       pool: [],
       dealing: false,
       impostorHintEnabled: false,
       hiddenImpostorEnabled: false,
+      twoImpostorsEnabled: false,
       difficulty: "all",
       selectedCats: [], // empty = all
       deckKey: "",
@@ -1421,6 +1433,7 @@
 
       impostorHintName: $("impostorHintName"),
       hiddenImpostorName: $("hiddenImpostorName"),
+      twoImpostorsName: $("twoImpostorsName"),
       doneText: $("doneText"),
       doneSub: $("doneSub"),
 
@@ -1435,8 +1448,10 @@
       playersInput: $("playersInput"),
       impostorHintToggle: $("impostorHintToggle"),
       hiddenImpostorToggle: $("hiddenImpostorToggle"),
+      twoImpostorsToggle: $("twoImpostorsToggle"),
       impostorHintState: $("impostorHintState"),
       hiddenImpostorState: $("hiddenImpostorState"),
+      twoImpostorsState: $("twoImpostorsState"),
 
       startBtn: $("startBtn"),
 
@@ -1473,6 +1488,7 @@
       if(!Array.isArray(state.selectedCats)) state.selectedCats = [];
       if(!Array.isArray(state.pool)) state.pool = [];
       if(!Array.isArray(state.deck)) state.deck = [];
+      if(!Array.isArray(state.impostorPlayers)) state.impostorPlayers = [];
     }
 
     function t(key, ...args){
@@ -1617,6 +1633,9 @@
       if(el.hiddenImpostorState && el.hiddenImpostorToggle){
         el.hiddenImpostorState.textContent = el.hiddenImpostorToggle.checked ? onText : offText;
       }
+      if(el.twoImpostorsState && el.twoImpostorsToggle){
+        el.twoImpostorsState.textContent = el.twoImpostorsToggle.checked ? onText : offText;
+      }
     }
 
     function setLanguage(lang){
@@ -1647,6 +1666,7 @@
 
       if(el.impostorHintName) el.impostorHintName.textContent = t("impostorHint");
       if(el.hiddenImpostorName) el.hiddenImpostorName.textContent = t("hiddenImpostor");
+      if(el.twoImpostorsName) el.twoImpostorsName.textContent = t("twoImpostors");
       if(el.startBtn) el.startBtn.textContent = t("start");
       if(el.revealBtn) el.revealBtn.textContent = t("reveal");
       if(el.closeCardBtn) el.closeCardBtn.textContent = t("close");
@@ -1690,8 +1710,25 @@
         }while(x > limit);
         return min + (x % range);
       }
-
       return min + Math.floor(Math.random() * range);
+    }
+
+    // 10% chance for TWO impostors instead of one.
+    // For 3 players we keep it to 1 impostor (two impostors with 3 players tends to be too skewed).
+    // 10% chance for TWO impostors instead of one (optional toggle).
+    // For 3 players we keep it to 1 impostor (two impostors with 3 players tends to be too skewed).
+    function pickImpostorPlayers(total, opts = {}){
+      const rngInt = opts.rngInt || randInt;
+      const allowTwo = !!opts.allowTwo;
+      const chance = typeof opts.chance === "number" ? opts.chance : 0.10;
+
+      const wantTwo = allowTwo && (total >= 4) && (rngInt(1, 100) <= Math.round(chance * 100));
+      if(!wantTwo) return [rngInt(1, total)];
+
+      const a = rngInt(1, total);
+      let b = rngInt(1, total - 1);
+      if(b >= a) b += 1; // ensure b != a
+      return [a, b].sort((x,y) => x - y);
     }
 
     function shuffleInPlace(arr){
@@ -1951,7 +1988,7 @@
     }
 
     function revealCard(isRefresh=false){
-      const isImpostor = (state.currentPlayer === state.impostorPlayer);
+      const isImpostor = Array.isArray(state.impostorPlayers) && state.impostorPlayers.includes(state.currentPlayer);
       const secret = state.secret;
       if(!el.cardMain || !el.cardLabel) return;
 
@@ -2017,8 +2054,10 @@
 
       state.impostorHintEnabled = !!el.impostorHintToggle?.checked;
       state.hiddenImpostorEnabled = !!el.hiddenImpostorToggle?.checked;
+      state.twoImpostorsEnabled = !!el.twoImpostorsToggle?.checked;
       storage.setBool(LS.hint, state.impostorHintEnabled);
       storage.setBool(LS.hidden, state.hiddenImpostorEnabled);
+      storage.setBool(LS.twoImpostors, state.twoImpostorsEnabled);
 
       state.pool = buildPool();
       if(!state.pool.length){
@@ -2028,7 +2067,7 @@
 
       state.totalPlayers = total;
       state.currentPlayer = 1;
-      state.impostorPlayer = randInt(1, total);
+      state.impostorPlayers = pickImpostorPlayers(total, { allowTwo: state.twoImpostorsEnabled });
       chooseSecret();
       state.decoy = state.hiddenImpostorEnabled ? chooseDecoyForSecret(state.secret) : null;
       state.dealing = true;
@@ -2047,7 +2086,7 @@
     function newGame(){
       state.totalPlayers = 0;
       state.currentPlayer = 1;
-      state.impostorPlayer = 0;
+      state.impostorPlayers = [];
       state.secret = null;
       state.decoy = null;
       state.pool = [];
@@ -2104,6 +2143,11 @@
 
       try{
         console.assert(WORD_BANK.length > 0, "WORD_BANK should not be empty");
+
+        if(el.categoryChips){
+          renderCategoryChips();
+          console.assert(el.categoryChips.children.length >= 2, "Category chips should render (All + at least one category)");
+        }
 
         const pineapple = WORD_BANK.find(w => w.en === "Pineapple");
         console.assert(!!pineapple, "Test word missing: Pineapple");
@@ -2211,6 +2255,27 @@
           storage.set(LS.lastSecret, prevLast);
         }
 
+        {
+          const makeSeqRng = (seq) => {
+            let i = 0;
+            return (_min, _max) => seq[Math.min(i++, seq.length - 1)];
+          };
+
+          const a = pickImpostorPlayers(5, { allowTwo: true, rngInt: makeSeqRng([1, 2, 2]) });
+          console.assert(a.length === 2, "Should pick 2 impostors when chance triggers");
+          console.assert(a[0] !== a[1], "Two impostors must be distinct");
+          console.assert(a.every(n => n >= 1 && n <= 5), "Impostors must be within player range");
+
+          const b = pickImpostorPlayers(5, { allowTwo: true, rngInt: makeSeqRng([100, 4]) });
+          console.assert(b.length === 1, "Should pick 1 impostor when chance does not trigger");
+
+          const d = pickImpostorPlayers(5, { allowTwo: false, rngInt: makeSeqRng([1, 2, 2]) });
+          console.assert(d.length === 1, "When toggle is off, should always pick 1 impostor");
+
+          const c = pickImpostorPlayers(3, { allowTwo: true, rngInt: makeSeqRng([1, 1]) });
+          console.assert(c.length === 1, "For 3 players, should keep 1 impostor");
+        }
+
       } finally {
         state.lang = snap.lang;
         state.difficulty = snap.difficulty;
@@ -2286,6 +2351,7 @@
       // Restore toggles
       if(el.impostorHintToggle) el.impostorHintToggle.checked = storage.getBool(LS.hint, false);
       if(el.hiddenImpostorToggle) el.hiddenImpostorToggle.checked = storage.getBool(LS.hidden, false);
+      if(el.twoImpostorsToggle) el.twoImpostorsToggle.checked = storage.getBool(LS.twoImpostors, true);
       updateToggleStateLabels();
 
       // Restore difficulty
@@ -2305,6 +2371,10 @@
       });
       el.hiddenImpostorToggle?.addEventListener("change", () => {
         storage.setBool(LS.hidden, !!el.hiddenImpostorToggle.checked);
+        updateToggleStateLabels();
+      });
+      el.twoImpostorsToggle?.addEventListener("change", () => {
+        storage.setBool(LS.twoImpostors, !!el.twoImpostorsToggle.checked);
         updateToggleStateLabels();
       });
 
