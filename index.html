@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="fi" data-theme="snow">
+<html lang="fi">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#081522" />
+  <meta name="theme-color" content="#0b1020" />
 
   <!-- App metadata (single-file, best-effort PWA + iOS add-to-home) -->
   <meta name="description" id="descMeta" content="Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä." />
@@ -26,17 +26,6 @@
   <style>
     :root{
       --bg:#0b1020;
-      --bgGlow:#1a2a63;
-      --onAccent:#08102a;
-
-      /* Accent (used by active states, primary buttons, focus rings) */
-      --accentTop: rgba(122,167,255,.98);
-      --accentBot: rgba(84,133,255,.94);
-      --accentBorder: rgba(122,167,255,.55);
-      --accentBorderStrong: rgba(122,167,255,.62);
-      --accentOutline: rgba(122,167,255,.75);
-      --accentRing: rgba(122,167,255,.22);
-      --accentRing2: rgba(122,167,255,.18);
       --text:#eef3ff;
       --muted:rgba(238,243,255,.68);
       --muted2:rgba(238,243,255,.52);
@@ -56,7 +45,7 @@
     body{
       margin:0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background: radial-gradient(1200px 800px at 20% 0%, var(--bgGlow) 0%, var(--bg) 55%) fixed;
+      background: radial-gradient(1200px 800px at 20% 0%, #1a2a63 0%, var(--bg) 55%) fixed;
       color: var(--text);
       -webkit-tap-highlight-color: transparent;
       overflow-x:hidden;
@@ -126,8 +115,8 @@
       box-shadow:none;
     }
     .langbtn.active{
-      border-color: var(--accentOutline);
-      box-shadow: 0 0 0 3px var(--accentRing);
+      border-color: rgba(122,167,255,.75);
+      box-shadow: 0 0 0 3px rgba(122,167,255,.22);
     }
 
     /* Surfaces */
@@ -194,13 +183,13 @@
     button:focus-visible,
     input:focus-visible{
       outline: none;
-      box-shadow: 0 0 0 4px var(--accentRing), 0 12px 28px rgba(0,0,0,.24);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.22), 0 12px 28px rgba(0,0,0,.24);
     }
 
     .primary{
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      border-color: var(--accentBorder);
-      color: var(--onAccent);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color: #08102a;
       box-shadow: 0 18px 45px rgba(0,0,0,.34);
     }
 
@@ -218,9 +207,9 @@
       border: 1px solid rgba(255,255,255,.10);
     }
     .quickbtn.active{
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      border-color: var(--accentBorder);
-      color: var(--onAccent);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
     }
 
     /* Segmented control (difficulty) */
@@ -236,9 +225,9 @@
       font-weight: 950;
     }
     .segbtn.active{
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      border-color: var(--accentBorder);
-      color: var(--onAccent);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
     }
 
     /* Category chips */
@@ -255,9 +244,9 @@
       border: 1px solid rgba(255,255,255,.10);
     }
     .chip.active{
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      border-color: var(--accentBorder);
-      color: var(--onAccent);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
+      color:#08102a;
     }
 
     /* Special logo chip (Kinojuha) */
@@ -328,19 +317,19 @@
 
     .toggle input:focus-visible + .toggle-ui{
       outline: none;
-      box-shadow: 0 0 0 4px var(--accentRing), 0 12px 28px rgba(0,0,0,.24);
-      border-color: var(--accentBorder);
+      box-shadow: 0 0 0 4px rgba(122,167,255,.22), 0 12px 28px rgba(0,0,0,.24);
+      border-color: rgba(122,167,255,.55);
     }
 
     .toggle input:checked + .toggle-ui{
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      border-color: var(--accentBorder);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      border-color: rgba(122,167,255,.55);
     }
-    .toggle input:checked + .toggle-ui .toggle-name{ color: var(--onAccent); }
+    .toggle input:checked + .toggle-ui .toggle-name{ color:#08102a; }
     .toggle input:checked + .toggle-ui .toggle-pill{
       background: rgba(0,0,0,.14);
       border-color: rgba(0,0,0,.10);
-      color: var(--onAccent);
+      color:#08102a;
     }
 
     /* Dealing header */
@@ -401,7 +390,7 @@
       margin-top: 0;
       padding: 16px 16px;
       border-radius: 22px;
-      border: 1px solid var(--accentRing);
+      border: 1px solid rgba(122,167,255,.22);
       background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.12) 100%);
       box-shadow: 0 14px 34px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.10);
       text-align:center;
@@ -412,17 +401,11 @@
       content:"";
       position:absolute;
       inset:-40% -30%;
-      background: radial-gradient(closest-side at 35% 35%, color-mix(in srgb, var(--accentTop) 60%, transparent), transparent);
+      background: radial-gradient(closest-side at 35% 35%, rgba(122,167,255,.55), rgba(122,167,255,0));
       opacity:.14;
       transform: rotate(8deg);
       pointer-events:none;
     }
-
-    /* Fallback for browsers without color-mix */
-    @supports not (background: color-mix(in srgb, white, black)){
-      .hintbox::before{ background: radial-gradient(closest-side at 35% 35%, rgba(122,167,255,.55), rgba(122,167,255,0)); }
-    }
-
     .hintbox .label{
       font-size: 11px;
       color: rgba(238,243,255,.74);
@@ -471,9 +454,9 @@
       width: 100%;
       padding: 26px 18px;
       border-radius: 22px;
-      border: 1px solid var(--accentBorderStrong);
-      background: linear-gradient(180deg, var(--accentTop) 0%, var(--accentBot) 100%);
-      color: var(--onAccent);
+      border: 1px solid rgba(122,167,255,.62);
+      background: linear-gradient(180deg, rgba(122,167,255,.98) 0%, rgba(84,133,255,.94) 100%);
+      color:#08102a;
       font-weight: 1000;
       font-size: clamp(20px, 5.3vw, 28px);
       letter-spacing: .1px;
@@ -537,8 +520,8 @@
       line-height: 1.2;
       padding: 0 10px;
       /* Reserve equal space on both sides so the text stays truly centered, even with right-side buttons */
-      padding-left: 136px;
-      padding-right: 136px;
+      padding-left: 92px;
+      padding-right: 92px;
       pointer-events: none;
       max-width: 100%;
     }
@@ -591,122 +574,14 @@
     .footbtn:active{ transform: translateY(1px) scale(.99); filter: brightness(1.03); }
     .footbtn.active{
       opacity: 1;
-      border-color: var(--accentOutline);
-      box-shadow: 0 0 0 3px var(--accentRing2);
+      border-color: rgba(122,167,255,.75);
+      box-shadow: 0 0 0 3px rgba(122,167,255,.18);
       background: rgba(255,255,255,.06);
     }
 
-    /* Christmas theme */
-    html[data-theme="xmas"]{
-      --bg:#07140e;
-      --bgGlow:#0f3a23;
-      --text:#f3fff7;
-      --muted:rgba(243,255,247,.70);
-      --muted2:rgba(243,255,247,.54);
-      --danger:#ff5a6a;
-      --surface: rgba(255,255,255,.065);
-      --surface2: rgba(255,255,255,.040);
-      --border: rgba(255,255,255,.14);
-      --border2: rgba(255,255,255,.18);
-
-      --onAccent:#06120b;
-      --accentTop: rgba(80, 220, 140, .98);
-      --accentBot: rgba(46, 175, 103, .94);
-      --accentBorder: rgba(80, 220, 140, .55);
-      --accentBorderStrong: rgba(80, 220, 140, .62);
-      --accentOutline: rgba(80, 220, 140, .78);
-      --accentRing: rgba(80, 220, 140, .22);
-      --accentRing2: rgba(80, 220, 140, .18);
-    }
-
-    html[data-theme="xmas"] body{
-      background: radial-gradient(1200px 800px at 20% 0%, var(--bgGlow) 0%, var(--bg) 55%) fixed;
-    }
-
-    html[data-theme="xmas"] .card-main.imposter{ color: var(--danger); }
-
-    /* Gingerbread theme (pipari) */
-    html[data-theme="ginger"]{
-      --bg:#1a0f0a;
-      --bgGlow:#3a2318;
-      --text:#fff3ea;
-      --muted:rgba(255,243,234,.72);
-      --muted2:rgba(255,243,234,.54);
-      --danger:#ff6b7a;
-      --surface: rgba(255,255,255,.070);
-      --surface2: rgba(255,255,255,.040);
-      --border: rgba(255,255,255,.14);
-      --border2: rgba(255,255,255,.18);
-
-      --onAccent:#170a07;
-      --accentTop: rgba(255, 82, 96, .98);
-      --accentBot: rgba(214, 45, 61, .94);
-      --accentBorder: rgba(255, 82, 96, .55);
-      --accentBorderStrong: rgba(255, 82, 96, .62);
-      --accentOutline: rgba(255, 82, 96, .78);
-      --accentRing: rgba(255, 82, 96, .22);
-      --accentRing2: rgba(255, 82, 96, .18);
-    }
-
-    html[data-theme="ginger"] body{
-      background:
-        radial-gradient(900px 700px at 18% 0%, rgba(255,82,96,.16) 0%, rgba(255,82,96,0) 50%),
-        radial-gradient(1200px 800px at 20% 0%, var(--bgGlow) 0%, var(--bg) 55%) fixed;
-    }
-
-    html[data-theme="ginger"] .card-main.imposter{ color: var(--danger); }
-
-    /* Snowy theme (luminen) */
-    html[data-theme="snow"]{
-      --bg:#081522;
-      --bgGlow:#123a63;
-      --text:#f5fbff;
-      --muted:rgba(245,251,255,.74);
-      --muted2:rgba(245,251,255,.56);
-      --danger:#ff6b8a;
-      --surface: rgba(255,255,255,.070);
-      --surface2: rgba(255,255,255,.040);
-      --border: rgba(255,255,255,.16);
-      --border2: rgba(255,255,255,.20);
-
-      --onAccent:#061120;
-      --accentTop: rgba(128, 214, 255, .98);
-      --accentBot: rgba(78, 168, 255, .94);
-      --accentBorder: rgba(128, 214, 255, .55);
-      --accentBorderStrong: rgba(128, 214, 255, .62);
-      --accentOutline: rgba(128, 214, 255, .78);
-      --accentRing: rgba(128, 214, 255, .22);
-      --accentRing2: rgba(128, 214, 255, .18);
-    }
-
-    html[data-theme="snow"] body{
-      background:
-        radial-gradient(1200px 800px at 20% 0%, var(--bgGlow) 0%, var(--bg) 55%) fixed;
-    }
-
-    html[data-theme="snow"] body::before{
-      content:"";
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      z-index: 0;
-      opacity: .28;
-      background:
-        radial-gradient(circle at 10% 18%, rgba(255,255,255,.95) 0 1px, rgba(255,255,255,0) 2px) 0 0 / 120px 120px,
-        radial-gradient(circle at 65% 35%, rgba(255,255,255,.85) 0 1px, rgba(255,255,255,0) 2px) 0 0 / 160px 160px,
-        radial-gradient(circle at 30% 70%, rgba(255,255,255,.75) 0 1px, rgba(255,255,255,0) 2px) 0 0 / 220px 220px,
-        radial-gradient(circle at 85% 80%, rgba(255,255,255,.90) 0 1px, rgba(255,255,255,0) 2px) 0 0 / 260px 260px;
-      mix-blend-mode: screen;
-    }
-
-    /* Ensure app content stays above snow overlay */
-    html[data-theme="snow"] .wrap{ position: relative; z-index: 1; }
-
-    html[data-theme="snow"] .card-main.imposter{ color: var(--danger); }
-
     /* If you ever add left-side buttons later, this keeps text centered */
     @media (max-width: 380px){
-      .footertext{ padding-left: 126px; padding-right: 126px; }
+      .footertext{ padding-left: 82px; padding-right: 82px; }
       .footbtn{ width: 34px; }
     }
     .toast{
@@ -852,7 +727,7 @@
               <div class="done-title" id="doneText">Start playing</div>
               <div class="done-sub" id="doneSub">All players have seen their cards.</div>
               <div class="btns">
-                <button class="primary" id="newGameBtn" type="button">New game</button>
+                <button class="primary" id="newGameBtn">New game</button>
               </div>
             </div>
           </div>
@@ -861,11 +736,10 @@
 
       <footer class="footer">
         <div class="footertext" aria-hidden="true">
-          <div class="footerline top" id="footerTop"></div>
-          v1.8 class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
+          <div class="footerline top" id="footerTop">sanahuijari.fi · v1.7</div>
+          <div class="footerline" id="footerBottom">Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.</div>
         </div>
         <div class="footactions" aria-label="Links">
-          <button class="footbtn" type="button" id="themeBtn" aria-label="Theme" title="Theme">🎄</button>
           <button class="footbtn" type="button" id="repoBtn" aria-label="GitHub" title="GitHub">🐙</button>
           <button class="footbtn" type="button" id="selfTestBtn" aria-label="Self-test" title="Self-test">🧪</button>
         </div>
@@ -1430,8 +1304,7 @@
       difficulty: "wi_difficulty", // all|easy|medium|hard
       categories: "wi_categories", // comma-separated keys; empty = all
       lastSecret: "wi_last_secret", // last picked secret (to reduce immediate repeats)
-      twoImpostors: "wi_two_impostors", // 10% chance for two impostors
-      theme: "wi_theme" // default|xmas|ginger|snow
+      twoImpostors: "wi_two_impostors" // 10% chance for two impostors
     };
 
     const storage = {
@@ -1460,7 +1333,6 @@
 
     const CATEGORY_KEYS = ["space","food","animal","person","vehicle","place","nature","activity","thing","movies","music","kinojuha","intti","suomi"]; // keep in sync with i18n
     const DIFF_KEYS = ["all","easy","medium","hard"];
-    const THEME_KEYS = ["default","xmas","ginger","snow"];
 
     function inferDifficultyFromText(en, fi){
       const a = String(en || "").trim();
@@ -1549,20 +1421,18 @@
         cat_music: "Music",
         cat_kinojuha: "Kinojuha",
         cat_intti: "Conscription",
-        footerTop: "sanahuija "Made by AI with ❤️ — 0% humv1.8ode. · sanahuijari.fi · v1.7",
-      "Sanahuijari",
+        footerTop: "sanahuijari.fi · v1.7",
+        footerBottom: "Made by AI with ❤️ — 0% human code.",
+        footer: "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v1.7",
+        meta_desc: "Pass-and-play word impostor game for one phone/tablet.",
+        meta_short: "Sanahuijari",
 
         selfTest: "Self-test",
         testsPassed: "Self-test: all good ✅",
-      v1.8stsFailed: (n) => `Self-test: ${n} issue(s) — check console ⚠️`,
+        testsFailed: (n) => `Self-test: ${n} issue(s) — check console ⚠️`,
         testsOn: "Self-test ON",
         testsOff: "Self-test OFF",
         repo: "GitHub repository",
-        theme: "Theme",
-        theme_default: "Default theme",
-        theme_xmas: "Christmas theme",
-        theme_ginger: "Gingerbread theme",
-        theme_snow: "Snowy theme",
 
       },
       fi: {
@@ -1609,20 +1479,17 @@
         cat_kinojuha: "Kinojuha",
         cat_intti: "Intti",
         footerTop: "sanahuijari.fi · v1.7",
-        footerBottom: "Tekoälyn tekemä ",
+        footerBottom: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
         footer: "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v1.7",
-        meta_desc: "Sanahuijari yhdellä puhelimella/tabletil        meta_v1.8t: "Sanahuijari",
+        meta_desc: "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
+        meta_short: "Sanahuijari",
 
         selfTest: "Itsetesti",
-        testsPassed: "Itlmaa — katso konsoli ⚠️`,
+        testsPassed: "Itsetesti: kaikki ok ✅",
+        testsFailed: (n) => `Itsetesti: ${n} ongelmaa — katso konsoli ⚠️`,
         testsOn: "Itsetesti PÄÄLLÄ",
-   v1.8 testsOff: "Itsetesti POIS",
+        testsOff: "Itsetesti POIS",
         repo: "GitHub-repositorio",
-        theme: "Teema",
-        theme_default: "Oletusteema",
-        theme_xmas: "Jouluteema",
-        theme_ginger: "Pipariteema",
-        theme_snow: "Lumiteema",
 
       }
     };
@@ -1643,7 +1510,6 @@
       selectedCats: [], // empty = all
       deckKey: "",
       deck: [],
-      theme: "default",
     };
 
     // Cache DOM references
@@ -1709,8 +1575,8 @@
       footerTop: $("footerTop"),
       footerBottom: $("footerBottom"),
       selfTestBtn: $("selfTestBtn"),
-      repoBtn: $("repoBtn"),      toast: $("toast"),
-      themeBtn: $("themeBtn"),
+      repoBtn: $("repoBtn"),
+      toast: $("toast"),
     };
 
     function ensureArrays(){
@@ -1822,8 +1688,8 @@
         start_url: "./",
         scope: "./",
         display: "standalone",
-        background_color: "#081522",
-        theme_color: "#081522",
+        background_color: "#0b1020",
+        theme_color: "#0b1020",
         icons: [
           {
             src: iconHref,
@@ -1851,65 +1717,6 @@
       if(saved === "fi" || saved === "en") return saved;
       // Default to Finnish (device/browser language is ignored unless user explicitly switches).
       return "fi";
-    }
-
-    function detectInitialTheme(){
-      const saved = storage.get(LS.theme, null);
-      if(saved && THEME_KEYS.includes(saved)) return saved;
-      // Default to winter theme (snow)
-      return "snow";
-    }
-
-    function updateThemeButton(){
-      if(!el.themeBtn) return;
-
-      const idx = Math.max(0, THEME_KEYS.indexOf(state.theme));
-      const nextTheme = THEME_KEYS[(idx + 1) % THEME_KEYS.length];
-
-      const icon = (nextTheme === "xmas") ? "🎄"
-        : (nextTheme === "ginger") ? "🍪"
-        : (nextTheme === "snow") ? "❄️"
-        : "🎭";
-
-      el.themeBtn.classList.toggle("active", state.theme !== "default");
-      el.themeBtn.textContent = icon;
-
-      const labelKey = (nextTheme === "xmas") ? "theme_xmas"
-        : (nextTheme === "ginger") ? "theme_ginger"
-        : (nextTheme === "snow") ? "theme_snow"
-        : "theme_default";
-
-      const label = t(labelKey);
-      el.themeBtn.setAttribute("aria-label", `${t("theme")}: ${label}`);
-      el.themeBtn.title = `${t("theme")}: ${label}`;
-    }
-
-    function applyTheme(theme){
-      state.theme = THEME_KEYS.includes(theme) ? theme : "default";
-      storage.set(LS.theme, state.theme);
-
-      if(el.html){
-        if(state.theme === "default") el.html.removeAttribute("data-theme");
-        else el.html.setAttribute("data-theme", state.theme);
-      }
-
-      // Update theme-color meta for nicer browser UI
-      const meta = document.querySelector('meta[name="theme-color"]');
-      if(meta){
-        const c = (state.theme === "xmas") ? "#07140e"
-          : (state.theme === "ginger") ? "#1a0f0a"
-          : (state.theme === "snow") ? "#081522"
-          : "#0b1020";
-        meta.setAttribute("content", c);
-      }
-
-      updateThemeButton();
-    }
-
-    function toggleTheme(){
-      const idx = Math.max(0, THEME_KEYS.indexOf(state.theme));
-      const next = THEME_KEYS[(idx + 1) % THEME_KEYS.length];
-      applyTheme(next);
     }
 
     function updateToggleStateLabels(){
@@ -1975,7 +1782,6 @@
 
       updateToggleStateLabels();
       renderCategoryChips();
-      updateThemeButton();
 
       if(el.dealPanel && !el.dealPanel.classList.contains("hidden")){
         updateDealUI();
@@ -2372,39 +2178,17 @@
       showPanel("done");
     }
 
-    function buildReloadUrl(nowMs = Date.now(), href = location.href){
-      const url = new URL(href);
-      // Cache-busting param so GitHub Pages updates are picked up reliably.
-      url.searchParams.set("cb", String(nowMs));
-      return url.toString();
-    }
-
-    function clearCacheStorageBestEffort(){
-      try{
-        const c = window.caches;
-        if(!c || !c.keys) return;
-        c.keys().then(keys => Promise.all(keys.map(k => c.delete(k)))).catch(() => {});
-      }catch(_e){}
-    }
-
-    function hardReload(){
-      // Important: navigate immediately (user expects instant response).
-      // Cleanup is best-effort and should not block navigation.
-      try{ releaseWakeLock(); }catch(_e){}
-      clearCacheStorageBestEffort();
-
-      try{
-        const next = buildReloadUrl(Date.now(), location.href);
-        location.replace(next);
-      }catch(_e){
-        // Fallback
-        location.reload();
-      }
-    }
-
     function newGame(){
-      // New game doubles as "update refresh" for GitHub Pages deployments.
-      hardReload();
+      state.totalPlayers = 0;
+      state.currentPlayer = 1;
+      state.impostorPlayers = [];
+      state.secret = null;
+      state.decoy = null;
+      state.pool = [];
+      state.dealing = false;
+
+      showPanel("setup");
+      releaseWakeLock();
     }
 
     // ---- Wake lock (best effort) ----
@@ -2594,38 +2378,6 @@
           console.assert(c.length === 1, "For 3 players, should keep 1 impostor");
         }
 
-        {
-          const prevTheme = state.theme;
-          const prevSaved = storage.get(LS.theme, null);
-
-          storage.set(LS.theme, "");
-          console.assert(detectInitialTheme() === "snow", "Default theme should be snow");
-
-          {
-            const u = buildReloadUrl(123, "https://example.com/game.html?x=1");
-            console.assert(u.includes("x=1"), "Reload URL should preserve existing query params");
-            console.assert(u.includes("cb=123"), "Reload URL should include cb cache-buster");
-          }
-
-          if(prevSaved === null) localStorage.removeItem(LS.theme);
-          else storage.set(LS.theme, prevSaved);
-
-
-          applyTheme("xmas");
-          console.assert(document.documentElement.getAttribute("data-theme") === "xmas", "Theme should set data-theme=xmas");
-
-          applyTheme("ginger");
-          console.assert(document.documentElement.getAttribute("data-theme") === "ginger", "Theme should set data-theme=ginger");
-
-          applyTheme("snow");
-          console.assert(document.documentElement.getAttribute("data-theme") === "snow", "Theme should set data-theme=snow");
-
-          applyTheme("default");
-          console.assert(!document.documentElement.hasAttribute("data-theme"), "Default theme should remove data-theme");
-
-          applyTheme(prevTheme);
-        }
-
       } finally {
         state.lang = snap.lang;
         state.difficulty = snap.difficulty;
@@ -2694,9 +2446,6 @@
 
     function init(){
       ensureArrays();
-
-      // Theme first (so CSS vars apply immediately)
-      applyTheme(detectInitialTheme());
 
       // Language
       setLanguage(detectInitialLanguage());
@@ -2786,12 +2535,6 @@
         el.repoBtn.setAttribute("aria-label", t("repo"));
         el.repoBtn.title = t("repo");
         el.repoBtn.addEventListener("click", openRepo);
-      }
-
-      // Theme toggle (footer, subtle)
-      if(el.themeBtn){
-        updateThemeButton();
-        el.themeBtn.addEventListener("click", toggleTheme);
       }
 
       // Self-test toggle button (subtle)
