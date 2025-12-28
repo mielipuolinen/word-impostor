@@ -449,6 +449,41 @@
       line-height: 1.25;
     }
 
+    /* Results box on done screen */
+    .results-box{
+      margin-top: 16px;
+      padding: 18px 16px;
+      border-radius: 22px;
+      border: 1px solid rgba(122,167,255,.28);
+      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.12) 100%);
+      box-shadow: 0 14px 34px rgba(0,0,0,.26);
+      text-align: center;
+    }
+    .result-item{
+      margin-bottom: 14px;
+    }
+    .result-item:last-child{
+      margin-bottom: 0;
+    }
+    .result-label{
+      font-size: 12px;
+      font-weight: 950;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+      color: rgba(238,243,255,.68);
+      margin-bottom: 6px;
+    }
+    .result-value{
+      font-size: clamp(22px, 5.6vw, 30px);
+      font-weight: 1000;
+      line-height: 1.1;
+      color: var(--text);
+      word-break: break-word;
+    }
+    .result-impostor{
+      color: var(--danger);
+    }
+
     /* Big tap CTA for Reveal / Close */
     .tap{
       width: 100%;
@@ -657,6 +692,14 @@
             </div>
           </div>
 
+          <label class="toggle" aria-label="Detective hint">
+            <input id="detectiveHintToggle" type="checkbox" />
+            <span class="toggle-ui">
+              <span class="toggle-name" id="detectiveHintName">Etsivä: Näytä luokka</span>
+              <span class="toggle-pill" id="detectiveHintState">Off</span>
+            </span>
+          </label>
+
           <label class="toggle" aria-label="Impostor hint">
             <input id="impostorHintToggle" type="checkbox" />
             <span class="toggle-ui">
@@ -665,11 +708,27 @@
             </span>
           </label>
 
+          <label class="toggle" aria-label="Impostor knows role">
+            <input id="impostorKnowsToggle" type="checkbox" checked />
+            <span class="toggle-ui">
+              <span class="toggle-name" id="impostorKnowsName">Huijari: Tietää roolinsa</span>
+              <span class="toggle-pill" id="impostorKnowsState">On</span>
+            </span>
+          </label>
+
           <label class="toggle" aria-label="Hidden impostor">
             <input id="hiddenImpostorToggle" type="checkbox" />
             <span class="toggle-ui">
               <span class="toggle-name" id="hiddenImpostorName">Huijari: Saa väärän sanan</span>
               <span class="toggle-pill" id="hiddenImpostorState">Off</span>
+            </span>
+          </label>
+
+          <label class="toggle" aria-label="Show impostor count">
+            <input id="showImpostorCountToggle" type="checkbox" />
+            <span class="toggle-ui">
+              <span class="toggle-name" id="showImpostorCountName">Huijari: Näytä huijarien määrä</span>
+              <span class="toggle-pill" id="showImpostorCountState">Off</span>
             </span>
           </label>
 
@@ -711,6 +770,11 @@
                 <div class="value" id="impostorHintText">Food</div>
               </div>
 
+              <div class="hintbox hidden" id="impostorCountBox" aria-live="polite">
+                <div class="label" id="impostorCountLabel">IMPOSTORS</div>
+                <div class="value" id="impostorCountText">1</div>
+              </div>
+
               <div class="btns" style="margin-top:8px;">
                 <button class="tap passbtn" id="closeCardBtn">Close &amp; Pass to the next player</button>
               </div>
@@ -724,9 +788,22 @@
         <div class="panel-inner">
           <div class="card">
             <div class="card-face done-face">
-              <div class="done-title" id="doneText">Start playing</div>
+              <div class="done-title" id="doneText">Start playing!</div>
               <div class="done-sub" id="doneSub">All players have seen their cards.</div>
+
+              <div class="results-box hidden" id="resultsBox">
+                <div class="result-item">
+                  <div class="result-label" id="resultWordLabel">The secret word was:</div>
+                  <div class="result-value" id="resultWord"></div>
+                </div>
+                <div class="result-item">
+                  <div class="result-label" id="resultImpostorLabel">Impostor was:</div>
+                  <div class="result-value result-impostor" id="resultImpostor"></div>
+                </div>
+              </div>
+
               <div class="btns">
+                <button id="revealResultsBtn">Reveal results</button>
                 <button class="primary" id="newGameBtn">New game</button>
               </div>
             </div>
@@ -1304,7 +1381,10 @@
       difficulty: "wi_difficulty", // all|easy|medium|hard
       categories: "wi_categories", // comma-separated keys; empty = all
       lastSecret: "wi_last_secret", // last picked secret (to reduce immediate repeats)
-      twoImpostors: "wi_two_impostors" // 10% chance for two impostors
+      twoImpostors: "wi_two_impostors", // 10% chance for two impostors
+      detectiveHint: "wi_detective_hint", // detectives see category
+      impostorKnows: "wi_impostor_knows", // impostor knows they are impostor
+      showImpostorCount: "wi_show_impostor_count" // impostor sees how many impostors
     };
 
     const storage = {
@@ -1391,17 +1471,29 @@
         diff_medium: "Medium",
         diff_hard: "Hard",
         impostorHint: "Impostor: Word category hint",
+        detectiveHint: "Detective: Show category",
+        impostorKnows: "Impostor: Knows their role",
+        showImpostorCount: "Impostor: Show impostor count",
         toggle_on: "On",
         toggle_off: "Off",
         hiddenImpostor: "Impostor: Gets a wrong word",
         twoImpostors: "10% chance: Two impostors",
         start: "Start",
+        holdToReveal: "Hold to reveal",
+        revealing: (n) => `Revealing in ${n}...`,
         reveal: "Reveal the card",
         close: "Close & Pass to the next player",
-        doneTitle: "Start playing",
+        doneTitle: "Start playing!",
         doneBody: "All players have seen their cards.",
         newGame: "New game",
-        youAreImpostor: "You are an impostor",
+        revealResults: "Reveal results",
+        hideResults: "Hide results",
+        secretWordWas: "The secret word was:",
+        impostorWas: "Impostor was:",
+        impostorsWere: "Impostors were:",
+        impostorCountHint: (n) => `${n} impostor(s) this round`,
+        youAreImpostor: "You are the impostor",
+        youAreImpostorHidden: "???",
         card_word: "WORD",
         category: "CATEGORY",
         categoriesLabel: "CATEGORIES",
@@ -1448,17 +1540,29 @@
         diff_medium: "Keskitaso",
         diff_hard: "Vaikea",
         impostorHint: "Huijari: Luokkavihje",
+        detectiveHint: "Etsivä: Näytä luokka",
+        impostorKnows: "Huijari: Tietää roolinsa",
+        showImpostorCount: "Huijari: Näytä huijarien määrä",
         toggle_on: "Päällä",
         toggle_off: "Pois",
         hiddenImpostor: "Huijari: Saa väärän sanan",
         twoImpostors: "10%: Kaksi huijaria",
         start: "Aloita",
+        holdToReveal: "Pidä paljastaaksesi",
+        revealing: (n) => `Paljastuu ${n}...`,
         reveal: "Näytä kortti",
         close: "Sulje & Anna seuraavalle pelaajalle",
-        doneTitle: "Aloittakaa peli",
+        doneTitle: "Aloittakaa peli!",
         doneBody: "Kaikki ovat nähneet korttinsa.",
         newGame: "Uusi peli",
+        revealResults: "Paljasta tulokset",
+        hideResults: "Piilota tulokset",
+        secretWordWas: "Salasana oli:",
+        impostorWas: "Huijari oli:",
+        impostorsWere: "Huijarit olivat:",
+        impostorCountHint: (n) => `${n} huijaria tällä kierroksella`,
         youAreImpostor: "Olet huijari",
+        youAreImpostorHidden: "???",
         card_word: "SANA",
         category: "LUOKKA",
         categoriesLabel: "LUOKAT",
@@ -1506,10 +1610,16 @@
       impostorHintEnabled: false,
       hiddenImpostorEnabled: false,
       twoImpostorsEnabled: false,
+      detectiveHintEnabled: false,
+      impostorKnowsEnabled: true,
+      showImpostorCountEnabled: false,
       difficulty: "all",
       selectedCats: [], // empty = all
       deckKey: "",
       deck: [],
+      revealCountdown: 0,
+      revealTimer: null,
+      resultsVisible: false,
     };
 
     // Cache DOM references
@@ -1544,9 +1654,18 @@
       impostorHintToggle: $("impostorHintToggle"),
       hiddenImpostorToggle: $("hiddenImpostorToggle"),
       twoImpostorsToggle: $("twoImpostorsToggle"),
+      detectiveHintToggle: $("detectiveHintToggle"),
+      impostorKnowsToggle: $("impostorKnowsToggle"),
+      showImpostorCountToggle: $("showImpostorCountToggle"),
       impostorHintState: $("impostorHintState"),
       hiddenImpostorState: $("hiddenImpostorState"),
       twoImpostorsState: $("twoImpostorsState"),
+      detectiveHintState: $("detectiveHintState"),
+      impostorKnowsState: $("impostorKnowsState"),
+      showImpostorCountState: $("showImpostorCountState"),
+      detectiveHintName: $("detectiveHintName"),
+      impostorKnowsName: $("impostorKnowsName"),
+      showImpostorCountName: $("showImpostorCountName"),
 
       startBtn: $("startBtn"),
 
@@ -1565,7 +1684,17 @@
       impostorHintLabel: $("impostorHintLabel"),
       impostorHintText: $("impostorHintText"),
 
+      impostorCountBox: $("impostorCountBox"),
+      impostorCountLabel: $("impostorCountLabel"),
+      impostorCountText: $("impostorCountText"),
+
       newGameBtn: $("newGameBtn"),
+      revealResultsBtn: $("revealResultsBtn"),
+      resultsBox: $("resultsBox"),
+      resultWordLabel: $("resultWordLabel"),
+      resultWord: $("resultWord"),
+      resultImpostorLabel: $("resultImpostorLabel"),
+      resultImpostor: $("resultImpostor"),
 
       diffAll: $("diffAll"),
       diffEasy: $("diffEasy"),
@@ -1731,6 +1860,15 @@
       if(el.twoImpostorsState && el.twoImpostorsToggle){
         el.twoImpostorsState.textContent = el.twoImpostorsToggle.checked ? onText : offText;
       }
+      if(el.detectiveHintState && el.detectiveHintToggle){
+        el.detectiveHintState.textContent = el.detectiveHintToggle.checked ? onText : offText;
+      }
+      if(el.impostorKnowsState && el.impostorKnowsToggle){
+        el.impostorKnowsState.textContent = el.impostorKnowsToggle.checked ? onText : offText;
+      }
+      if(el.showImpostorCountState && el.showImpostorCountToggle){
+        el.showImpostorCountState.textContent = el.showImpostorCountToggle.checked ? onText : offText;
+      }
     }
 
     function setLanguage(lang){
@@ -1762,13 +1900,19 @@
       if(el.impostorHintName) el.impostorHintName.textContent = t("impostorHint");
       if(el.hiddenImpostorName) el.hiddenImpostorName.textContent = t("hiddenImpostor");
       if(el.twoImpostorsName) el.twoImpostorsName.textContent = t("twoImpostors");
+      if(el.detectiveHintName) el.detectiveHintName.textContent = t("detectiveHint");
+      if(el.impostorKnowsName) el.impostorKnowsName.textContent = t("impostorKnows");
+      if(el.showImpostorCountName) el.showImpostorCountName.textContent = t("showImpostorCount");
       if(el.startBtn) el.startBtn.textContent = t("start");
-      if(el.revealBtn) el.revealBtn.textContent = t("reveal");
+      if(el.revealBtn && !state.revealCountdown) el.revealBtn.textContent = t("holdToReveal");
       if(el.closeCardBtn) el.closeCardBtn.textContent = t("close");
       if(el.cardLabel) el.cardLabel.textContent = t("card_word");
       if(el.doneText) el.doneText.textContent = t("doneTitle");
       if(el.doneSub) el.doneSub.textContent = t("doneBody");
       if(el.newGameBtn) el.newGameBtn.textContent = t("newGame");
+      if(el.revealResultsBtn) el.revealResultsBtn.textContent = state.resultsVisible ? t("hideResults") : t("revealResults");
+      if(el.resultWordLabel) el.resultWordLabel.textContent = t("secretWordWas");
+      if(el.resultImpostorLabel) el.resultImpostorLabel.textContent = state.impostorPlayers.length > 1 ? t("impostorsWere") : t("impostorWas");
       if(el.footerTop) el.footerTop.textContent = t("footerTop");
       if(el.footerBottom) el.footerBottom.textContent = t("footerBottom");
       if(el.selfTestBtn){
@@ -2082,19 +2226,35 @@
       el.impostorHintBox.classList.toggle("hidden", !visible);
     }
 
+    function setImpostorCountBoxVisible(visible){
+      if(!el.impostorCountBox) return;
+      el.impostorCountBox.classList.toggle("hidden", !visible);
+    }
+
     function revealCard(isRefresh=false){
       const isImpostor = Array.isArray(state.impostorPlayers) && state.impostorPlayers.includes(state.currentPlayer);
       const secret = state.secret;
       if(!el.cardMain || !el.cardLabel) return;
 
-      const showHint = isImpostor && state.impostorHintEnabled && !!secret;
+      // Determine what to show based on settings
+      const showImpostorHint = isImpostor && state.impostorHintEnabled && !!secret;
+      const showDetectiveHint = !isImpostor && state.detectiveHintEnabled && !!secret;
+      const showImpostorCount = isImpostor && state.showImpostorCountEnabled && state.impostorPlayers.length > 0;
 
       if(isImpostor && !state.hiddenImpostorEnabled){
-        el.cardLabel.classList.add("hidden");
-        el.cardMain.textContent = t("youAreImpostor");
-        el.cardMain.classList.add("imposter");
+        // Impostor without decoy word
+        if(state.impostorKnowsEnabled){
+          el.cardLabel.classList.add("hidden");
+          el.cardMain.textContent = t("youAreImpostor");
+          el.cardMain.classList.add("imposter");
+        }else{
+          // Stealth mode: impostor doesn't know they're the impostor
+          el.cardLabel.classList.add("hidden");
+          el.cardMain.textContent = t("youAreImpostorHidden");
+          el.cardMain.classList.add("imposter");
+        }
 
-        if(showHint){
+        if(showImpostorHint){
           const cats = getHintCategories(secret);
           if(el.impostorHintText) el.impostorHintText.textContent = categoryText(cats);
           if(el.impostorHintLabel) el.impostorHintLabel.textContent = (cats.length > 1) ? t("categoriesLabel") : t("category");
@@ -2103,13 +2263,15 @@
           setHintBoxVisible(false);
         }
       }else{
+        // Detective or impostor with decoy word
         el.cardLabel.classList.remove("hidden");
         el.cardLabel.textContent = t("card_word");
         const entry = (isImpostor && state.hiddenImpostorEnabled) ? state.decoy : secret;
         el.cardMain.textContent = entry ? (entry[state.lang] || entry.en) : "";
         el.cardMain.classList.remove("imposter");
 
-        if(showHint){
+        // Show hint for detective or impostor with decoy
+        if(showDetectiveHint || showImpostorHint){
           const cats = getHintCategories(secret);
           if(el.impostorHintText) el.impostorHintText.textContent = categoryText(cats);
           if(el.impostorHintLabel) el.impostorHintLabel.textContent = (cats.length > 1) ? t("categoriesLabel") : t("category");
@@ -2117,6 +2279,15 @@
         }else{
           setHintBoxVisible(false);
         }
+      }
+
+      // Show impostor count to impostors if enabled
+      if(showImpostorCount){
+        if(el.impostorCountText) el.impostorCountText.textContent = t("impostorCountHint", state.impostorPlayers.length);
+        if(el.impostorCountLabel) el.impostorCountLabel.textContent = state.lang === "fi" ? "HUIJARIT" : "IMPOSTORS";
+        setImpostorCountBoxVisible(true);
+      }else{
+        setImpostorCountBoxVisible(false);
       }
 
       if(!isRefresh){
@@ -2128,6 +2299,8 @@
     function hideCard(){
       el.faceUp?.classList.add("hidden");
       el.faceDown?.classList.remove("hidden");
+      // Reset reveal button text
+      if(el.revealBtn) el.revealBtn.textContent = t("holdToReveal");
     }
 
     function nextPlayer(){
@@ -2150,9 +2323,15 @@
       state.impostorHintEnabled = !!el.impostorHintToggle?.checked;
       state.hiddenImpostorEnabled = !!el.hiddenImpostorToggle?.checked;
       state.twoImpostorsEnabled = !!el.twoImpostorsToggle?.checked;
+      state.detectiveHintEnabled = !!el.detectiveHintToggle?.checked;
+      state.impostorKnowsEnabled = !!el.impostorKnowsToggle?.checked;
+      state.showImpostorCountEnabled = !!el.showImpostorCountToggle?.checked;
       storage.setBool(LS.hint, state.impostorHintEnabled);
       storage.setBool(LS.hidden, state.hiddenImpostorEnabled);
       storage.setBool(LS.twoImpostors, state.twoImpostorsEnabled);
+      storage.setBool(LS.detectiveHint, state.detectiveHintEnabled);
+      storage.setBool(LS.impostorKnows, state.impostorKnowsEnabled);
+      storage.setBool(LS.showImpostorCount, state.showImpostorCountEnabled);
 
       state.pool = buildPool();
       if(!state.pool.length){
@@ -2166,6 +2345,7 @@
       chooseSecret();
       state.decoy = state.hiddenImpostorEnabled ? chooseDecoyForSecret(state.secret) : null;
       state.dealing = true;
+      state.resultsVisible = false;
 
       showPanel("deal");
       updateDealUI();
@@ -2176,6 +2356,35 @@
       state.dealing = false;
       hideCard();
       showPanel("done");
+      updateDonePanel();
+    }
+
+    function updateDonePanel(){
+      // Update labels for current language
+      if(el.doneText) el.doneText.textContent = t("doneTitle");
+      if(el.doneSub) el.doneSub.textContent = t("doneBody");
+      if(el.revealResultsBtn) el.revealResultsBtn.textContent = state.resultsVisible ? t("hideResults") : t("revealResults");
+      if(el.resultWordLabel) el.resultWordLabel.textContent = t("secretWordWas");
+      if(el.resultImpostorLabel) el.resultImpostorLabel.textContent = state.impostorPlayers.length > 1 ? t("impostorsWere") : t("impostorWas");
+
+      // Populate results
+      if(el.resultWord && state.secret){
+        el.resultWord.textContent = state.secret[state.lang] || state.secret.en;
+      }
+      if(el.resultImpostor && state.impostorPlayers.length){
+        const impostorText = state.impostorPlayers.map(n => t("player", n)).join(", ");
+        el.resultImpostor.textContent = impostorText;
+      }
+
+      // Show/hide results box
+      if(el.resultsBox){
+        el.resultsBox.classList.toggle("hidden", !state.resultsVisible);
+      }
+    }
+
+    function toggleResults(){
+      state.resultsVisible = !state.resultsVisible;
+      updateDonePanel();
     }
 
     function newGame(){
@@ -2185,6 +2394,7 @@
       state.secret = null;
       state.decoy = null;
       state.pool = [];
+      state.resultsVisible = false;
       state.dealing = false;
 
       showPanel("setup");
@@ -2454,6 +2664,9 @@
       if(el.impostorHintToggle) el.impostorHintToggle.checked = storage.getBool(LS.hint, false);
       if(el.hiddenImpostorToggle) el.hiddenImpostorToggle.checked = storage.getBool(LS.hidden, false);
       if(el.twoImpostorsToggle) el.twoImpostorsToggle.checked = storage.getBool(LS.twoImpostors, true);
+      if(el.detectiveHintToggle) el.detectiveHintToggle.checked = storage.getBool(LS.detectiveHint, false);
+      if(el.impostorKnowsToggle) el.impostorKnowsToggle.checked = storage.getBool(LS.impostorKnows, true);
+      if(el.showImpostorCountToggle) el.showImpostorCountToggle.checked = storage.getBool(LS.showImpostorCount, false);
       updateToggleStateLabels();
 
       // Restore difficulty
@@ -2477,6 +2690,18 @@
       });
       el.twoImpostorsToggle?.addEventListener("change", () => {
         storage.setBool(LS.twoImpostors, !!el.twoImpostorsToggle.checked);
+        updateToggleStateLabels();
+      });
+      el.detectiveHintToggle?.addEventListener("change", () => {
+        storage.setBool(LS.detectiveHint, !!el.detectiveHintToggle.checked);
+        updateToggleStateLabels();
+      });
+      el.impostorKnowsToggle?.addEventListener("change", () => {
+        storage.setBool(LS.impostorKnows, !!el.impostorKnowsToggle.checked);
+        updateToggleStateLabels();
+      });
+      el.showImpostorCountToggle?.addEventListener("change", () => {
+        storage.setBool(LS.showImpostorCount, !!el.showImpostorCountToggle.checked);
         updateToggleStateLabels();
       });
 
@@ -2522,9 +2747,46 @@
 
       // Main actions
       el.startBtn?.addEventListener("click", startGame);
-      el.revealBtn?.addEventListener("click", () => revealCard(false));
+
+      // Reveal button with hold-to-reveal timer (2 seconds)
+      if(el.revealBtn){
+        let holdTimer = null;
+        let countdown = 2;
+
+        const startHold = () => {
+          countdown = 2;
+          el.revealBtn.textContent = t("revealing", countdown);
+          holdTimer = setInterval(() => {
+            countdown -= 1;
+            if(countdown <= 0){
+              clearInterval(holdTimer);
+              holdTimer = null;
+              revealCard(false);
+            }else{
+              el.revealBtn.textContent = t("revealing", countdown);
+            }
+          }, 1000);
+        };
+
+        const cancelHold = () => {
+          if(holdTimer){
+            clearInterval(holdTimer);
+            holdTimer = null;
+            el.revealBtn.textContent = t("holdToReveal");
+          }
+        };
+
+        el.revealBtn.addEventListener("mousedown", startHold);
+        el.revealBtn.addEventListener("touchstart", (e) => { e.preventDefault(); startHold(); }, { passive: false });
+        el.revealBtn.addEventListener("mouseup", cancelHold);
+        el.revealBtn.addEventListener("mouseleave", cancelHold);
+        el.revealBtn.addEventListener("touchend", cancelHold);
+        el.revealBtn.addEventListener("touchcancel", cancelHold);
+      }
+
       el.closeCardBtn?.addEventListener("click", () => { hideCard(); nextPlayer(); });
       el.newGameBtn?.addEventListener("click", newGame);
+      el.revealResultsBtn?.addEventListener("click", toggleResults);
 
       document.addEventListener("visibilitychange", () => {
         if(state.dealing && document.visibilityState === "visible") requestWakeLock();
