@@ -1,6 +1,12 @@
+(function($){
 "use strict";
 
-const BOOT_SPLASH_MIN_MS = 2000;
+if(!$){
+  console.error("Sanahuijari: jQuery missing (vendor/jquery-3.7.1.min.js)");
+  return;
+}
+
+const BOOT_SPLASH_MIN_MS = 1500;
 const BOOT_SPLASH_START_MS = (globalThis.performance && typeof performance.now === "function") ? performance.now() : Date.now();
 
 let bootProgressRaf = 0;
@@ -22,6 +28,9 @@ function initBootProgress(){
     ring.style.strokeDashoffset = String(c);
   }
   if(el.bootPercent) el.bootPercent.textContent = "0%";
+  if(el.bootVersion){
+    el.bootVersion.textContent = (globalThis.SANAHUIJARI_ICON_VERSION || "");
+  }
 
   stopBootProgress();
   const tick = () => {
@@ -46,6 +55,8 @@ function initBootProgress(){
 }
 
 // ---- Snowfall (canvas particle system) ----
+const ENABLE_SNOWFALL = false;
+
 const snow = {
   canvas: null,
   ctx: null,
@@ -237,6 +248,16 @@ function _snowTick(ts){
 function initSnowfall(){
   if(!snow.canvas) snow.canvas = document.getElementById("snowCanvas");
   if(!snow.canvas) return;
+
+  if(!ENABLE_SNOWFALL){
+    // Ensure it's not visible even when body.force-motion forces display via !important.
+    try{ snow.canvas.style.setProperty("display", "none", "important"); }catch(_e){
+      try{ snow.canvas.style.display = "none"; }catch(_e2){}
+    }
+    _snowStop();
+    return;
+  }
+
   if(!_snowShouldRun()) return;
 
   const ctx = snow.canvas.getContext("2d", { alpha: true, desynchronized: true });
@@ -287,7 +308,9 @@ async function finishBootSplash(){
   stopBootProgress();
 
   // Drop snowfall intensity back to normal after boot.
-  try{ _snowSeedFlakes(); }catch(_e){}
+  if(ENABLE_SNOWFALL){
+    try{ _snowSeedFlakes(); }catch(_e){}
+  }
 }
 
 // ---- Storage keys (localStorage) ----
@@ -299,9 +322,11 @@ const LS = {
   hint: "wi_hint",
   hidden: "wi_hidden",
   difficulty: "wi_difficulty", // all|easy|medium|hard
-  categories: "wi_categories", // comma-separated keys; empty = all
+  categories: "wi_categories", // comma-separated keys; empty = none selected (v2)
+  categoriesV2: "wi_categories_v2", // 1 => categories empty means none selected; missing/0 => legacy empty meant "all"
+  bannedCategories: "wi_categories_banned", // comma-separated keys; always excluded
   lastSecret: "wi_last_secret", // last picked secret (to reduce immediate repeats)
-  twoImpostors: "wi_two_impostors", // 20% (1:5) chance for two impostors
+  twoImpostors: "wi_two_impostors", // 20% (1:5) chance for multiple impostors
   detectiveHint: "wi_detective_hint", // detectives see category
   impostorKnows: "wi_impostor_knows", // impostor knows they are impostor
   showImpostorCount: "wi_show_impostor_count" // impostor sees how many impostors
@@ -329,16 +354,17 @@ const storage = {
   }
 };
 
-const $ = (id) => document.getElementById(id);
+const byId = (id) => document.getElementById(id);
 
 const CATEGORY_KEYS = ["space","food","animal","person","vehicle","place","nature","activity","thing","movies","music","kinojuha","intti","suomi"]; // keep in sync with i18n
-const DIFF_KEYS = ["all","easy","medium","hard"];
+const DIFF_KEYS = ["easy","medium","hard"];
 
 const DEFAULT_SETTINGS = Object.freeze({
   players: 3,
   playersMode: "preset", // "preset" | "custom"
-  difficulty: "all",
-  categories: [], // empty = all
+  difficulty: DIFF_KEYS.slice(),
+  categories: CATEGORY_KEYS.slice(),
+  bannedCategories: [], // always excluded
 
   detectiveHint: false,
   impostorHint: true,
@@ -368,8 +394,9 @@ const state = {
   detectiveHintEnabled: false,
   impostorKnowsEnabled: true,
   showImpostorCountEnabled: false,
-  difficulty: "all",
-  selectedCats: [], // empty = all
+  selectedDiffs: DIFF_KEYS.slice(),
+  selectedCats: CATEGORY_KEYS.slice(),
+  bannedCats: [],
   deckKey: "",
   deck: [],
   revealCountdown: 0,
@@ -383,104 +410,105 @@ function cacheDom(){
   el = {
     html: document.documentElement,
 
-    bootSplash: $("bootSplash"),
-    appRoot: $("appRoot"),
-    bootPercent: $("bootPercent"),
-    bootRingFill: $("bootRingFill"),
+    bootSplash: byId("bootSplash"),
+    appRoot: byId("appRoot"),
+    bootPercent: byId("bootPercent"),
+    bootRingFill: byId("bootRingFill"),
 
-    snowCanvas: $("snowCanvas"),
+    snowCanvas: byId("snowCanvas"),
 
-    titleText: $("titleText"),
-    taglineText: $("taglineText"),
+    titleText: byId("titleText"),
+    taglineText: byId("taglineText"),
 
-    playersLabel: $("playersLabel"),
-    customBtn: $("customBtn"),
-    difficultyLabel: $("difficultyLabel"),
-    categoriesLabel: $("categoriesLabel"),
-    difficultySeg: $("difficultySeg"),
-    categoryChips: $("categoryChips"),
+    playersLabel: byId("playersLabel"),
+    customBtn: byId("customBtn"),
+    difficultyLabel: byId("difficultyLabel"),
+    categoriesLabel: byId("categoriesLabel"),
+    difficultySeg: byId("difficultySeg"),
+    categoryChips: byId("categoryChips"),
 
-    impostorHintName: $("impostorHintName"),
-    hiddenImpostorName: $("hiddenImpostorName"),
-    twoImpostorsName: $("twoImpostorsName"),
-    doneText: $("doneText"),
-    doneSub: $("doneSub"),
+    impostorHintName: byId("impostorHintName"),
+    hiddenImpostorName: byId("hiddenImpostorName"),
+    twoImpostorsName: byId("twoImpostorsName"),
+    doneText: byId("doneText"),
+    doneSub: byId("doneSub"),
 
-    langEn: $("langEn"),
-    langFi: $("langFi"),
+    langEn: byId("langEn"),
+    langFi: byId("langFi"),
 
-    setupPanel: $("setupPanel"),
-    dealPanel: $("dealPanel"),
-    donePanel: $("donePanel"),
+    setupPanel: byId("setupPanel"),
+    dealPanel: byId("dealPanel"),
+    donePanel: byId("donePanel"),
 
-    playerQuick: $("playerQuick"),
-    playersInput: $("playersInput"),
-    impostorHintToggle: $("impostorHintToggle"),
-    hiddenImpostorToggle: $("hiddenImpostorToggle"),
-    twoImpostorsToggle: $("twoImpostorsToggle"),
-    detectiveHintToggle: $("detectiveHintToggle"),
-    impostorKnowsToggle: $("impostorKnowsToggle"),
-    showImpostorCountToggle: $("showImpostorCountToggle"),
-    impostorHintState: $("impostorHintState"),
-    hiddenImpostorState: $("hiddenImpostorState"),
-    twoImpostorsState: $("twoImpostorsState"),
-    detectiveHintState: $("detectiveHintState"),
-    impostorKnowsState: $("impostorKnowsState"),
-    showImpostorCountState: $("showImpostorCountState"),
-    detectiveHintName: $("detectiveHintName"),
-    impostorKnowsName: $("impostorKnowsName"),
-    showImpostorCountName: $("showImpostorCountName"),
+    playerQuick: byId("playerQuick"),
+    playersInput: byId("playersInput"),
+    impostorHintToggle: byId("impostorHintToggle"),
+    hiddenImpostorToggle: byId("hiddenImpostorToggle"),
+    twoImpostorsToggle: byId("twoImpostorsToggle"),
+    detectiveHintToggle: byId("detectiveHintToggle"),
+    impostorKnowsToggle: byId("impostorKnowsToggle"),
+    showImpostorCountToggle: byId("showImpostorCountToggle"),
+    impostorHintState: byId("impostorHintState"),
+    hiddenImpostorState: byId("hiddenImpostorState"),
+    twoImpostorsState: byId("twoImpostorsState"),
+    detectiveHintState: byId("detectiveHintState"),
+    impostorKnowsState: byId("impostorKnowsState"),
+    showImpostorCountState: byId("showImpostorCountState"),
+    detectiveHintName: byId("detectiveHintName"),
+    impostorKnowsName: byId("impostorKnowsName"),
+    showImpostorCountName: byId("showImpostorCountName"),
 
-    startBtn: $("startBtn"),
+    startBtn: byId("startBtn"),
 
-    playerHeading: $("playerHeading"),
-    progressText: $("progressText"),
+    playerHeading: byId("playerHeading"),
+    progressText: byId("progressText"),
 
-    faceDown: $("faceDown"),
-    faceUp: $("faceUp"),
-    revealBtn: $("revealBtn"),
-    closeCardBtn: $("closeCardBtn"),
+    faceDown: byId("faceDown"),
+    faceUp: byId("faceUp"),
+    revealBtn: byId("revealBtn"),
+    closeCardBtn: byId("closeCardBtn"),
 
-    exitGameBtn: $("exitGameBtn"),
+    exitGameBtn: byId("exitGameBtn"),
 
-    cardLabel: $("cardLabel"),
-    cardMain: $("cardMain"),
+    cardLabel: byId("cardLabel"),
+    cardMain: byId("cardMain"),
 
-    impostorHintBox: $("impostorHintBox"),
-    impostorHintLabel: $("impostorHintLabel"),
-    impostorHintText: $("impostorHintText"),
+    impostorHintBox: byId("impostorHintBox"),
+    impostorHintLabel: byId("impostorHintLabel"),
+    impostorHintText: byId("impostorHintText"),
 
-    impostorCountBox: $("impostorCountBox"),
-    impostorCountLabel: $("impostorCountLabel"),
-    impostorCountText: $("impostorCountText"),
+    impostorCountBox: byId("impostorCountBox"),
+    impostorCountLabel: byId("impostorCountLabel"),
+    impostorCountText: byId("impostorCountText"),
 
-    newGameBtn: $("newGameBtn"),
-    revealResultsBtn: $("revealResultsBtn"),
-    resultsBox: $("resultsBox"),
-    resultWordLabel: $("resultWordLabel"),
-    resultWord: $("resultWord"),
-    resultImpostorLabel: $("resultImpostorLabel"),
-    resultImpostor: $("resultImpostor"),
-    resultDetectiveLabel: $("resultDetectiveLabel"),
-    resultDetective: $("resultDetective"),
+    newGameBtn: byId("newGameBtn"),
+    revealResultsBtn: byId("revealResultsBtn"),
+    resultsBox: byId("resultsBox"),
+    resultWordLabel: byId("resultWordLabel"),
+    resultWord: byId("resultWord"),
+    resultImpostorLabel: byId("resultImpostorLabel"),
+    resultImpostor: byId("resultImpostor"),
+    resultDetectiveLabel: byId("resultDetectiveLabel"),
+    resultDetective: byId("resultDetective"),
 
-    diffAll: $("diffAll"),
-    diffEasy: $("diffEasy"),
-    diffMedium: $("diffMedium"),
-    diffHard: $("diffHard"),
+    diffAll: byId("diffAll"),
+    diffEasy: byId("diffEasy"),
+    diffMedium: byId("diffMedium"),
+    diffHard: byId("diffHard"),
 
-    footerTop: $("footerTop"),
-    footerBottom: $("footerBottom"),
-    selfTestBtn: $("selfTestBtn"),
-    repoBtn: $("repoBtn"),
-    rulesBtn: $("rulesBtn"),
-    resetSettingsBtn: $("resetSettingsBtn"),
-    rulesModal: $("rulesModal"),
-    rulesBackdrop: $("rulesBackdrop"),
-    rulesTitle: $("rulesTitle"),
-    rulesBody: $("rulesBody"),
-    rulesCloseBtn: $("rulesCloseBtn"),
-    toast: $("toast"),
+    footerTop: byId("footerTop"),
+    footerBottom: byId("footerBottom"),
+    bootVersion: byId("bootVersion"),
+    selfTestBtn: byId("selfTestBtn"),
+    repoBtn: byId("repoBtn"),
+    rulesBtn: byId("rulesBtn"),
+    resetSettingsBtn: byId("resetSettingsBtn"),
+    rulesModal: byId("rulesModal"),
+    rulesBackdrop: byId("rulesBackdrop"),
+    rulesTitle: byId("rulesTitle"),
+    rulesBody: byId("rulesBody"),
+    rulesCloseBtn: byId("rulesCloseBtn"),
+    toast: byId("toast"),
   };
 }
 
@@ -702,6 +730,7 @@ function closeRules(){
 
 function ensureArrays(){
   if(!Array.isArray(state.selectedCats)) state.selectedCats = [];
+  if(!Array.isArray(state.bannedCats)) state.bannedCats = [];
   if(!Array.isArray(state.pool)) state.pool = [];
   if(!Array.isArray(state.deck)) state.deck = [];
   if(!Array.isArray(state.impostorPlayers)) state.impostorPlayers = [];
@@ -874,7 +903,8 @@ function setLanguage(lang){
     }
     el.resultDetectiveLabel.textContent = detectives.length > 1 ? t("detectivesWere") : t("detectiveWas");
   }
-  if(el.footerTop) el.footerTop.textContent = t("footerTop");
+  const appVer = (globalThis.SANAHUIJARI_ICON_VERSION || "v3.0");
+  if(el.footerTop) el.footerTop.textContent = t("footerTop", { version: appVer });
   if(el.footerBottom) el.footerBottom.textContent = t("footerBottom");
   if(el.selfTestBtn){
     el.selfTestBtn.setAttribute("aria-label", t("selfTest"));
@@ -936,22 +966,37 @@ function randInt(min, maxInclusive){
   return min + Math.floor(Math.random() * range);
 }
 
-// 20% (1:5) chance for TWO impostors instead of one.
-// For 3 players we keep it to 1 impostor (two impostors with 3 players tends to be too skewed).
-// 20% (1:5) chance for TWO impostors instead of one (optional toggle).
-// For 3 players we keep it to 1 impostor (two impostors with 3 players tends to be too skewed).
+// Multi-impostor logic (optional toggle):
+// - Default is 1 impostor.
+// - If enabled: 20% (1:5) chance to have multiple impostors (>= 2), regardless of player count.
+// - Always leave at least one detective => impostors <= total - 1.
+// - When multiple impostors are possible:
+//   - First, the 20% chance yields 2 impostors.
+//   - Then, if 3+ impostors are possible, 50:50 chance to upgrade to >2 impostors.
 function pickImpostorPlayers(total, opts = {}){
   const rngInt = opts.rngInt || randInt;
   const allowTwo = !!opts.allowTwo;
   const chance = typeof opts.chance === "number" ? opts.chance : 0.20;
 
-  const wantTwo = allowTwo && (total >= 4) && (rngInt(1, 100) <= Math.round(chance * 100));
-  if(!wantTwo) return [rngInt(1, total)];
+  const maxImpostors = Math.max(1, total - 1); // always at least one detective
+  let impostorCount = 1;
 
-  const a = rngInt(1, total);
-  let b = rngInt(1, total - 1);
-  if(b >= a) b += 1; // ensure b != a
-  return [a, b].sort((x,y) => x - y);
+  const wantMultiple = allowTwo && (maxImpostors >= 2) && (rngInt(1, 100) <= Math.round(chance * 100));
+  if(wantMultiple){
+    impostorCount = Math.min(2, maxImpostors);
+
+    // 50:50 chance to have more than two impostors (when possible).
+    if(impostorCount === 2 && maxImpostors >= 3){
+      const upgrade = rngInt(0, 1) === 1;
+      if(upgrade) impostorCount = 3;
+    }
+  }
+
+  const picks = new Set();
+  while(picks.size < impostorCount){
+    picks.add(rngInt(1, total));
+  }
+  return Array.from(picks).sort((x,y) => x - y);
 }
 
 function shuffleInPlace(arr){
@@ -966,8 +1011,12 @@ function shuffleInPlace(arr){
 
 function currentPoolKey(){
   ensureArrays();
-  const cats = state.selectedCats.length ? state.selectedCats.slice().sort().join(".") : "__all__";
-  return `${state.difficulty}|${cats}`;
+  const diffs = Array.isArray(state.selectedDiffs) && state.selectedDiffs.length
+    ? state.selectedDiffs.slice().sort().join(".")
+    : "__none__";
+  const cats = state.selectedCats.length ? state.selectedCats.slice().sort().join(".") : "__none__";
+  const banned = state.bannedCats.length ? state.bannedCats.slice().sort().join(".") : "__none__";
+  return `${diffs}|${cats}|!${banned}`;
 }
 
 function ensureDeckForPool(pool){
@@ -1028,15 +1077,100 @@ function intersectsCats(a=[], b=[]){
 
 function buildPool(){
   ensureArrays();
+  // Only selected categories are eligible for draws.
+  if(!state.selectedCats.length) return [];
+  // Only selected difficulties are eligible for draws.
+  if(!Array.isArray(state.selectedDiffs) || state.selectedDiffs.length === 0) return [];
+
   let pool = WORD_BANK.slice();
-  if(state.difficulty !== "all"){
-    pool = pool.filter(w => w.diff === state.difficulty);
+  if(state.selectedDiffs.length !== DIFF_KEYS.length){
+    const set = new Set(state.selectedDiffs);
+    pool = pool.filter(w => set.has(w.diff));
   }
   if(state.selectedCats.length){
     const set = new Set(state.selectedCats);
     pool = pool.filter(w => normalizeCats(w).some(c => set.has(c)));
   }
+  if(state.bannedCats.length){
+    const banned = new Set(state.bannedCats);
+    pool = pool.filter(w => !normalizeCats(w).some(c => banned.has(c)));
+  }
   return pool;
+}
+
+function normalizeDiffKeys(keys){
+  return (Array.isArray(keys) ? keys : [])
+    .map(String)
+    .map(s => s.trim())
+    .filter(Boolean)
+    .filter(k => DIFF_KEYS.includes(k));
+}
+
+function setSelectedDiffs(diffs, { allowEmpty = false } = {}){
+  ensureArrays();
+  const normalized = normalizeDiffKeys(diffs);
+  const uniq = Array.from(new Set(normalized));
+  if(!uniq.length && !allowEmpty){
+    // Keep previous selection; never allow empty.
+    return;
+  }
+  state.selectedDiffs = uniq.length ? uniq : [];
+  storage.set(LS.difficulty, state.selectedDiffs.join(","));
+
+  const set = new Set(state.selectedDiffs);
+  const btns = el.difficultySeg?.querySelectorAll(".segbtn") || [];
+  btns.forEach(b => b.classList.toggle("active", set.has(String(b.dataset.diff || ""))));
+
+  state.deck = [];
+  state.deckKey = "";
+  updateStartButtonState();
+}
+
+function updateStartButtonState(){
+  if(!el.startBtn) return;
+  let available = 0;
+  try{
+    available = buildPool().length;
+  }catch(_e){
+    available = 0;
+  }
+
+  const disabled = available === 0;
+  el.startBtn.disabled = disabled;
+  el.startBtn.setAttribute("aria-disabled", disabled ? "true" : "false");
+  // Keep it simple: let the existing alert in startGame be a fallback.
+}
+
+function normalizeCategoryKeys(keys){
+  return (Array.isArray(keys) ? keys : [])
+    .map(String)
+    .map(s => s.trim())
+    .filter(Boolean)
+    .filter(k => CATEGORY_KEYS.includes(k));
+}
+
+function setCategoryFilters({ include = null, ban = null } = {}){
+  ensureArrays();
+
+  const includeNorm = include === null ? state.selectedCats : normalizeCategoryKeys(include);
+  const banNorm = ban === null ? state.bannedCats : normalizeCategoryKeys(ban);
+
+  const includeSet = new Set(includeNorm);
+  const banSet = new Set(banNorm);
+  // A category can't be both included and banned.
+  for(const k of includeSet) banSet.delete(k);
+
+  state.selectedCats = Array.from(includeSet);
+  state.bannedCats = Array.from(banSet);
+
+  storage.set(LS.categories, state.selectedCats.join(","));
+  storage.set(LS.bannedCategories, state.bannedCats.join(","));
+  storage.setBool(LS.categoriesV2, true);
+
+  state.deck = [];
+  state.deckKey = "";
+  renderCategoryChips();
+  updateStartButtonState();
 }
 
 function chooseSecret(){
@@ -1106,31 +1240,36 @@ function useCustomCount(){
 }
 
 function setDifficulty(diff){
-  state.difficulty = DIFF_KEYS.includes(diff) ? diff : "all";
-  storage.set(LS.difficulty, state.difficulty);
-  const btns = el.difficultySeg?.querySelectorAll(".segbtn") || [];
-  btns.forEach(b => b.classList.toggle("active", b.dataset.diff === state.difficulty));
-  state.deck = [];
-  state.deckKey = "";
+  // Back-compat: allow passing an array (e.g. defaults).
+  if(Array.isArray(diff)){
+    setSelectedDiffs(diff);
+    return;
+  }
+
+  const key = String(diff || "");
+  if(!DIFF_KEYS.includes(key)) return;
+
+  const next = new Set(Array.isArray(state.selectedDiffs) ? state.selectedDiffs : []);
+  if(next.has(key)){
+    if(next.size <= 1) return; // must keep at least one
+    next.delete(key);
+  }else{
+    next.add(key);
+  }
+  setSelectedDiffs(Array.from(next));
 }
 
 function setSelectedCats(keys){
-  const normalized = (Array.isArray(keys) ? keys : [])
-    .map(String)
-    .map(s => s.trim())
-    .filter(k => CATEGORY_KEYS.includes(k));
-
-  state.selectedCats = Array.from(new Set(normalized));
-  storage.set(LS.categories, state.selectedCats.join(","));
-  state.deck = [];
-  state.deckKey = "";
-  renderCategoryChips();
+  // Back-compat: keep existing call sites working.
+  setCategoryFilters({ include: keys });
 }
 
 function renderCategoryChips(){
   if(!el.categoryChips) return;
   ensureArrays();
   const selected = new Set(state.selectedCats);
+  const banned = new Set(state.bannedCats);
+  const allSelected = (state.bannedCats.length === 0 && state.selectedCats.length === CATEGORY_KEYS.length);
 
   if(!el.categoryChips.dataset.ready){
     el.categoryChips.innerHTML = "";
@@ -1139,7 +1278,6 @@ function renderCategoryChips(){
     allBtn.type = "button";
     allBtn.className = "chip";
     allBtn.dataset.cat = "__all__";
-    allBtn.addEventListener("click", () => setSelectedCats([]));
     el.categoryChips.appendChild(allBtn);
 
     for(const key of CATEGORY_KEYS){
@@ -1147,13 +1285,6 @@ function renderCategoryChips(){
       btn.type = "button";
       btn.className = "chip";
       btn.dataset.cat = key;
-      btn.addEventListener("click", () => {
-        ensureArrays();
-        const next = new Set(state.selectedCats);
-        if(next.has(key)) next.delete(key);
-        else next.add(key);
-        setSelectedCats(Array.from(next));
-      });
       el.categoryChips.appendChild(btn);
     }
 
@@ -1166,14 +1297,20 @@ function renderCategoryChips(){
     if(key === "__all__"){
       btn.classList.remove("logo");
       btn.textContent = t("all");
-      btn.classList.toggle("active", state.selectedCats.length === 0);
+      btn.classList.toggle("active", allSelected);
+      btn.classList.remove("banned");
+      btn.setAttribute("aria-pressed", allSelected ? "true" : "false");
       continue;
     }
 
     // Special: Kinojuha uses a logo instead of text
     if(key === "kinojuha"){
       btn.classList.add("logo");
-      btn.classList.toggle("active", selected.has(key));
+      const isSelected = selected.has(key);
+      const isBanned = banned.has(key);
+      btn.classList.toggle("active", isSelected);
+      btn.classList.toggle("banned", isBanned);
+      btn.setAttribute("aria-pressed", isSelected ? "true" : (isBanned ? "mixed" : "false"));
       const label = t("cat_kinojuha");
       btn.setAttribute("aria-label", label);
       btn.setAttribute("title", label);
@@ -1201,7 +1338,11 @@ function renderCategoryChips(){
 
     btn.classList.remove("logo");
     btn.textContent = t(`cat_${key}`);
-    btn.classList.toggle("active", selected.has(key));
+    const isSelected = selected.has(key);
+    const isBanned = banned.has(key);
+    btn.classList.toggle("active", isSelected);
+    btn.classList.toggle("banned", isBanned);
+    btn.setAttribute("aria-pressed", isSelected ? "true" : (isBanned ? "mixed" : "false"));
   }
 }
 
@@ -1510,8 +1651,9 @@ function showToast(msg){
 function runSelfTests(){
   const snap = {
     lang: state.lang,
-    difficulty: state.difficulty,
+    selectedDiffs: Array.isArray(state.selectedDiffs) ? state.selectedDiffs.slice() : [],
     selectedCats: Array.isArray(state.selectedCats) ? state.selectedCats.slice() : [],
+    bannedCats: Array.isArray(state.bannedCats) ? state.bannedCats.slice() : [],
     pool: state.pool,
     deck: Array.isArray(state.deck) ? state.deck.slice() : [],
     deckKey: state.deckKey,
@@ -1530,7 +1672,7 @@ function runSelfTests(){
       const canvas = document.getElementById("snowCanvas");
       console.assert(!!canvas, "Snow canvas element should exist");
 
-      if((!reduceMotion || forced) && canvas){
+      if(ENABLE_SNOWFALL && (!reduceMotion || forced) && canvas){
         console.assert(canvas.width > 0 && canvas.height > 0, "Snow canvas should have a backing buffer");
         console.assert(!!snow && !!snow.running, "Snowfall renderer should be running");
       }
@@ -1570,15 +1712,18 @@ function runSelfTests(){
     }
 
     {
-      const prevDiff = state.difficulty;
+      const prevDiffs = Array.isArray(state.selectedDiffs) ? state.selectedDiffs.slice() : [];
       const prevCats = Array.isArray(state.selectedCats) ? state.selectedCats.slice() : [];
-      state.difficulty = "hard";
+      const prevBanned = Array.isArray(state.bannedCats) ? state.bannedCats.slice() : [];
+      state.selectedDiffs = ["hard"];
       state.selectedCats = ["space"];
+      state.bannedCats = [];
       const pool = buildPool();
       console.assert(pool.every(w => w.diff === "hard"), "Pool should be hard only");
       console.assert(pool.every(w => w.cats.includes("space")), "Pool should be space category");
-      state.difficulty = prevDiff;
+      state.selectedDiffs = prevDiffs;
       state.selectedCats = prevCats;
+      state.bannedCats = prevBanned;
     }
 
     {
@@ -1603,10 +1748,12 @@ function runSelfTests(){
     }
 
     {
-      const prevDiff = state.difficulty;
+      const prevDiffs = Array.isArray(state.selectedDiffs) ? state.selectedDiffs.slice() : [];
       const prevCats = Array.isArray(state.selectedCats) ? state.selectedCats.slice() : [];
-      state.difficulty = "all";
+      const prevBanned = Array.isArray(state.bannedCats) ? state.bannedCats.slice() : [];
+      state.selectedDiffs = DIFF_KEYS.slice();
       state.selectedCats = ["suomi"];
+      state.bannedCats = [];
       const p = buildPool();
       console.assert(p.length > 0, "Suomi pool should not be empty");
       console.assert(p.every(w => w.cats.includes("suomi")), "Suomi pool words should include 'suomi' category");
@@ -1616,16 +1763,26 @@ function runSelfTests(){
       console.assert(ip.length > 0, "Intti pool should not be empty");
       console.assert(ip.every(w => w.cats.includes("intti")), "Intti pool words should include 'intti' category");
       console.assert(ip.some(w => w.fi === "Varusmies"), "Intti pool should include Varusmies");
-      state.difficulty = prevDiff;
+
+      // Ban-only mode: all except banned.
+      state.selectedCats = CATEGORY_KEYS.slice();
+      state.bannedCats = ["suomi"];
+      const bp = buildPool();
+      console.assert(bp.length > 0, "Ban-only pool should not be empty");
+      console.assert(bp.every(w => !w.cats.includes("suomi")), "Banned category words should be excluded");
+
+      state.selectedDiffs = prevDiffs;
       state.selectedCats = prevCats;
+      state.bannedCats = prevBanned;
     }
 
     {
       const prevPool = state.pool;
       const prevDeck = Array.isArray(state.deck) ? state.deck.slice() : [];
       const prevKey = state.deckKey;
-      const prevDiff = state.difficulty;
+      const prevDiffs = Array.isArray(state.selectedDiffs) ? state.selectedDiffs.slice() : [];
       const prevCats = Array.isArray(state.selectedCats) ? state.selectedCats.slice() : [];
+      const prevBanned = Array.isArray(state.bannedCats) ? state.bannedCats.slice() : [];
       const prevLast = storage.get(LS.lastSecret, "");
 
       const fake = [
@@ -1635,8 +1792,9 @@ function runSelfTests(){
       ];
 
       state.pool = fake;
-      state.difficulty = "all";
-      state.selectedCats = [];
+      state.selectedDiffs = DIFF_KEYS.slice();
+      state.selectedCats = CATEGORY_KEYS.slice();
+      state.bannedCats = [];
       state.deck = [];
       state.deckKey = "";
       storage.set(LS.lastSecret, "");
@@ -1651,8 +1809,9 @@ function runSelfTests(){
       state.pool = prevPool;
       state.deck = prevDeck;
       state.deckKey = prevKey;
-      state.difficulty = prevDiff;
+      state.selectedDiffs = prevDiffs;
       state.selectedCats = prevCats;
+      state.bannedCats = prevBanned;
       storage.set(LS.lastSecret, prevLast);
     }
 
@@ -1662,25 +1821,35 @@ function runSelfTests(){
         return (_min, _max) => seq[Math.min(i++, seq.length - 1)];
       };
 
+      // Chance triggers => at least two impostors.
       const a = pickImpostorPlayers(5, { allowTwo: true, rngInt: makeSeqRng([1, 2, 2]) });
-      console.assert(a.length === 2, "Should pick 2 impostors when chance triggers");
-      console.assert(a[0] !== a[1], "Two impostors must be distinct");
+      console.assert(a.length >= 2, "Should pick multiple impostors when chance triggers");
+      console.assert(new Set(a).size === a.length, "Impostors must be distinct");
       console.assert(a.every(n => n >= 1 && n <= 5), "Impostors must be within player range");
+      console.assert(a.length <= 4, "Must leave at least one detective");
 
+      // Chance does not trigger => single impostor.
       const b = pickImpostorPlayers(5, { allowTwo: true, rngInt: makeSeqRng([100, 4]) });
       console.assert(b.length === 1, "Should pick 1 impostor when chance does not trigger");
 
+      // Toggle off => always single impostor.
       const d = pickImpostorPlayers(5, { allowTwo: false, rngInt: makeSeqRng([1, 2, 2]) });
       console.assert(d.length === 1, "When toggle is off, should always pick 1 impostor");
 
-      const c = pickImpostorPlayers(3, { allowTwo: true, rngInt: makeSeqRng([1, 1]) });
-      console.assert(c.length === 1, "For 3 players, should keep 1 impostor");
+      // For 3 players, multiple impostors means 2 max (must leave a detective).
+      const c = pickImpostorPlayers(3, { allowTwo: true, rngInt: makeSeqRng([1, 1, 2, 3]) });
+      console.assert(c.length === 2, "For 3 players, multiple impostors should be 2 (max)");
+
+      // For 4+ players, allow a 3-impostor upgrade when the 50:50 roll hits.
+      const e = pickImpostorPlayers(6, { allowTwo: true, rngInt: makeSeqRng([1, 1, 1, 2, 3]) });
+      console.assert(e.length === 3, "When upgrade hits, should pick >2 impostors (3)");
     }
 
   } finally {
     state.lang = snap.lang;
-    state.difficulty = snap.difficulty;
+    state.selectedDiffs = snap.selectedDiffs.slice();
     state.selectedCats = snap.selectedCats.slice();
+    state.bannedCats = snap.bannedCats.slice();
     state.pool = snap.pool;
     state.deck = snap.deck.slice();
     state.deckKey = snap.deckKey;
@@ -1688,11 +1857,13 @@ function runSelfTests(){
     state.decoy = snap.decoy;
     state.dealing = snap.dealing;
 
-    console.assert(state.difficulty === snap.difficulty, "Self-tests must not change difficulty");
-    console.assert(Array.isArray(state.selectedCats) && state.selectedCats.join(",") === snap.selectedCats.join(","), "Self-tests must not change categories");
+    console.assert(Array.isArray(state.selectedDiffs) && state.selectedDiffs.join(",") === snap.selectedDiffs.join(","), "Self-tests must not change difficulty selection");
+    console.assert(Array.isArray(state.selectedCats) && state.selectedCats.join(",") === snap.selectedCats.join(","), "Self-tests must not change included categories");
+    console.assert(Array.isArray(state.bannedCats) && state.bannedCats.join(",") === snap.bannedCats.join(","), "Self-tests must not change banned categories");
 
     const btns = el.difficultySeg?.querySelectorAll(".segbtn") || [];
-    btns.forEach(b => b.classList.toggle("active", b.dataset.diff === state.difficulty));
+    const ds = new Set(state.selectedDiffs);
+    btns.forEach(b => b.classList.toggle("active", ds.has(String(b.dataset.diff || ""))));
     renderCategoryChips();
     updateToggleStateLabels();
   }
@@ -1753,19 +1924,80 @@ function init(){
   updateToggleStateLabels();
 
   // Restore difficulty
-  const savedDiff = storage.get(LS.difficulty, DEFAULT_SETTINGS.difficulty);
-  state.difficulty = DIFF_KEYS.includes(savedDiff) ? savedDiff : DEFAULT_SETTINGS.difficulty;
-  const btns = el.difficultySeg?.querySelectorAll(".segbtn") || [];
-  btns.forEach(b => b.classList.toggle("active", b.dataset.diff === state.difficulty));
+  const rawDiff = storage.get(LS.difficulty, null);
+  let savedDiffs = [];
+  if(rawDiff === null){
+    savedDiffs = DEFAULT_SETTINGS.difficulty.slice();
+  }else{
+    const s = String(rawDiff || "").trim();
+    if(s === "all" || s === ""){
+      savedDiffs = DIFF_KEYS.slice();
+    }else if(s.includes(",")){
+      savedDiffs = s.split(",").map(x => x.trim()).filter(Boolean);
+    }else{
+      savedDiffs = [s];
+    }
+  }
+  // Normalizes + enforces at least one.
+  setSelectedDiffs(savedDiffs.length ? savedDiffs : DIFF_KEYS.slice());
 
   // Restore categories
-  const savedCats = (storage.get(LS.categories, "") || "").split(",").map(s => s.trim()).filter(Boolean);
-  setSelectedCats(savedCats);
+  // Default: All categories selected.
+  const v2 = storage.getBool(LS.categoriesV2, false);
+  const rawCats = storage.get(LS.categories, null);
+  const rawBannedCats = storage.get(LS.bannedCategories, "");
+
+  let savedCats = [];
+  if(rawCats === null){
+    // Missing key => default (all selected)
+    savedCats = CATEGORY_KEYS.slice();
+  }else{
+    const parsed = String(rawCats || "").split(",").map(s => s.trim()).filter(Boolean);
+    // Legacy: empty meant "all".
+    savedCats = (!v2 && parsed.length === 0) ? CATEGORY_KEYS.slice() : parsed;
+  }
+
+  const savedBannedCats = String(rawBannedCats || "").split(",").map(s => s.trim()).filter(Boolean);
+  setCategoryFilters({ include: savedCats, ban: savedBannedCats });
+
+  // Ensure start button reflects current selections.
+  updateStartButtonState();
+
+  // Category chip clicks (delegated)
+  if(el.categoryChips){
+    $(el.categoryChips).on("click", "button.chip", function(){
+      const key = this.dataset.cat;
+      if(key === "__all__"){
+        ensureArrays();
+        const isAllSelected = (state.bannedCats.length === 0 && state.selectedCats.length === CATEGORY_KEYS.length);
+        // Toggle between selecting everything and deselecting everything.
+        if(isAllSelected) setCategoryFilters({ include: [], ban: [] });
+        else setCategoryFilters({ include: CATEGORY_KEYS.slice(), ban: [] });
+        return;
+      }
+
+      ensureArrays();
+      const nextInclude = new Set(state.selectedCats);
+      const nextBan = new Set(state.bannedCats);
+
+      // Cycle: selected -> banned -> deselected -> selected
+      if(nextInclude.has(key)){
+        nextInclude.delete(key);
+        nextBan.add(key);
+      }else if(nextBan.has(key)){
+        nextBan.delete(key);
+      }else{
+        nextInclude.add(key);
+      }
+
+      setCategoryFilters({ include: Array.from(nextInclude), ban: Array.from(nextBan) });
+    });
+  }
 
   const resetSettingsToDefault = () => {
     usePresetCount(DEFAULT_SETTINGS.players);
-    setDifficulty(DEFAULT_SETTINGS.difficulty);
-    setSelectedCats(DEFAULT_SETTINGS.categories);
+    setSelectedDiffs(DEFAULT_SETTINGS.difficulty.slice());
+    setCategoryFilters({ include: DEFAULT_SETTINGS.categories, ban: DEFAULT_SETTINGS.bannedCategories });
 
     if(el.detectiveHintToggle){
       el.detectiveHintToggle.checked = DEFAULT_SETTINGS.detectiveHint;
@@ -1794,39 +2026,37 @@ function init(){
     updateToggleStateLabels();
   };
 
-  el.resetSettingsBtn?.addEventListener("click", resetSettingsToDefault);
+  if(el.resetSettingsBtn) $(el.resetSettingsBtn).on("click", resetSettingsToDefault);
 
   // Persist on change
-  el.impostorHintToggle?.addEventListener("change", () => {
+  if(el.impostorHintToggle) $(el.impostorHintToggle).on("change", () => {
     storage.setBool(LS.hint, !!el.impostorHintToggle.checked);
     updateToggleStateLabels();
   });
-  el.hiddenImpostorToggle?.addEventListener("change", () => {
+  if(el.hiddenImpostorToggle) $(el.hiddenImpostorToggle).on("change", () => {
     storage.setBool(LS.hidden, !!el.hiddenImpostorToggle.checked);
     updateToggleStateLabels();
   });
-  el.twoImpostorsToggle?.addEventListener("change", () => {
+  if(el.twoImpostorsToggle) $(el.twoImpostorsToggle).on("change", () => {
     storage.setBool(LS.twoImpostors, !!el.twoImpostorsToggle.checked);
     updateToggleStateLabels();
   });
-  el.detectiveHintToggle?.addEventListener("change", () => {
+  if(el.detectiveHintToggle) $(el.detectiveHintToggle).on("change", () => {
     storage.setBool(LS.detectiveHint, !!el.detectiveHintToggle.checked);
     updateToggleStateLabels();
   });
-  el.impostorKnowsToggle?.addEventListener("change", () => {
+  if(el.impostorKnowsToggle) $(el.impostorKnowsToggle).on("change", () => {
     storage.setBool(LS.impostorKnows, !!el.impostorKnowsToggle.checked);
     updateToggleStateLabels();
   });
-  el.showImpostorCountToggle?.addEventListener("change", () => {
+  if(el.showImpostorCountToggle) $(el.showImpostorCountToggle).on("change", () => {
     storage.setBool(LS.showImpostorCount, !!el.showImpostorCountToggle.checked);
     updateToggleStateLabels();
   });
 
   // Difficulty clicks
-  el.difficultySeg?.addEventListener("click", (e) => {
-    const btn = e.target.closest("button.segbtn");
-    if(!btn) return;
-    setDifficulty(btn.dataset.diff);
+  if(el.difficultySeg) $(el.difficultySeg).on("click", "button.segbtn", function(){
+    setDifficulty(this.dataset.diff);
   });
 
   // Player count restore
@@ -1839,31 +2069,29 @@ function init(){
   }
 
   // Quick buttons
-  el.playerQuick?.addEventListener("click", (e) => {
-    const btn = e.target.closest("button.quickbtn");
-    if(!btn) return;
-    const v = btn.dataset.count;
+  if(el.playerQuick) $(el.playerQuick).on("click", "button.quickbtn", function(){
+    const v = this.dataset.count;
     if(v === "custom") useCustomCount();
     else usePresetCount(clampPlayers(v));
   });
 
   // Custom input changes -> keep storage updated
-  el.playersInput?.addEventListener("input", () => {
+  if(el.playersInput) $(el.playersInput).on("input", () => {
     if(el.playersInput.classList.contains("hidden")) return;
     storage.set(LS.players, clampPlayers(el.playersInput.value));
   });
 
   // Enter key starts
-  el.playersInput?.addEventListener("keydown", (e) => {
+  if(el.playersInput) $(el.playersInput).on("keydown", (e) => {
     if(e.key === "Enter") startGame();
   });
 
   // Language buttons
-  el.langEn?.addEventListener("click", () => setLanguage("en"));
-  el.langFi?.addEventListener("click", () => setLanguage("fi"));
+  if(el.langEn) $(el.langEn).on("click", () => setLanguage("en"));
+  if(el.langFi) $(el.langFi).on("click", () => setLanguage("fi"));
 
   // Main actions
-  el.startBtn?.addEventListener("click", startGame);
+  if(el.startBtn) $(el.startBtn).on("click", startGame);
 
   // Reveal button with hold-to-reveal timer (1.0 second, tenths)
   if(el.revealBtn){
@@ -1875,7 +2103,7 @@ function init(){
     el.revealBtn.addEventListener("touchcancel", cancelHoldCountdown);
   }
 
-  el.closeCardBtn?.addEventListener("click", () => { hideCard(); nextPlayer(); });
+  if(el.closeCardBtn) $(el.closeCardBtn).on("click", () => { hideCard(); nextPlayer(); });
 
   // Exit game (hold to exit, release to cancel)
   if(el.exitGameBtn){
@@ -1886,10 +2114,10 @@ function init(){
     el.exitGameBtn.addEventListener("touchend", cancelExitHold);
     el.exitGameBtn.addEventListener("touchcancel", cancelExitHold);
   }
-  el.newGameBtn?.addEventListener("click", newGame);
-  el.revealResultsBtn?.addEventListener("click", toggleResults);
+  if(el.newGameBtn) $(el.newGameBtn).on("click", newGame);
+  if(el.revealResultsBtn) $(el.revealResultsBtn).on("click", toggleResults);
 
-  document.addEventListener("visibilitychange", () => {
+  $(document).on("visibilitychange", () => {
     if(state.dealing && document.visibilityState === "visible") requestWakeLock();
   });
 
@@ -1897,18 +2125,18 @@ function init(){
   if(el.repoBtn){
     el.repoBtn.setAttribute("aria-label", t("repo"));
     el.repoBtn.title = t("repo");
-    el.repoBtn.addEventListener("click", openRepo);
+    $(el.repoBtn).on("click", openRepo);
   }
 
   // Rules button + modal
   if(el.rulesBtn){
     el.rulesBtn.setAttribute("aria-label", t("rulesBtn"));
     el.rulesBtn.title = t("rulesBtn");
-    el.rulesBtn.addEventListener("click", openRules);
+    $(el.rulesBtn).on("click", openRules);
   }
-  el.rulesCloseBtn?.addEventListener("click", closeRules);
-  el.rulesBackdrop?.addEventListener("click", closeRules);
-  document.addEventListener("keydown", (e) => {
+  if(el.rulesCloseBtn) $(el.rulesCloseBtn).on("click", closeRules);
+  if(el.rulesBackdrop) $(el.rulesBackdrop).on("click", closeRules);
+  $(document).on("keydown", (e) => {
     if(e.key === "Escape" && el.rulesModal && !el.rulesModal.classList.contains("hidden")) closeRules();
   });
 
@@ -1918,7 +2146,7 @@ function init(){
     el.selfTestBtn.classList.toggle("active", enabled);
     el.selfTestBtn.setAttribute("aria-label", t("selfTest"));
     el.selfTestBtn.title = t("selfTest");
-    el.selfTestBtn.addEventListener("click", () => {
+    $(el.selfTestBtn).on("click", () => {
       const now = !storage.getBool(LS.selftest, false);
       setSelfTestEnabled(now, { runNow: now });
     });
@@ -1940,14 +2168,60 @@ function init(){
 
   // Register service worker for offline-capable PWA (best effort).
   if("serviceWorker" in navigator){
-    window.addEventListener("load", () => {
-      navigator.serviceWorker.register("./sw.js").catch(() => {});
+    $(window).on("load", () => {
+      const hadController = !!navigator.serviceWorker.controller;
+      let reloading = false;
+
+      navigator.serviceWorker.addEventListener("controllerchange", () => {
+        // Avoid a first-install reload loop (when there was no controller yet).
+        if(!hadController) return;
+        if(reloading) return;
+        reloading = true;
+        window.location.reload();
+      });
+
+      navigator.serviceWorker.register("./sw.js").then((reg) => {
+        // If an update is already waiting, activate it immediately.
+        if(reg.waiting){
+          reg.waiting.postMessage({ type: "SKIP_WAITING" });
+        }
+
+        reg.addEventListener("updatefound", () => {
+          const installing = reg.installing;
+          if(!installing) return;
+
+          installing.addEventListener("statechange", () => {
+            // When a new SW is installed while we already have a controller,
+            // trigger immediate activation.
+            if(installing.state === "installed" && navigator.serviceWorker.controller){
+              // Some browsers expose `reg.waiting`, others require messaging `installing`.
+              if(reg.waiting) reg.waiting.postMessage({ type: "SKIP_WAITING" });
+              installing.postMessage({ type: "SKIP_WAITING" });
+            }
+          });
+        });
+
+        // Best-effort: ask the browser to check for updates.
+        reg.update().catch(() => {});
+      }).catch(() => {});
     });
   }
 }
 
 async function bootstrap(){
   cacheDom();
+  // Apply versioned icon URLs (single source: version.js).
+  try{
+    const v = (globalThis.SANAHUIJARI_ICON_VERSION || "v3.0");
+    document.querySelectorAll("img[data-icon-src]").forEach((img) => {
+      const base = img.getAttribute("data-icon-src");
+      if(!base) return;
+      img.src = `icons/${base}.${v}.png`;
+    });
+  }catch{
+    // Best-effort only.
+  }
+
   // Start background snowfall ASAP.
   initSnowfall();
   initBootProgress();
@@ -1961,3 +2235,5 @@ async function bootstrap(){
 
 // Script is loaded at end of <body>; DOM is ready enough for caching.
 bootstrap();
+
+})(window.jQuery);

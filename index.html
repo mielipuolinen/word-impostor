@@ -16,12 +16,14 @@
   <meta name="theme-color" content="#0e101c" media="(prefers-color-scheme: light)" />
 
   <!-- PWA / Installability -->
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16.png" />
-  <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png" />
-  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
-  <link rel="icon" type="image/png" sizes="512x512" href="icons/icon-512.png" />
-  <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png" />
+  <script src="version.js"></script>
+
+  <link rel="manifest" id="manifestLink" href="manifest.v3.0.json" />
+  <link rel="icon" type="image/png" sizes="16x16" data-icon="favicon-16" href="data:," />
+  <link rel="icon" type="image/png" sizes="32x32" data-icon="favicon-32" href="data:," />
+  <link rel="icon" type="image/png" sizes="192x192" data-icon="icon-192" href="data:," />
+  <link rel="icon" type="image/png" sizes="512x512" data-icon="icon-512" href="data:," />
+  <link rel="apple-touch-icon" sizes="180x180" data-icon="apple-touch-icon" href="data:," />
 
   <!-- iOS / Safari (best-effort) -->
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,7 +40,7 @@
   <meta property="og:title" content="Sanahuijari" />
   <meta property="og:description" content="Sanahuijari yhdellä puhelimella tai tabletilla — porukkapeli livenä." />
   <meta property="og:url" content="https://sanahuijari.fi/" />
-  <meta property="og:image" content="https://sanahuijari.fi/icons/icon-512.png" />
+  <meta property="og:image" id="ogImage" content="https://sanahuijari.fi/icons/icon-512.v3.0.png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
 
@@ -46,23 +48,52 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Sanahuijari" />
   <meta name="twitter:description" content="Sanahuijari yhdellä puhelimella tai tabletilla — porukkapeli livenä." />
-  <meta name="twitter:image" content="https://sanahuijari.fi/icons/icon-512.png" />
+  <meta name="twitter:image" id="twitterImage" content="https://sanahuijari.fi/icons/icon-512.v3.0.png" />
+
+  <script>
+    (function(){
+      const v = (globalThis.SANAHUIJARI_ICON_VERSION || "v3.0");
+
+      // Update icon links in <head> from a single version constant.
+      const setIconHref = (sel, base) => {
+        const el = document.querySelector(sel);
+        if(!el) return;
+        el.setAttribute("href", `icons/${base}.${v}.png`);
+      };
+      document.querySelectorAll('link[data-icon]').forEach((el) => {
+        const base = el.getAttribute('data-icon');
+        if(!base) return;
+        el.setAttribute('href', `icons/${base}.${v}.png`);
+      });
+
+      // Keep social previews aligned.
+      const og = document.getElementById("ogImage");
+      if(og) og.setAttribute("content", `https://sanahuijari.fi/icons/icon-512.${v}.png`);
+      const tw = document.getElementById("twitterImage");
+      if(tw) tw.setAttribute("content", `https://sanahuijari.fi/icons/icon-512.${v}.png`);
+
+      // Manifest filename is versioned as well.
+      const m = document.getElementById("manifestLink");
+      if(m) m.setAttribute("href", `manifest.${v}.json`);
+    })();
+  </script>
 
   <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body class="booting force-motion">
   <canvas id="snowCanvas" class="snow-canvas" aria-hidden="true"></canvas>
-  <img src="icons/logo.png" alt="" class="bg-logo" aria-hidden="true">
+  <img src="data:," data-icon-src="logo" alt="" class="bg-logo" aria-hidden="true">
 
   <div id="bootSplash" class="boot-splash" aria-hidden="true">
-    <img src="icons/logo.png" alt="" class="boot-logo" aria-hidden="true" decoding="async" fetchpriority="high">
+    <img src="data:," data-icon-src="logo" alt="" class="boot-logo" aria-hidden="true" decoding="async" fetchpriority="high">
     <div class="boot-progress" aria-hidden="true">
       <svg class="boot-ring" viewBox="0 0 64 64" focusable="false" aria-hidden="true">
         <circle class="boot-ring-track" cx="32" cy="32" r="28"></circle>
         <circle class="boot-ring-fill" id="bootRingFill" cx="32" cy="32" r="28"></circle>
       </svg>
       <div class="boot-percent" id="bootPercent">0%</div>
+      <div class="boot-version" id="bootVersion"></div>
     </div>
   </div>
 
@@ -100,7 +131,6 @@
             <div class="col">
               <label id="difficultyLabel">i18n:difficulty</label>
               <div class="seg" id="difficultySeg" role="group" aria-label="i18n:difficulty">
-                <button class="segbtn" type="button" data-diff="all" id="diffAll">i18n:all</button>
                 <button class="segbtn" type="button" data-diff="easy" id="diffEasy">i18n:diff_easy</button>
                 <button class="segbtn" type="button" data-diff="medium" id="diffMedium">i18n:diff_medium</button>
                 <button class="segbtn" type="button" data-diff="hard" id="diffHard">i18n:diff_hard</button>
@@ -261,6 +291,7 @@
     </div>
   </div>
 
+  <script src="vendor/jquery-3.7.1.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
