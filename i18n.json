@@ -1,0 +1,202 @@
+{
+  "en": {
+    "title": "Sanahuijari",
+    "tagline": "Bluff your way out · Group game on one phone",
+
+    "players": "Number of players",
+    "custom": "Other",
+    "difficulty": "Difficulty",
+    "categories": "Word categories",
+    "all": "All",
+    "diff_easy": "Easy",
+    "diff_medium": "Medium",
+    "diff_hard": "Hard",
+
+    "impostorHint": "Impostor: Show secret word category",
+    "detectiveHint": "Detective: Show secret word category",
+    "impostorKnows": "Impostor: Knows their role",
+    "showImpostorCount": "Impostor: Show impostor count",
+    "toggle_on": "On",
+    "toggle_off": "Off",
+    "hiddenImpostor": "Impostor: Gets a wrong secret word",
+    "twoImpostors": "Multiple impostors (1 in 5 chance)",
+
+    "start": "Start Sanahuijari game",
+    "holdToReveal": "Hold down to view the card",
+    "revealing": "Revealing in {0} s…",
+
+    "exitGameBtn": "Exit game",
+    "exitingIn": "Exiting in {0} s…",
+
+    "reveal": "Show card",
+    "close": "Hide & Pass to next",
+
+    "doneTitle": "Start playing!",
+    "doneBody": "All players have seen their cards.",
+    "newGame": "New game",
+
+    "revealResults": "Show results",
+    "hideResults": "Hide results",
+
+    "secretWordWas": "The secret word was:",
+    "impostorWas": "Impostor was:",
+    "impostorsWere": "Impostors were:",
+    "detectivesWere": "Detectives were:",
+    "detectiveWas": "Detective was:",
+
+    "impostorCountHint": "{0} impostor(s) in this game",
+
+    "youAreImpostor": "You are the impostor",
+    "youAreImpostorHidden": "???",
+
+    "card_word": "SECRET WORD",
+    "category": "SECRET WORD CATEGORY",
+    "categoriesLabel": "SECRET WORD CATEGORIES",
+
+    "alertNoWords": "No secret words found with these choices.",
+    "player": "Player {0}",
+
+    "cat_space": "Space",
+    "cat_food": "Food",
+    "cat_animal": "Animal",
+    "cat_person": "Person",
+    "cat_vehicle": "Vehicle",
+    "cat_place": "Place",
+    "cat_nature": "Nature",
+    "cat_activity": "Activity",
+    "cat_thing": "Thing",
+    "cat_suomi": "Finland",
+    "cat_movies": "Movies",
+    "cat_music": "Music",
+    "cat_kinojuha": "Kinojuha",
+    "cat_intti": "Military service",
+
+    "footerTop": "sanahuijari.fi · v2.5",
+    "footerBottom": "Made by AI with ❤️ — 0% human code.",
+    "footer": "Made by AI with ❤️ — 0% human code. · sanahuijari.fi · v2.5",
+
+    "meta_desc": "Sanahuijari on one phone/tablet — play live.",
+    "meta_short": "Sanahuijari",
+
+    "language": "Language",
+    "links": "Links",
+    "lang_en": "English",
+    "lang_fi": "Finnish",
+
+    "selfTest": "Self-test",
+    "testsPassed": "Self-test: all OK ✅",
+    "testsFailed": "Self-test: {0} issue(s) — see console ⚠️",
+    "testsOn": "Self-test ON",
+    "testsOff": "Self-test OFF",
+    "repo": "GitHub repository",
+
+    "resetSettingsBtn": "Restore defaults",
+
+    "rulesBtn": "Rules",
+    "rulesTitle": "Game rules",
+    "rulesClose": "Close",
+    "rulesLoading": "Loading rules…",
+    "rulesError": "Could not load rules.",
+    "rulesFallbackHtml": "\n          <h3>Goal</h3>\n          <p><strong>Detectives</strong> know the secret word and try to find the impostor(s) without giving the word away.</p>\n          <p><strong>Impostor(s)</strong> don’t know the word: bluff, stay hidden, and figure it out from the clues.</p>\n          <h3>Cards</h3>\n          <ul>\n            <li>Pass the phone around: each player views their card in turn without showing it to others.</li>\n            <li>Detectives see the secret word (and optionally the category).</li>\n            <li>Impostors may see hints depending on settings (e.g. category, a decoy word, impostor count).</li>\n          </ul>\n          <h3>Clue rounds</h3>\n          <ol>\n            <li>After everyone has seen their card, put the phone aside.</li>\n            <li>Play <strong>2 rounds</strong>.</li>\n            <li>Each round, every player gives <strong>one clue</strong> (2 clues per player total).</li>\n            <li>After giving a clue, don’t explain or defend it.</li>\n            <li>The starting player changes each game (e.g. clockwise rotation).</li>\n          </ol>\n          <h3>Vote & win</h3>\n          <ul>\n            <li>Discuss and vote who the impostor(s) are.</li>\n            <li>If the impostor(s) are <strong>not</strong> caught, impostor(s) win.</li>\n            <li>If the impostor(s) <strong>are</strong> caught, they may guess the secret word <strong>once</strong>: correct = impostor(s) win, wrong = detectives win.</li>\n          </ul>\n          <div class=\"note\">Tip: detectives — give a clue that fits the word but doesn’t reveal it. Impostor — listen, stay consistent, and avoid guesses that are too specific.</div>\n        "
+  },
+  "fi": {
+    "title": "Sanahuijari",
+    "tagline": "Bluffaa tiesi ulos · Porukkapeli yhdellä puhelimella",
+
+    "players": "Pelaajien määrä",
+    "custom": "Muu",
+    "difficulty": "Vaikeustaso",
+    "categories": "Sanaluokat",
+    "all": "Kaikki",
+    "diff_easy": "Helppo",
+    "diff_medium": "Keskitaso",
+    "diff_hard": "Vaikea",
+
+    "impostorHint": "Sanahuijari: Näytä salasanakategoria",
+    "detectiveHint": "Etsivä: Näytä salasanakategoria",
+    "impostorKnows": "Sanahuijari: Tietää olevansa Sanahuijari",
+    "showImpostorCount": "Sanahuijari: Näytä Sanahuijarien määrä",
+    "toggle_on": "Päällä",
+    "toggle_off": "Pois",
+    "hiddenImpostor": "Sanahuijari: Saa väärän salasanan",
+    "twoImpostors": "Useampi Sanahuijari (1:5 todennäköisyys)",
+
+    "start": "Aloita Sanahuijari-peli",
+    "holdToReveal": "Pidä pohjassa nähdäksesi kortin",
+
+    "language": "Kieli",
+    "links": "Linkit",
+    "lang_en": "Englanti",
+    "lang_fi": "Suomi",
+    "revealing": "Paljastuu {0} s…",
+
+    "exitGameBtn": "Poistu pelistä",
+    "exitingIn": "Poistutaan {0} s…",
+
+    "reveal": "Näytä kortti",
+    "close": "Piilota & Anna seuraavalle",
+
+    "doneTitle": "Aloittakaa peli!",
+    "doneBody": "Kaikki ovat nähneet korttinsa.",
+    "newGame": "Uusi peli",
+
+    "revealResults": "Näytä tulokset",
+    "hideResults": "Piilota tulokset",
+
+    "secretWordWas": "Salasana oli:",
+    "impostorWas": "Sanahuijari oli:",
+    "impostorsWere": "Sanahuijarit olivat:",
+    "detectivesWere": "Etsivät olivat:",
+    "detectiveWas": "Etsivä oli:",
+
+    "impostorCountHint": "{0} Sanahuijaria tässä pelissä",
+
+    "youAreImpostor": "Olet Sanahuijari",
+    "youAreImpostorHidden": "???",
+
+    "card_word": "SALASANA",
+    "category": "SALASANAKATEGORIA",
+    "categoriesLabel": "SALASANAKATEGORIAT",
+
+    "alertNoWords": "Yhtään salasanaa ei löydy valinnoilla.",
+    "player": "Pelaaja {0}",
+
+    "cat_space": "Avaruus",
+    "cat_food": "Ruoka",
+    "cat_animal": "Eläin",
+    "cat_person": "Henkilö",
+    "cat_vehicle": "Ajoneuvo",
+    "cat_place": "Paikka",
+    "cat_nature": "Luonto",
+    "cat_activity": "Toiminta",
+    "cat_thing": "Asia",
+    "cat_suomi": "Suomi",
+    "cat_movies": "Elokuvat",
+    "cat_music": "Musiikki",
+    "cat_kinojuha": "Kinojuha",
+    "cat_intti": "Intti",
+
+    "footerTop": "sanahuijari.fi · v2.5",
+    "footerBottom": "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia.",
+    "footer": "Tekoälyn tekemä ❤️ — 0 % ihmiskoodia. · sanahuijari.fi · v2.5",
+
+    "meta_desc": "Sanahuijari yhdellä puhelimella/tabletilla — pelaa livenä.",
+    "meta_short": "Sanahuijari",
+
+    "selfTest": "Itsetesti",
+    "testsPassed": "Itsetesti: kaikki ok ✅",
+    "testsFailed": "Itsetesti: {0} ongelmaa — katso konsoli ⚠️",
+    "testsOn": "Itsetesti PÄÄLLÄ",
+    "testsOff": "Itsetesti POIS",
+    "repo": "GitHub-repositorio",
+
+    "resetSettingsBtn": "Palauta oletukset",
+
+    "rulesBtn": "Säännöt",
+    "rulesTitle": "Pelisäännöt",
+    "rulesClose": "Sulje",
+    "rulesLoading": "Ladataan sääntöjä…",
+    "rulesError": "Sääntöjä ei saatu ladattua.",
+    "rulesFallbackHtml": "\n          <h3>Tavoite</h3>\n          <p><strong>Etsivät</strong> tietävät Salasanan ja yrittävät löytää Sanahuijari(t) paljastamatta Salasanaa.</p>\n          <p><strong>Sanahuijari(t)</strong> ei tiedä Salasanaa: bluffaa, pysy piilossa ja päättele Salasana vihjeistä.</p>\n          <h3>Kortit</h3>\n          <ul>\n            <li>Puhelin kiertää: jokainen katsoo korttinsa vuorollaan paljastamatta sitä muille.</li>\n            <li>Etsivä näkee Salasanan (ja asetuksista riippuen myös salasanakategorian).</li>\n            <li>Sanahuijari voi nähdä asetuksista riippuen vihjeitä (esim. kategoria, väärä salasana, huijarien määrä).</li>\n          </ul>\n          <h3>Vihjekierrokset</h3>\n          <ol>\n            <li>Kun kaikki ovat nähneet korttinsa, laite sivuun.</li>\n            <li>Pelataan <strong>2 kierrosta</strong>.</li>\n            <li>Jokaisella kierroksella jokainen antaa <strong>yhden vihjeen</strong> (yhteensä 2 vihjettä per pelaaja).</li>\n            <li>Vihjeen jälkeen ei saa selitellä tai puolustella omaa vihjettä.</li>\n            <li>Vuoron aloittaja vaihtuu pelistä toiseen (esim. myötäpäivään kiertäen).</li>\n          </ol>\n          <h3>Äänestys ja voitto</h3>\n          <ul>\n            <li>Keskustelkaa ja äänestäkää, ketkä ovat Sanahuijareita.</li>\n            <li>Jos Sanahuijari(t) ei jää kiinni äänestyksessä, Sanahuijari(t) voittaa.</li>\n            <li>Jos Sanahuijari(t) jää kiinni, Sanahuijari(t) saa arvata Salasanan <strong>yhden kerran</strong>: oikein = Sanahuijari(t) voittaa, väärin = Etsivät voittavat.</li>\n          </ul>\n          <div class=\"note\">Vinkki: Etsivät – antakaa vihje, joka sopii sanaan muttei paljasta sitä. Sanahuijari – kuuntele, pysy johdonmukaisena ja vältä liian tarkkoja arvauksia.</div>\n        "
+  }
+}

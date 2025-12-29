@@ -66,21 +66,35 @@ Kortti: Pelaajille jaettavat kortit, josta etsivät näkevät kortista salasanan
 
 ## Pelisäännöt
 
-Etsivien tehtävänä on paljastaa Sanahuijarit. Sanahuijarien tehtävä on bluffata, olla paljastumatta, sekä yrittää päätellä Salasana.
+### Tavoite
+- **Etsivät** tietävät Salasanan ja yrittävät löytää Sanahuijari(t) paljastamatta Salasanaa.
+- **Sanahuijari(t)** ei tiedä Salasanaa: bluffaa, pysy piilossa ja yritä päätellä Salasana vihjeistä.
 
-Jokaiselle pelaajalle jaetaan kortti. Etsivä saa kortin, jossa on mainittu Salasana ja mahdollisesti salasanakategoria. Sanahuijari saa kortin, jossa on peliasetuksista riippuen mainittu jotain seuraavista asioista;
-- "Olet Sanahuijari" -teksti
-- Salasanavihjeenä salasanakategoria
-- Salasanavihjeenä väärä salasana samasta salasanakategoriasta
-- Pelisä olevien Sanahuijarien lukumäärä
+### Kortit
+- Jokainen katsoo korttinsa **vuorollaan** paljastamatta sitä muille.
+- **Etsivä** näkee kortista Salasanan (ja asetuksista riippuen myös salasanakategorian).
+- **Sanahuijari** voi nähdä asetuksista riippuen esimerkiksi:
+- "Olet Sanahuijari" -tekstin
+- salasanakategorian vihjeenä
+- väärän salasanan samasta kategoriasta
+- Sanahuijarien lukumäärän
 
-Kun kaikki pelaajat ovat nähneet korttinsa, pelataan kaksi kierrosta seuraavasti. Jokainen pelaaja vuorollaan antaa jonkin vihjeen Salasanasta. Vuoron aloittaja vaihtuu joka pelissä. Vuorot ja vuoron aloittajat esimerkiksi kiertävät myötäpäivää.
+### Vihjekierrokset
+1. Kun kaikki ovat nähneet korttinsa, laite sivuun.
+2. Pelataan **2 kierrosta**.
+3. Jokaisella kierroksella jokainen pelaaja antaa **yhden vihjeen** Salasanasta (yhteensä **2 vihjettä per pelaaja**).
+4. Vihjeen jälkeen ei saa selitellä tai puolustella omaa vihjettä.
+5. Vuoron aloittaja vaihtuu pelistä toiseen (esim. myötäpäivään kiertäen).
 
-Kun vihjeet on annettu, kaikki pelaajat voivat keskustella vihjeistä ja sopia, että ketä äänestetään Sanahuijareiksi. Pelaajat eivät saa yrittää perustella antamiaan vihjeitään. Pelaajat voivat puhua muiden pelaajien antamista vihjeistä.
+### Äänestys ja voitto
+- Vihjeiden jälkeen keskustellaan ja äänestetään, ketkä ovat Sanahuijareita.
+- **Jos Sanahuijari(t) ei jää kiinni äänestyksessä → Sanahuijari(t) voittaa.**
+- **Jos Sanahuijari(t) jää kiinni → Sanahuijari(t) saa arvata Salasanan yhden kerran.**
 
-Kun enemmistö on päässyt sopuun äänestämisestä, tulee Sanahuijarien paljastaa itsensä. Sanahuijarit voittavat, mikäli eivät jää kiinni äännestyksessä. Mikäli Sanahuijarit jäävät kiinni, voivat he yrittää arvata Salasanaa yhden kerran. Oikein arvattaessa Sanahuijarit voittavat. Muussa tapauksessa Etsivät voittavat.
+- Oikein → Sanahuijari(t) voittaa.
+- Väärin → Etsivät voittavat.
 
-Pelaajat voivat halutessaan pitää kirjaa Salasanoista, annetuista vihjeistä, Sanahuijareista, sekä voittajista.
+Halutessa voitte pitää kirjaa Salasanoista, vihjeistä, Sanahuijareista ja voittajista.
 
 
 ## Tekniset vaatimukset

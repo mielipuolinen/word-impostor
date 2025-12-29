@@ -1,10 +1,15 @@
 /* Minimal service worker for offline-capable PWA */
 
-const CACHE_NAME = "sanahuijari-v2.0";
+const CACHE_NAME = "sanahuijari-v2.5";
 
 const PRECACHE_URLS = [
   "./",
   "./index.html",
+  "./app.js",
+  "./styles.css",
+  "./i18n.json",
+  "./words.json",
+  "./Sanahuijari.md",
   "./manifest.json",
   "./icons/icon-192.png",
   "./icons/icon-512.png",

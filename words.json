@@ -1,0 +1,4493 @@
+{
+  "words": [
+    {
+      "en": "Airport",
+      "fi": "Lentokenttä",
+      "cats": [
+        "place"
+      ]
+    },
+    {
+      "en": "Astronaut",
+      "fi": "Astronautti",
+      "cats": [
+        "person",
+        "space"
+      ]
+    },
+    {
+      "en": "Backpack",
+      "fi": "Reppu",
+      "cats": [
+        "thing"
+      ]
+    },
+    {
+      "en": "Bakery",
+      "fi": "Leipomo",
+      "cats": [
+        "place"
+      ]
+    },
+    {
+      "en": "Bamboo",
+      "fi": "Bambu",
+      "cats": [
+        "nature"
+      ]
+    },
+    {
+      "en": "Banana",
+      "fi": "Banaani",
+      "cats": [
+        "food",
+        "nature"
+      ]
+    },
+    {
+      "en": "Bicycle",
+      "fi": "Polkupyörä",
+      "cats": [
+        "vehicle"
+      ]
+    },
+    {
+      "en": "Blizzard",
+      "fi": "Lumimyrsky",
+      "cats": [
+        "nature"
+      ]
+    },
+    {
+      "en": "Camera",
+      "fi": "Kamera",
+      "cats": [
+        "thing"
+      ]
+    },
+    {
+      "en": "Castle",
+      "fi": "Linna",
+      "cats": [
+        "place"
+      ]
+    },
+    {
+      "en": "Chocolate",
+      "fi": "Suklaa",
+      "cats": [
+        "food"
+      ]
+    },
+    {
+      "en": "Crocodile",
+      "fi": "Krokotiili",
+      "cats": [
+        "animal"
+      ]
+    },
+    {
+      "en": "Eclipse",
+      "fi": "Pimennys",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Galaxy",
+      "fi": "Galaksi",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Hamburger",
+      "fi": "Hampurilainen",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ice cream",
+      "fi": "Jäätelö",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Library",
+      "fi": "Kirjasto",
+      "cats": [
+        "place"
+      ]
+    },
+    {
+      "en": "Ninja",
+      "fi": "Ninja",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pineapple",
+      "fi": "Ananas",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Planet",
+      "fi": "Planeetta",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Rocket",
+      "fi": "Raketti",
+      "cats": [
+        "space",
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Spaceship",
+      "fi": "Avaruusalus",
+      "cats": [
+        "space",
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Telescope",
+      "fi": "Kaukoputki",
+      "cats": [
+        "thing",
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Helsinki",
+      "fi": "Helsinki",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tampere",
+      "fi": "Tampere",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Turku",
+      "fi": "Turku",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Oulu",
+      "fi": "Oulu",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rovaniemi",
+      "fi": "Rovaniemi",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Lapland",
+      "fi": "Lappi",
+      "cats": [
+        "place",
+        "nature",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Suomenlinna",
+      "fi": "Suomenlinna",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Saimaa",
+      "fi": "Saimaa",
+      "cats": [
+        "place",
+        "nature",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Archipelago",
+      "fi": "Saaristo",
+      "cats": [
+        "nature",
+        "place",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Reindeer",
+      "fi": "Poro",
+      "cats": [
+        "animal",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Whooper swan",
+      "fi": "Laulujoutsen",
+      "cats": [
+        "animal",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Northern lights",
+      "fi": "Revontulet",
+      "cats": [
+        "nature",
+        "space",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Midnight sun",
+      "fi": "Yötön yö",
+      "cats": [
+        "nature",
+        "space",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Karjalanpiirakka",
+      "fi": "Karjalanpiirakka",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Korvapuusti",
+      "fi": "Korvapuusti",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Salmiakki",
+      "fi": "Salmiakki",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Mämmi",
+      "fi": "Mämmi",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Ruisleipä",
+      "fi": "Ruisleipä",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Lohikeitto",
+      "fi": "Lohikeitto",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Poronkäristys",
+      "fi": "Poronkäristys",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Glögi",
+      "fi": "Glögi",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Sima",
+      "fi": "Sima",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Leipäjuusto",
+      "fi": "Leipäjuusto",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Mustikkapiirakka",
+      "fi": "Mustikkapiirakka",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sauna",
+      "fi": "Sauna",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "May Day",
+      "fi": "Vappu",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Midsummer",
+      "fi": "Juhannus",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Independence Day",
+      "fi": "Itsenäisyyspäivä",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Moomin",
+      "fi": "Muumipeikko",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Santa Claus",
+      "fi": "Joulupukki",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kalevala",
+      "fi": "Kalevala",
+      "cats": [
+        "thing",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kimi Räikkönen",
+      "fi": "Kimi Räikkönen",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sanna Marin",
+      "fi": "Sanna Marin",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ismo Leikola",
+      "fi": "Ismo Leikola",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Darude",
+      "fi": "Darude",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Lordi",
+      "fi": "Lordi",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Comet",
+      "fi": "Komeetta",
+      "cats": [
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Nebula",
+      "fi": "Kaassumu",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Black hole",
+      "fi": "Musta aukko",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Supernova",
+      "fi": "Supernova",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Asteroid belt",
+      "fi": "Asteroidivyö",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Space station",
+      "fi": "Avaruusasema",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Satellite",
+      "fi": "Satelliitti",
+      "cats": [
+        "space",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Meteor shower",
+      "fi": "Meteorisade",
+      "cats": [
+        "space",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Gravity",
+      "fi": "Painovoima",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Orbit",
+      "fi": "Kiertorata",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Mars",
+      "fi": "Mars",
+      "cats": [
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Jupiter",
+      "fi": "Jupiter",
+      "cats": [
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Saturn",
+      "fi": "Saturnus",
+      "cats": [
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Moon crater",
+      "fi": "Kuun kraatteri",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Space suit",
+      "fi": "Avaruuspuku",
+      "cats": [
+        "space",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Launch pad",
+      "fi": "Laukaisualusta",
+      "cats": [
+        "space",
+        "place"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Solar flare",
+      "fi": "Auringonpurkaus",
+      "cats": [
+        "space",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Constellation",
+      "fi": "Tähtikuvio",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Milky Way",
+      "fi": "Linnunrata",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Vacuum",
+      "fi": "Tyhjiö",
+      "cats": [
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Light-year",
+      "fi": "Valovuosi",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Exoplanet",
+      "fi": "Eksoplaneetta",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Alien",
+      "fi": "Avaruusolio",
+      "cats": [
+        "space",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Dark matter",
+      "fi": "Pimeä aine",
+      "cats": [
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pasta",
+      "fi": "Pasta",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Pizza",
+      "fi": "Pizza",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Sushi",
+      "fi": "Sushi",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tacos",
+      "fi": "Tacot",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Pancake",
+      "fi": "Pannukakku",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Waffle",
+      "fi": "Vohveli",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cheese",
+      "fi": "Juusto",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tomato",
+      "fi": "Tomaatti",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Avocado",
+      "fi": "Avokado",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Blueberry",
+      "fi": "Mustikka",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Strawberry",
+      "fi": "Mansikka",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Mushroom",
+      "fi": "Sieni",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Garlic",
+      "fi": "Valkosipuli",
+      "cats": [
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Cinnamon",
+      "fi": "Kaneli",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Honey",
+      "fi": "Hunaja",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Yogurt",
+      "fi": "Jogurtti",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Coffee",
+      "fi": "Kahvi",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tea",
+      "fi": "Tee",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Lemon",
+      "fi": "Sitruuna",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Watermelon",
+      "fi": "Vesimeloni",
+      "cats": [
+        "food",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Soup",
+      "fi": "Keitto",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Curry",
+      "fi": "Curry",
+      "cats": [
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Chocolate cake",
+      "fi": "Suklaakakku",
+      "cats": [
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Popcorn",
+      "fi": "Popcorn",
+      "cats": [
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Lion",
+      "fi": "Leijona",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tiger",
+      "fi": "Tiikeri",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Elephant",
+      "fi": "Elefantti",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Giraffe",
+      "fi": "Kirahvi",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Zebra",
+      "fi": "Seepra",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Penguin",
+      "fi": "Pingviini",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Dolphin",
+      "fi": "Delfiini",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Shark",
+      "fi": "Hai",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Octopus",
+      "fi": "Mustekala",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Owl",
+      "fi": "Pöllö",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Fox",
+      "fi": "Kettu",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Bear",
+      "fi": "Karhu",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Wolf",
+      "fi": "Susi",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rabbit",
+      "fi": "Kani",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Squirrel",
+      "fi": "Orava",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Horse",
+      "fi": "Hevonen",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Cow",
+      "fi": "Lehmä",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Sheep",
+      "fi": "Lammas",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Goat",
+      "fi": "Vuohi",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Pig",
+      "fi": "Sika",
+      "cats": [
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Kangaroo",
+      "fi": "Kenguru",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Koala",
+      "fi": "Koala",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Eagle",
+      "fi": "Kotka",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Turtle",
+      "fi": "Kilpikonna",
+      "cats": [
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Doctor",
+      "fi": "Lääkäri",
+      "cats": [
+        "person"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Teacher",
+      "fi": "Opettaja",
+      "cats": [
+        "person"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Firefighter",
+      "fi": "Palomies",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Detective",
+      "fi": "Etsivä",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Chef",
+      "fi": "Kokki",
+      "cats": [
+        "person",
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Astronomer",
+      "fi": "Tähtitieteilijä",
+      "cats": [
+        "person",
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pilot",
+      "fi": "Lentäjä",
+      "cats": [
+        "person",
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Musician",
+      "fi": "Muusikko",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Painter",
+      "fi": "Maalari",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Photographer",
+      "fi": "Valokuvaaja",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Gardener",
+      "fi": "Puutarhuri",
+      "cats": [
+        "person",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Carpenter",
+      "fi": "Puuseppä",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Engineer",
+      "fi": "Insinööri",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Scientist",
+      "fi": "Tiedemies",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Nurse",
+      "fi": "Sairaanhoitaja",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Athlete",
+      "fi": "Urheilija",
+      "cats": [
+        "person",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Singer",
+      "fi": "Laulaja",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Actor",
+      "fi": "Näyttelijä",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Dentist",
+      "fi": "Hammaslääkäri",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Plumber",
+      "fi": "Putkimies",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Programmer",
+      "fi": "Ohjelmoija",
+      "cats": [
+        "person",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Barber",
+      "fi": "Parturi",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Journalist",
+      "fi": "Toimittaja",
+      "cats": [
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Judge",
+      "fi": "Tuomari",
+      "cats": [
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Car",
+      "fi": "Auto",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Truck",
+      "fi": "Rekka",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Bus",
+      "fi": "Bussi",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Train",
+      "fi": "Juna",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Tram",
+      "fi": "Raitiovaunu",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Subway",
+      "fi": "Metro",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Motorcycle",
+      "fi": "Moottoripyörä",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Scooter",
+      "fi": "Skootteri",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ship",
+      "fi": "Laiva",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Boat",
+      "fi": "Vene",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Ferry",
+      "fi": "Lautta",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Helicopter",
+      "fi": "Helikopteri",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Airplane",
+      "fi": "Lentokone",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Jet",
+      "fi": "Suihkukone",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Hot air balloon",
+      "fi": "Kuumailmapallo",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Skateboard",
+      "fi": "Rullalauta",
+      "cats": [
+        "vehicle",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Snowmobile",
+      "fi": "Moottorikelkka",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tractor",
+      "fi": "Traktori",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ambulance",
+      "fi": "Ambulanssi",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Police car",
+      "fi": "Poliisiauto",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Fire truck",
+      "fi": "Paloauto",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sailboat",
+      "fi": "Purjevene",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Canoe",
+      "fi": "Kanootti",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Tank",
+      "fi": "Panssarivaunu",
+      "cats": [
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Hospital",
+      "fi": "Sairaala",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "School",
+      "fi": "Koulu",
+      "cats": [
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Stadium",
+      "fi": "Stadion",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Museum",
+      "fi": "Museo",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Zoo",
+      "fi": "Eläintarha",
+      "cats": [
+        "place",
+        "animal"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Aquarium",
+      "fi": "Akvaario",
+      "cats": [
+        "place",
+        "animal"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Park",
+      "fi": "Puisto",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Beach",
+      "fi": "Ranta",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Mountain",
+      "fi": "Vuori",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Forest",
+      "fi": "Metsä",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Desert",
+      "fi": "Aavikko",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Island",
+      "fi": "Saari",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Bridge",
+      "fi": "Silta",
+      "cats": [
+        "place",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Harbor",
+      "fi": "Satama",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Market",
+      "fi": "Tori",
+      "cats": [
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Restaurant",
+      "fi": "Ravintola",
+      "cats": [
+        "place",
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cinema",
+      "fi": "Elokuvateatteri",
+      "cats": [
+        "place"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Theater",
+      "fi": "Teatteri",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Hotel",
+      "fi": "Hotelli",
+      "cats": [
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Bank",
+      "fi": "Pankki",
+      "cats": [
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Post office",
+      "fi": "Posti",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Police station",
+      "fi": "Poliisilaitos",
+      "cats": [
+        "place"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Farm",
+      "fi": "Maatila",
+      "cats": [
+        "place",
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Temple",
+      "fi": "Temppeli",
+      "cats": [
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "River",
+      "fi": "Joki",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Lake",
+      "fi": "Järvi",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Ocean",
+      "fi": "Valtameri",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Waterfall",
+      "fi": "Vesiputous",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Volcano",
+      "fi": "Tulivuori",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Glacier",
+      "fi": "Jäätikkö",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Canyon",
+      "fi": "Kanjoni",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Meadow",
+      "fi": "Niitty",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cave",
+      "fi": "Luola",
+      "cats": [
+        "nature",
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Coral reef",
+      "fi": "Koralliriutta",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rainbow",
+      "fi": "Sateenkaari",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Thunderstorm",
+      "fi": "Ukkosmyrsky",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Hurricane",
+      "fi": "Hurrikaani",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tornado",
+      "fi": "Tornado",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Earthquake",
+      "fi": "Maanjäristys",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Fog",
+      "fi": "Sumu",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Dew",
+      "fi": "Kaste",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Pine tree",
+      "fi": "Mänty",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Oak",
+      "fi": "Tammi",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Palm tree",
+      "fi": "Palmu",
+      "cats": [
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Sunflower",
+      "fi": "Auringonkukka",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rose",
+      "fi": "Ruusu",
+      "cats": [
+        "nature"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Snowflake",
+      "fi": "Lumihiutale",
+      "cats": [
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pebble",
+      "fi": "Pikkukivi",
+      "cats": [
+        "nature",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Camping",
+      "fi": "Telttailu",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Hiking",
+      "fi": "Vaellus",
+      "cats": [
+        "activity",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Swimming",
+      "fi": "Uinti",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Dancing",
+      "fi": "Tanssi",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Singing",
+      "fi": "Laulaminen",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Painting",
+      "fi": "Maalaaminen",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Reading",
+      "fi": "Lukeminen",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cooking",
+      "fi": "Ruoanlaitto",
+      "cats": [
+        "activity",
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Fishing",
+      "fi": "Kalastus",
+      "cats": [
+        "activity",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Skiing",
+      "fi": "Hiihto",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Snowboarding",
+      "fi": "Lumilautailu",
+      "cats": [
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Surfing",
+      "fi": "Surffaus",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Yoga",
+      "fi": "Jooga",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Meditation",
+      "fi": "Meditaatio",
+      "cats": [
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Chess",
+      "fi": "Shakki",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Board game",
+      "fi": "Lautapeli",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Karaoke",
+      "fi": "Karaoke",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Photography",
+      "fi": "Valokuvaus",
+      "cats": [
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Gardening",
+      "fi": "Puutarhanhoito",
+      "cats": [
+        "activity",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Baking",
+      "fi": "Leivonta",
+      "cats": [
+        "activity",
+        "food"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Running",
+      "fi": "Juoksu",
+      "cats": [
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Cycling",
+      "fi": "Pyöräily",
+      "cats": [
+        "activity",
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Picnic",
+      "fi": "Piknik",
+      "cats": [
+        "activity",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Shopping",
+      "fi": "Ostokset",
+      "cats": [
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Smartphone",
+      "fi": "Älypuhelin",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Laptop",
+      "fi": "Kannettava tietokone",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tablet",
+      "fi": "Tabletti",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Headphones",
+      "fi": "Kuulokkeet",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Microphone",
+      "fi": "Mikrofoni",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Keyboard",
+      "fi": "Näppäimistö",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Mouse",
+      "fi": "Hiiri",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Umbrella",
+      "fi": "Sateenvarjo",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Wallet",
+      "fi": "Lompakko",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Key",
+      "fi": "Avain",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Watch",
+      "fi": "Kello",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Glasses",
+      "fi": "Silmälasit",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Toothbrush",
+      "fi": "Hammasharja",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Candle",
+      "fi": "Kynttilä",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Mirror",
+      "fi": "Peili",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Pillow",
+      "fi": "Tyyny",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Blanket",
+      "fi": "Peitto",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Hammer",
+      "fi": "Vasara",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Screwdriver",
+      "fi": "Ruuvimeisseli",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rope",
+      "fi": "Köysi",
+      "cats": [
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Flashlight",
+      "fi": "Taskulamppu",
+      "cats": [
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Battery",
+      "fi": "Paristo",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Compass",
+      "fi": "Kompassi",
+      "cats": [
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Map",
+      "fi": "Kartta",
+      "cats": [
+        "thing",
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Sisu",
+      "fi": "Sisu",
+      "cats": [
+        "thing",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Kalsarikännit",
+      "fi": "Kalsarikännit",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Fazer Blue",
+      "fi": "Fazerin Sininen",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kalakukko",
+      "fi": "Kalakukko",
+      "cats": [
+        "food",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nokia",
+      "fi": "Nokia",
+      "cats": [
+        "thing",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Iittala",
+      "fi": "Iittala",
+      "cats": [
+        "thing",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Marimekko",
+      "fi": "Marimekko",
+      "cats": [
+        "thing",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Sibelius",
+      "fi": "Sibelius",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Aino Ackté",
+      "fi": "Aino Ackté",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Käärijä",
+      "fi": "Käärijä",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cheek",
+      "fi": "Cheek",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Teemu Selänne",
+      "fi": "Teemu Selänne",
+      "cats": [
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Porvoo",
+      "fi": "Porvoo",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Savonlinna",
+      "fi": "Savonlinna",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Koli National Park",
+      "fi": "Kolin kansallispuisto",
+      "cats": [
+        "place",
+        "nature",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nuuksio",
+      "fi": "Nuuksio",
+      "cats": [
+        "place",
+        "nature",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Linnanmäki",
+      "fi": "Linnanmäki",
+      "cats": [
+        "place",
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ice fishing",
+      "fi": "Pilkkiminen",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cottage",
+      "fi": "Mökki",
+      "cats": [
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Ruisrock",
+      "fi": "Ruisrock",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Provinssi",
+      "fi": "Provinssi",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ski holiday",
+      "fi": "Hiihtoloma",
+      "cats": [
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Reindeer corral",
+      "fi": "Poroaitaus",
+      "cats": [
+        "place",
+        "animal",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Cloudberry",
+      "fi": "Lakka",
+      "cats": [
+        "food",
+        "nature",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Inception",
+      "fi": "Inception",
+      "cats": [
+        "movies"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "The Matrix",
+      "fi": "Matrix",
+      "cats": [
+        "movies",
+        "space"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Titanic",
+      "fi": "Titanic",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Star Wars",
+      "fi": "Tähtien sota",
+      "cats": [
+        "movies",
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "The Lord of the Rings",
+      "fi": "Taru sormusten herrasta",
+      "cats": [
+        "movies"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Harry Potter",
+      "fi": "Harry Potter",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Jurassic Park",
+      "fi": "Jurassic Park",
+      "cats": [
+        "movies",
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Avatar",
+      "fi": "Avatar",
+      "cats": [
+        "movies",
+        "space"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "The Godfather",
+      "fi": "Kummisetä",
+      "cats": [
+        "movies"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Forrest Gump",
+      "fi": "Forrest Gump",
+      "cats": [
+        "movies"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "The Lion King",
+      "fi": "Leijonakuningas",
+      "cats": [
+        "movies",
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Frozen",
+      "fi": "Frozen",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Toy Story",
+      "fi": "Toy Story",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Spider-Man",
+      "fi": "Hämähäkkimies",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Batman",
+      "fi": "Batman",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "The Avengers",
+      "fi": "Avengers",
+      "cats": [
+        "movies"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Interstellar",
+      "fi": "Interstellar",
+      "cats": [
+        "movies",
+        "space"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Back to the Future",
+      "fi": "Paluu tulevaisuuteen",
+      "cats": [
+        "movies"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Home Alone",
+      "fi": "Yksin kotona",
+      "cats": [
+        "movies"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Jaws",
+      "fi": "Tappajahai",
+      "cats": [
+        "movies",
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "The Shining",
+      "fi": "Hohto",
+      "cats": [
+        "movies"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Gladiator",
+      "fi": "Gladiator",
+      "cats": [
+        "movies"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Rocky",
+      "fi": "Rocky",
+      "cats": [
+        "movies",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "The Terminator",
+      "fi": "Terminator",
+      "cats": [
+        "movies"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Finding Nemo",
+      "fi": "Nemoa etsimässä",
+      "cats": [
+        "movies",
+        "animal"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Coco",
+      "fi": "Coco",
+      "cats": [
+        "movies",
+        "music"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "La La Land",
+      "fi": "La La Land",
+      "cats": [
+        "movies",
+        "music"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "The Sound of Music",
+      "fi": "Sound of Music",
+      "cats": [
+        "movies",
+        "music"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pirates of the Caribbean",
+      "fi": "Pirates of the Caribbean",
+      "cats": [
+        "movies",
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Mission: Impossible",
+      "fi": "Mission: Impossible",
+      "cats": [
+        "movies"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Guitar",
+      "fi": "Kitara",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Piano",
+      "fi": "Piano",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Drums",
+      "fi": "Rummut",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Violin",
+      "fi": "Viulu",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Saxophone",
+      "fi": "Saksofoni",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Microphone",
+      "fi": "Mikrofoni",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "DJ",
+      "fi": "DJ",
+      "cats": [
+        "music",
+        "person"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Band",
+      "fi": "Bändi",
+      "cats": [
+        "music",
+        "person"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Choir",
+      "fi": "Kuoro",
+      "cats": [
+        "music",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Orchestra",
+      "fi": "Orkesteri",
+      "cats": [
+        "music",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Concert",
+      "fi": "Keikka",
+      "cats": [
+        "music",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Festival",
+      "fi": "Festari",
+      "cats": [
+        "music",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Playlist",
+      "fi": "Soittolista",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Headphones",
+      "fi": "Kuulokkeet",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Vinyl record",
+      "fi": "Vinyylilevy",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Songwriter",
+      "fi": "Säveltäjä",
+      "cats": [
+        "music",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rap",
+      "fi": "Rap",
+      "cats": [
+        "music"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rock",
+      "fi": "Rock",
+      "cats": [
+        "music"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Jazz",
+      "fi": "Jazz",
+      "cats": [
+        "music"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Classical music",
+      "fi": "Klassinen musiikki",
+      "cats": [
+        "music"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pop music",
+      "fi": "Popmusiikki",
+      "cats": [
+        "music"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Heavy metal",
+      "fi": "Heavy metal",
+      "cats": [
+        "music"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Karaoke",
+      "fi": "Karaoke",
+      "cats": [
+        "music",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Encore",
+      "fi": "Ylimääräinen",
+      "cats": [
+        "music"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Stage",
+      "fi": "Lava",
+      "cats": [
+        "music",
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Amplifier",
+      "fi": "Vahvistin",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Metronome",
+      "fi": "Metronomi",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sheet music",
+      "fi": "Nuotit",
+      "cats": [
+        "music",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Opera",
+      "fi": "Ooppera",
+      "cats": [
+        "music",
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Ballet",
+      "fi": "Baletti",
+      "cats": [
+        "music",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Nightwish",
+      "fi": "Nightwish",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "The Rasmus",
+      "fi": "The Rasmus",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "HIM",
+      "fi": "HIM",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Apocalyptica",
+      "fi": "Apocalyptica",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "ALMA",
+      "fi": "ALMA",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Erika Vikman",
+      "fi": "Erika Vikman",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "JVG",
+      "fi": "JVG",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Haloo Helsinki!",
+      "fi": "Haloo Helsinki!",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Ultra Bra",
+      "fi": "Ultra Bra",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kaija Koo",
+      "fi": "Kaija Koo",
+      "cats": [
+        "music",
+        "person",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Vain elämää",
+      "fi": "Vain elämää",
+      "cats": [
+        "music",
+        "activity",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tangomarkkinat",
+      "fi": "Tangomarkkinat",
+      "cats": [
+        "music",
+        "activity",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Savonlinna Opera Festival",
+      "fi": "Savonlinnan oopperajuhlat",
+      "cats": [
+        "music",
+        "activity",
+        "place",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Uuno Turhapuro",
+      "fi": "Uuno Turhapuro",
+      "cats": [
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "The Unknown Soldier",
+      "fi": "Tuntematon sotilas",
+      "cats": [
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Napapiirin sankarit",
+      "fi": "Napapiirin sankarit",
+      "cats": [
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rare Exports",
+      "fi": "Rare Exports",
+      "cats": [
+        "movies",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Aki Kaurismäki",
+      "fi": "Aki Kaurismäki",
+      "cats": [
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Klaus Härö",
+      "fi": "Klaus Härö",
+      "cats": [
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Finnish Film Foundation",
+      "fi": "Suomen elokuvasäätiö",
+      "cats": [
+        "movies",
+        "thing",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Helsinki International Film Festival",
+      "fi": "Rakkautta & Anarkiaa",
+      "cats": [
+        "movies",
+        "activity",
+        "place",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Cinema Orion",
+      "fi": "Elokuvateatteri Orion",
+      "cats": [
+        "movies",
+        "place",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kinojuha",
+      "fi": "Kinojuha",
+      "cats": [
+        "kinojuha",
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Taavi Vartia",
+      "fi": "Taavi Vartia",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nurmijärvi",
+      "fi": "Nurmijärvi",
+      "cats": [
+        "kinojuha",
+        "place",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Taaborin Kesäteatteri",
+      "fi": "Taaborin Kesäteatteri",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "activity",
+        "place",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Taaborinvuori",
+      "fi": "Taaborinvuori",
+      "cats": [
+        "kinojuha",
+        "place",
+        "nature",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Art House screening",
+      "fi": "Art House -näytös",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "activity",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Premiere night",
+      "fi": "Ensi-ilta",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Movie ticket",
+      "fi": "Elokuvalippu",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "VIP hall",
+      "fi": "VIP-sali",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "50s interior",
+      "fi": "50-luvun tunnelma",
+      "cats": [
+        "kinojuha",
+        "thing",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Popcorn combo",
+      "fi": "Popparikombo",
+      "cats": [
+        "kinojuha",
+        "food"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rölli ja kultainen avain",
+      "fi": "Rölli ja kultainen avain",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rölli ja kaikkien aikojen salaisuus",
+      "fi": "Rölli ja kaikkien aikojen salaisuus",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "The Island of Secrets",
+      "fi": "Lomasankarit",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Finders of the Lost Yacht",
+      "fi": "Pertsa ja Kilu",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "World's Safest Place",
+      "fi": "Kevyttä yläpilveä",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pahat pojat",
+      "fi": "Pahat pojat",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Leijonasydän",
+      "fi": "Leijonasydän",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Häjyt",
+      "fi": "Häjyt",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kopps",
+      "fi": "Kopps",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Luokkakokous",
+      "fi": "Luokkakokous",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Napapiirin sankarit",
+      "fi": "Napapiirin sankarit",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rare Exports",
+      "fi": "Rare Exports",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Tuntematon sotilas",
+      "fi": "Tuntematon sotilas",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Uuno Turhapuro",
+      "fi": "Uuno Turhapuro",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Jasper Pääkkönen",
+      "fi": "Jasper Pääkkönen",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Laura Birn",
+      "fi": "Laura Birn",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Krista Kosonen",
+      "fi": "Krista Kosonen",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Jussi Vatanen",
+      "fi": "Jussi Vatanen",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kari Väänänen",
+      "fi": "Kari Väänänen",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Peter Franzén",
+      "fi": "Peter Franzén",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Vesa-Matti Loiri",
+      "fi": "Vesa-Matti Loiri",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Eero Aho",
+      "fi": "Eero Aho",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pirjo Lonka",
+      "fi": "Pirjo Lonka",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Irina Björklund",
+      "fi": "Irina Björklund",
+      "cats": [
+        "kinojuha",
+        "movies",
+        "person",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Conscription",
+      "fi": "Asevelvollisuus",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Call-up",
+      "fi": "Kutsunnat",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Recruit",
+      "fi": "Alokas",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Conscript",
+      "fi": "Varusmies",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Discharge day",
+      "fi": "Kotiutuminen",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Barracks",
+      "fi": "Kasarmi",
+      "cats": [
+        "intti",
+        "suomi",
+        "place"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Bunk room",
+      "fi": "Tupa",
+      "cats": [
+        "intti",
+        "suomi",
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Room inspection",
+      "fi": "Tupatarkastus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Mess hall",
+      "fi": "Sotku",
+      "cats": [
+        "intti",
+        "suomi",
+        "place"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Guard duty",
+      "fi": "Vartiovuoro",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Field exercise",
+      "fi": "Metsäleiri",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "March",
+      "fi": "Marssi",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Combat uniform",
+      "fi": "Taistelupuku",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Field uniform",
+      "fi": "Maastopuku",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "M05 camouflage",
+      "fi": "M05",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Beret",
+      "fi": "Baretti",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Military police",
+      "fi": "Sotilaspoliisi",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Company",
+      "fi": "Komppania",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Platoon",
+      "fi": "Joukkue",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Squad",
+      "fi": "Ryhmä",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "NCO school",
+      "fi": "AUK",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Reserve officer school",
+      "fi": "RUK",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Basic training",
+      "fi": "P-kausi",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Weekend leave",
+      "fi": "Lomille",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Duty officer",
+      "fi": "Päivystäjä",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Cleaning duty",
+      "fi": "Siivousvuoro",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Field meal",
+      "fi": "Kenttäruokailu",
+      "cats": [
+        "intti",
+        "suomi",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sleeping bag",
+      "fi": "Makuupussi",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rucksack",
+      "fi": "Rinkka",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Finnish Defence Forces",
+      "fi": "Puolustusvoimat",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "PV (abbrev.)",
+      "fi": "PV",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kessu (slang)",
+      "fi": "Kessu",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "TJ (days left)",
+      "fi": "TJ",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "TJ0",
+      "fi": "TJ0",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nakki (extra duty)",
+      "fi": "Nakki",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nakittaa",
+      "fi": "Nakittaa",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Nakkikomennus",
+      "fi": "Nakkikomennus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Spolle (slang)",
+      "fi": "Spolle",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Spol (abbr.)",
+      "fi": "SPOL",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rundi (shift)",
+      "fi": "Rundi",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rundi vuoro",
+      "fi": "Rundivuoro",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tetsaaminen",
+      "fi": "Tetsaaminen",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Tetsari (webbing)",
+      "fi": "Tetsari",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "TST-liivi",
+      "fi": "TST-liivi",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Suojaliivi",
+      "fi": "Suojaliivi",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Kypärä",
+      "fi": "Kypärä",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "easy"
+    },
+    {
+      "en": "Rynkky (slang)",
+      "fi": "Rynkky",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "RK 62",
+      "fi": "RK 62",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Panssari",
+      "fi": "Panssari",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Panssarijääkäri",
+      "fi": "Panssarijääkäri",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Jääkäri",
+      "fi": "Jääkäri",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Sissi",
+      "fi": "Sissi",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Sissiteltta",
+      "fi": "Sissiteltta",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kessu huutaa",
+      "fi": "Kessu huutaa",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Hajoaa",
+      "fi": "Hajoaa",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Hajoaminen",
+      "fi": "Hajoaminen",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Metsään",
+      "fi": "Metsään",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity",
+        "nature"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Mettään",
+      "fi": "Mettään",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Metsäkeikka",
+      "fi": "Metsäkeikka",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity",
+        "nature"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kessu-eväs",
+      "fi": "Kessu-eväs",
+      "cats": [
+        "intti",
+        "suomi",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sissimuona",
+      "fi": "Sissimuona",
+      "cats": [
+        "intti",
+        "suomi",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Pakkauslista",
+      "fi": "Pakkauslista",
+      "cats": [
+        "intti",
+        "suomi",
+        "thing"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Varustarkastus",
+      "fi": "Varustarkastus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Aamutarkastus",
+      "fi": "Aamutarkastus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Puhdas tupa",
+      "fi": "Puhdas tupa",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Lomakyyti",
+      "fi": "Lomakyyti",
+      "cats": [
+        "intti",
+        "suomi",
+        "vehicle"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Lomabussi",
+      "fi": "Lomabussi",
+      "cats": [
+        "intti",
+        "suomi",
+        "vehicle"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Nimenhuuto",
+      "fi": "Nimenhuuto",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Aamuhartaus",
+      "fi": "Aamuhartaus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sotilaskoti munkki",
+      "fi": "Sotilaskoti munkki",
+      "cats": [
+        "intti",
+        "suomi",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sotilaskodin munkki",
+      "fi": "Sotilaskodin munkki",
+      "cats": [
+        "intti",
+        "suomi",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Vänrikki",
+      "fi": "Vänrikki",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Luutnantti",
+      "fi": "Luutnantti",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kapteeni",
+      "fi": "Kapteeni",
+      "cats": [
+        "intti",
+        "suomi",
+        "person"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Rykmentti",
+      "fi": "Rykmentti",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Prikaati",
+      "fi": "Prikaati",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Varuskuntaravintola",
+      "fi": "Varuskuntaravintola",
+      "cats": [
+        "intti",
+        "suomi",
+        "place",
+        "food"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Sotilaskuri",
+      "fi": "Sotilaskuri",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Vapautus",
+      "fi": "Vapautus",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "VMP (slang)",
+      "fi": "VMP",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rapsa (slang)",
+      "fi": "Rapsa",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "TST-ammunta",
+      "fi": "TST-ammunta",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Taisteluharjoitus",
+      "fi": "Taisteluharjoitus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Rastirata",
+      "fi": "Rastirata",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Ampumarata",
+      "fi": "Ampumarata",
+      "cats": [
+        "intti",
+        "suomi",
+        "place",
+        "activity"
+      ],
+      "diff": "medium"
+    },
+    {
+      "en": "Sotaharjoitus",
+      "fi": "Sotaharjoitus",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Taistelijan peruskurssi",
+      "fi": "Taistelijan peruskurssi",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Suoja-alue",
+      "fi": "Suoja-alue",
+      "cats": [
+        "intti",
+        "suomi",
+        "place"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kaarna",
+      "fi": "Kaarna",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Rynnäkkö",
+      "fi": "Rynnäkkö",
+      "cats": [
+        "intti",
+        "suomi",
+        "activity"
+      ],
+      "diff": "hard"
+    },
+    {
+      "en": "Kessu ei nuku",
+      "fi": "Kessu ei nuku",
+      "cats": [
+        "intti",
+        "suomi"
+      ],
+      "diff": "hard"
+    }
+  ]
+}
